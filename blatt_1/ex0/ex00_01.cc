@@ -5,7 +5,7 @@
  * -> Run "Hello World!" program
  ***************************************************************************/
 
-/* This is C++ source code that should be dealt with by a C++ compiler. 
+/* This is C++ source code that should be dealt with by a C++ compiler.
    So to avoid the compiler stumble over explanations meant for human
    beings you need a way to mark paragraphs of text as comment.
    In C++ there are two ways to mark text as "to be ignored" by the
@@ -13,7 +13,7 @@
    All text is treated as comment that is found inbetween
    pairs of /* and */
 
-// A second possibility is to use // 
+// A second possibility is to use //
 // All text after // until the end of line is treated as comment.
 
 /* Now let's start with a very basic C++ program that prints just
@@ -36,14 +36,14 @@ int main() {
      to put our line of output "Hello World!" onto it.
      std::endl represents the so-called newline character ending a line. */
   std::cout << "Hello World!" << std::endl;
-  
+
   // Integer return value, no return statement at all means a value of 0.
-  return 0;
+  //return 0;
 
   /* "return" means return to the calling program, in this case the
-     operating system. To return to the operating system directly 
+     operating system. To return to the operating system directly
      from anywhere in a program use exit. Usually, this is used
      for error treatment. */
-  //exit(27);
+  exit(27);
 }
 // End of program
