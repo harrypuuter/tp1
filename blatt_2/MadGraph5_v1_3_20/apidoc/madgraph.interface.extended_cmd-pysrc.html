@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>madgraph.interface.extended_cmd</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="madgraph-module.html">Package&nbsp;madgraph</a> ::
+        <a href="madgraph.interface-module.html">Package&nbsp;interface</a> ::
+        Module&nbsp;extended_cmd
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="madgraph.interface.extended_cmd-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="madgraph.interface.extended_cmd-module.html">Module madgraph.interface.extended_cmd</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">################################################################################</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-comment"># Copyright (c) 2011 The MadGraph Development team and Contributors</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># This file is a part of the MadGraph 5 project, an application which </tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># automatically generates Feynman diagrams and matrix elements for arbitrary</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># high-energy processes in the Standard Model and beyond.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># It is subject to the MadGraph license which should accompany this </tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-comment"># distribution.</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># For more information, please visit: http://madgraph.phys.ucl.ac.be</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment">################################################################################</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">"""  A file containing different extension of the cmd basic python library"""</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">cmd</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">logging</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">signal</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">traceback</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt id="link-0" class="py-name" targets="Variable aloha.create_aloha.logger=aloha.create_aloha-module.html#logger,Variable madgraph.core.base_objects.logger=madgraph.core.base_objects-module.html#logger,Variable madgraph.core.diagram_generation.logger=madgraph.core.diagram_generation-module.html#logger,Variable madgraph.core.helas_objects.logger=madgraph.core.helas_objects-module.html#logger,Variable madgraph.interface.cmd_interface.logger=madgraph.interface.cmd_interface-module.html#logger,Variable madgraph.interface.extended_cmd.logger=madgraph.interface.extended_cmd-module.html#logger,Variable madgraph.interface.launch_ext_program.logger=madgraph.interface.launch_ext_program-module.html#logger,Variable madgraph.iolibs.export_cpp.logger=madgraph.iolibs.export_cpp-module.html#logger,Variable madgraph.iolibs.export_python.logger=madgraph.iolibs.export_python-module.html#logger,Variable madgraph.iolibs.export_v4.logger=madgraph.iolibs.export_v4-module.html#logger,Variable madgraph.iolibs.files.logger=madgraph.iolibs.files-module.html#logger,Variable madgraph.iolibs.group_subprocs.logger=madgraph.iolibs.group_subprocs-module.html#logger,Variable madgraph.iolibs.import_v4.logger=madgraph.iolibs.import_v4-module.html#logger,Variable madgraph.iolibs.save_model.logger=madgraph.iolibs.save_model-module.html#logger,Variable madgraph.iolibs.ufo_expression_parsers.logger=madgraph.iolibs.ufo_expression_parsers-module.html#logger,Variable madgraph.various.diagram_symmetry.logger=madgraph.various.diagram_symmetry-module.html#logger,Variable madgraph.various.process_checks.logger=madgraph.various.process_checks-module.html#logger,Variable models.import_ufo.logger=models.import_ufo-module.html#logger,Variable models.model_reader.logger=models.model_reader-module.html#logger"><a title="aloha.create_aloha.logger
+madgraph.core.base_objects.logger
+madgraph.core.diagram_generation.logger
+madgraph.core.helas_objects.logger
+madgraph.interface.cmd_interface.logger
+madgraph.interface.extended_cmd.logger
+madgraph.interface.launch_ext_program.logger
+madgraph.iolibs.export_cpp.logger
+madgraph.iolibs.export_python.logger
+madgraph.iolibs.export_v4.logger
+madgraph.iolibs.files.logger
+madgraph.iolibs.group_subprocs.logger
+madgraph.iolibs.import_v4.logger
+madgraph.iolibs.save_model.logger
+madgraph.iolibs.ufo_expression_parsers.logger
+madgraph.various.diagram_symmetry.logger
+madgraph.various.process_checks.logger
+models.import_ufo.logger
+models.model_reader.logger" class="py-name" href="#" onclick="return doclink('link-0', 'logger', 'link-0');">logger</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">'cmdprint'</tt><tt class="py-op">)</tt> <tt class="py-comment"># for stdout</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt id="link-1" class="py-name" targets="Variable madgraph.interface.cmd_interface.logger_stderr=madgraph.interface.cmd_interface-module.html#logger_stderr,Variable madgraph.interface.extended_cmd.logger_stderr=madgraph.interface.extended_cmd-module.html#logger_stderr"><a title="madgraph.interface.cmd_interface.logger_stderr
+madgraph.interface.extended_cmd.logger_stderr" class="py-name" href="#" onclick="return doclink('link-1', 'logger_stderr', 'link-1');">logger_stderr</a></tt> <tt class="py-op">=</tt> <tt class="py-name">logging</tt><tt class="py-op">.</tt><tt class="py-name">getLogger</tt><tt class="py-op">(</tt><tt class="py-string">'fatalerror'</tt><tt class="py-op">)</tt> <tt class="py-comment"># for stderr</tt> </tt>
+<a name="Cmd"></a><div id="Cmd-def"><a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment">#===============================================================================</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># CmdExtended</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment">#===============================================================================</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt> <a class="py-toggle" href="#" id="Cmd-toggle" onclick="return toggle('Cmd');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html">Cmd</a><tt class="py-op">(</tt><tt class="py-base-class">cmd</tt><tt class="py-op">.</tt><tt class="py-base-class">Cmd</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Cmd-expanded"><a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line">    <tt class="py-docstring">"""Extension of the cmd.Cmd command line.</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">    This extensions supports line breaking, history, comments,</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">    internal call to cmdline, path completion,...</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"><tt class="py-docstring">    this class should be MG5 independent"""</tt> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">    <tt class="py-comment">#suggested list of command</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">    <tt id="link-2" class="py-name" targets="Variable madgraph.interface.cmd_interface.CmdExtended.next_possibility=madgraph.interface.cmd_interface.CmdExtended-class.html#next_possibility,Variable madgraph.interface.extended_cmd.Cmd.next_possibility=madgraph.interface.extended_cmd.Cmd-class.html#next_possibility"><a title="madgraph.interface.cmd_interface.CmdExtended.next_possibility
+madgraph.interface.extended_cmd.Cmd.next_possibility" class="py-name" href="#" onclick="return doclink('link-2', 'next_possibility', 'link-2');">next_possibility</a></tt> <tt class="py-op">=</tt> <tt class="py-op">{</tt><tt class="py-op">}</tt> <tt class="py-comment"># command : [list of suggested command]</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">     </tt>
+<a name="Cmd.InvalidCmd"></a><div id="Cmd.InvalidCmd-def"><a name="L38"></a><tt class="py-lineno"> 38</tt> <a class="py-toggle" href="#" id="Cmd.InvalidCmd-toggle" onclick="return toggle('Cmd.InvalidCmd');">-</a><tt class="py-line">    <tt class="py-keyword">class</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd.InvalidCmd-class.html">InvalidCmd</a><tt class="py-op">(</tt><tt class="py-base-class">Exception</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.InvalidCmd-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.InvalidCmd-expanded"><a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">        <tt class="py-docstring">"""expected error for wrong command"""</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt>     </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">  </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt id="link-3" class="py-name" targets="Variable madgraph.interface.cmd_interface.CmdExtended.debug_output=madgraph.interface.cmd_interface.CmdExtended-class.html#debug_output,Variable madgraph.interface.extended_cmd.Cmd.InvalidCmd.debug_output=madgraph.interface.extended_cmd.Cmd.InvalidCmd-class.html#debug_output"><a title="madgraph.interface.cmd_interface.CmdExtended.debug_output
+madgraph.interface.extended_cmd.Cmd.InvalidCmd.debug_output" class="py-name" href="#" onclick="return doclink('link-3', 'debug_output', 'link-3');">debug_output</a></tt> <tt class="py-op">=</tt> <tt class="py-string">'debug'</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">        <tt id="link-4" class="py-name" targets="Variable madgraph.interface.cmd_interface.CmdExtended.error_debug=madgraph.interface.cmd_interface.CmdExtended-class.html#error_debug,Variable madgraph.interface.extended_cmd.Cmd.InvalidCmd.error_debug=madgraph.interface.extended_cmd.Cmd.InvalidCmd-class.html#error_debug"><a title="madgraph.interface.cmd_interface.CmdExtended.error_debug
+madgraph.interface.extended_cmd.Cmd.InvalidCmd.error_debug" class="py-name" href="#" onclick="return doclink('link-4', 'error_debug', 'link-4');">error_debug</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"""Please report this bug to developers\n</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-string">           More information is found in '%s'.\n</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-string">           Please attach this file to your report."""</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">            </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt id="link-5" class="py-name" targets="Variable madgraph.interface.cmd_interface.CmdExtended.keyboard_stop_msg=madgraph.interface.cmd_interface.CmdExtended-class.html#keyboard_stop_msg,Variable madgraph.interface.extended_cmd.Cmd.InvalidCmd.keyboard_stop_msg=madgraph.interface.extended_cmd.Cmd.InvalidCmd-class.html#keyboard_stop_msg"><a title="madgraph.interface.cmd_interface.CmdExtended.keyboard_stop_msg
+madgraph.interface.extended_cmd.Cmd.InvalidCmd.keyboard_stop_msg" class="py-name" href="#" onclick="return doclink('link-5', 'keyboard_stop_msg', 'link-5');">keyboard_stop_msg</a></tt> <tt class="py-op">=</tt> <tt class="py-string">"""stopping all current operation</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-string">            in order to quit the program please enter exit"""</tt> </tt>
+</div><a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">  </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">     </tt>
+<a name="Cmd.__init__"></a><div id="Cmd.__init__-def"><a name="L51"></a><tt class="py-lineno"> 51</tt> <a class="py-toggle" href="#" id="Cmd.__init__-toggle" onclick="return toggle('Cmd.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">arg</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">opt</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.__init__-expanded"><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">        <tt class="py-docstring">"""Init history and line continuation"""</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">         </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">log</tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Variable madgraph.interface.tutorial_text.history=madgraph.interface.tutorial_text-module.html#history"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-6', 'history', 'link-6');">history</a></tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">save_line</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Class madgraph.interface.extended_cmd.Cmd=madgraph.interface.extended_cmd.Cmd-class.html"><a title="madgraph.interface.extended_cmd.Cmd" class="py-name" href="#" onclick="return doclink('link-7', 'Cmd', 'link-7');">Cmd</a></tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method aloha.aloha_lib.AddVariable.__init__()=aloha.aloha_lib.AddVariable-class.html#__init__,Method aloha.aloha_lib.ConstantObject.__init__()=aloha.aloha_lib.ConstantObject-class.html#__init__,Method aloha.aloha_lib.FracVariable.__init__()=aloha.aloha_lib.FracVariable-class.html#__init__,Method aloha.aloha_lib.IndicesIterator.__init__()=aloha.aloha_lib.IndicesIterator-class.html#__init__,Method aloha.aloha_lib.LorentzObject.__init__()=aloha.aloha_lib.LorentzObject-class.html#__init__,Method aloha.aloha_lib.LorentzObjectRepresentation.__init__()=aloha.aloha_lib.LorentzObjectRepresentation-class.html#__init__,Method aloha.aloha_lib.MultVariable.__init__()=aloha.aloha_lib.MultVariable-class.html#__init__,Method aloha.aloha_lib.ScalarVariable.__init__()=aloha.aloha_lib.ScalarVariable-class.html#__init__,Method aloha.aloha_lib.Variable.__init__()=aloha.aloha_lib.Variable-class.html#__init__,Method aloha.aloha_object.C.__init__()=aloha.aloha_object.C-class.html#__init__,Method aloha.aloha_object.DenominatorPropagator.__init__()=aloha.aloha_object.DenominatorPropagator-class.html#__init__,Method aloha.aloha_object.Epsilon.__init__()=aloha.aloha_object.Epsilon-class.html#__init__,Method aloha.aloha_object.Gamma.__init__()=aloha.aloha_object.Gamma-class.html#__init__,Method aloha.aloha_object.Gamma5.__init__()=aloha.aloha_object.Gamma5-class.html#__init__,Method aloha.aloha_object.Identity.__init__()=aloha.aloha_object.Identity-class.html#__init__,Method aloha.aloha_object.Mass.__init__()=aloha.aloha_object.Mass-class.html#__init__,Method aloha.aloha_object.Metric.__init__()=aloha.aloha_object.Metric-class.html#__init__,Method aloha.aloha_object.OverMass2.__init__()=aloha.aloha_object.OverMass2-class.html#__init__,Method aloha.aloha_object.P.__init__()=aloha.aloha_object.P-class.html#__init__,Method aloha.aloha_object.PSlash.__init__()=aloha.aloha_object.PSlash-class.html#__init__,Method aloha.aloha_object.ProjM.__init__()=aloha.aloha_object.ProjM-class.html#__init__,Method aloha.aloha_object.ProjP.__init__()=aloha.aloha_object.ProjP-class.html#__init__,Method aloha.aloha_object.Scalar.__init__()=aloha.aloha_object.Scalar-class.html#__init__,Method aloha.aloha_object.Sigma.__init__()=aloha.aloha_object.Sigma-class.html#__init__,Method aloha.aloha_object.Spin2.__init__()=aloha.aloha_object.Spin2-class.html#__init__,Method aloha.aloha_object.Spinor.__init__()=aloha.aloha_object.Spinor-class.html#__init__,Method aloha.aloha_object.Vector.__init__()=aloha.aloha_object.Vector-class.html#__init__,Method aloha.aloha_object.Width.__init__()=aloha.aloha_object.Width-class.html#__init__,Method aloha.aloha_writers.ALOHAWriterForPython.__init__()=aloha.aloha_writers.ALOHAWriterForPython-class.html#__init__,Method aloha.aloha_writers.WriteALOHA.__init__()=aloha.aloha_writers.WriteALOHA-class.html#__init__,Method aloha.create_aloha.AbstractALOHAModel.__init__()=aloha.create_aloha.AbstractALOHAModel-class.html#__init__,Method aloha.create_aloha.AbstractRoutine.__init__()=aloha.create_aloha.AbstractRoutine-class.html#__init__,Method aloha.create_aloha.AbstractRoutineBuilder.__init__()=aloha.create_aloha.AbstractRoutineBuilder-class.html#__init__,Method aloha.template_files.wavefunctions.WaveFunction.__init__()=aloha.template_files.wavefunctions.WaveFunction-class.html#__init__,Method madgraph.core.base_objects.ModelVariable.__init__()=madgraph.core.base_objects.ModelVariable-class.html#__init__,Method madgraph.core.base_objects.ParamCardVariable.__init__()=madgraph.core.base_objects.ParamCardVariable-class.html#__init__,Method madgraph.core.base_objects.PhysicsObject.__init__()=madgraph.core.base_objects.PhysicsObject-class.html#__init__,Method madgraph.core.base_objects.PhysicsObjectList.__init__()=madgraph.core.base_objects.PhysicsObjectList-class.html#__init__,Method madgraph.core.base_objects.VertexList.__init__()=madgraph.core.base_objects.VertexList-class.html#__init__,Method madgraph.core.color_algebra.ColorString.__init__()=madgraph.core.color_algebra.ColorString-class.html#__init__,Method madgraph.core.color_algebra.Epsilon.__init__()=madgraph.core.color_algebra.Epsilon-class.html#__init__,Method madgraph.core.color_algebra.EpsilonBar.__init__()=madgraph.core.color_algebra.EpsilonBar-class.html#__init__,Method madgraph.core.color_algebra.K6.__init__()=madgraph.core.color_algebra.K6-class.html#__init__,Method madgraph.core.color_algebra.K6Bar.__init__()=madgraph.core.color_algebra.K6Bar-class.html#__init__,Method madgraph.core.color_algebra.T.__init__()=madgraph.core.color_algebra.T-class.html#__init__,Method madgraph.core.color_algebra.T6.__init__()=madgraph.core.color_algebra.T6-class.html#__init__,Method madgraph.core.color_algebra.f.__init__()=madgraph.core.color_algebra.f-class.html#__init__,Method madgraph.core.color_amp.ColorBasis.__init__()=madgraph.core.color_amp.ColorBasis-class.html#__init__,Method madgraph.core.color_amp.ColorMatrix.__init__()=madgraph.core.color_amp.ColorMatrix-class.html#__init__,Method madgraph.core.diagram_generation.Amplitude.__init__()=madgraph.core.diagram_generation.Amplitude-class.html#__init__,Method madgraph.core.diagram_generation.DecayChainAmplitude.__init__()=madgraph.core.diagram_generation.DecayChainAmplitude-class.html#__init__,Method madgraph.core.diagram_generation.DiagramTag.__init__()=madgraph.core.diagram_generation.DiagramTag-class.html#__init__,Method madgraph.core.diagram_generation.DiagramTagChainLink.__init__()=madgraph.core.diagram_generation.DiagramTagChainLink-class.html#__init__,Method madgraph.core.diagram_generation.MultiProcess.__init__()=madgraph.core.diagram_generation.MultiProcess-class.html#__init__,Method madgraph.core.drawing.DiagramDrawer.__init__()=madgraph.core.drawing.DiagramDrawer-class.html#__init__,Method madgraph.core.drawing.DrawOption.__init__()=madgraph.core.drawing.DrawOption-class.html#__init__,Method madgraph.core.drawing.FeynmanDiagram.__init__()=madgraph.core.drawing.FeynmanDiagram-class.html#__init__,Method madgraph.core.drawing.FeynmanLine.__init__()=madgraph.core.drawing.FeynmanLine-class.html#__init__,Method madgraph.core.drawing.VertexPoint.__init__()=madgraph.core.drawing.VertexPoint-class.html#__init__,Method madgraph.core.helas_objects.HelasAmplitude.__init__()=madgraph.core.helas_objects.HelasAmplitude-class.html#__init__,Method madgraph.core.helas_objects.HelasDecayChainProcess.__init__()=madgraph.core.helas_objects.HelasDecayChainProcess-class.html#__init__,Method madgraph.core.helas_objects.HelasMatrixElement.__init__()=madgraph.core.helas_objects.HelasMatrixElement-class.html#__init__,Method madgraph.core.helas_objects.HelasMultiProcess.__init__()=madgraph.core.helas_objects.HelasMultiProcess-class.html#__init__,Method madgraph.core.helas_objects.HelasWavefunction.__init__()=madgraph.core.helas_objects.HelasWavefunction-class.html#__init__,Method madgraph.interface.cmd_interface.CmdExtended.__init__()=madgraph.interface.cmd_interface.CmdExtended-class.html#__init__,Method madgraph.interface.cmd_interface.MadGraphCmd.__init__()=madgraph.interface.cmd_interface.MadGraphCmd-class.html#__init__,Method madgraph.interface.cmd_interface.MadGraphCmdWeb.__init__()=madgraph.interface.cmd_interface.MadGraphCmdWeb-class.html#__init__,Method madgraph.interface.extended_cmd.Cmd.__init__()=madgraph.interface.extended_cmd.Cmd-class.html#__init__,Method madgraph.interface.extended_cmd.CmdFile.__init__()=madgraph.interface.extended_cmd.CmdFile-class.html#__init__,Method madgraph.interface.extended_cmd.SmartQuestion.__init__()=madgraph.interface.extended_cmd.SmartQuestion-class.html#__init__,Method madgraph.interface.launch_ext_program.ExtLauncher.__init__()=madgraph.interface.launch_ext_program.ExtLauncher-class.html#__init__,Method madgraph.interface.launch_ext_program.MELauncher.__init__()=madgraph.interface.launch_ext_program.MELauncher-class.html#__init__,Method madgraph.interface.launch_ext_program.Pythia8Launcher.__init__()=madgraph.interface.launch_ext_program.Pythia8Launcher-class.html#__init__,Method madgraph.interface.launch_ext_program.SALauncher.__init__()=madgraph.interface.launch_ext_program.SALauncher-class.html#__init__,Method madgraph.interface.launch_ext_program.open_file.__init__()=madgraph.interface.launch_ext_program.open_file-class.html#__init__,Method madgraph.iolibs.drawing_eps.MultiEpsDiagramDrawer.__init__()=madgraph.iolibs.drawing_eps.MultiEpsDiagramDrawer-class.html#__init__,Method madgraph.iolibs.export_cpp.ProcessExporterCPP.__init__()=madgraph.iolibs.export_cpp.ProcessExporterCPP-class.html#__init__,Method madgraph.iolibs.export_cpp.ProcessExporterPythia8.__init__()=madgraph.iolibs.export_cpp.ProcessExporterPythia8-class.html#__init__,Method madgraph.iolibs.export_cpp.UFOModelConverterCPP.__init__()=madgraph.iolibs.export_cpp.UFOModelConverterCPP-class.html#__init__,Method madgraph.iolibs.export_python.ProcessExporterPython.__init__()=madgraph.iolibs.export_python.ProcessExporterPython-class.html#__init__,Method madgraph.iolibs.export_v4.ProcessExporterFortran.__init__()=madgraph.iolibs.export_v4.ProcessExporterFortran-class.html#__init__,Method madgraph.iolibs.export_v4.UFO_model_to_mg4.__init__()=madgraph.iolibs.export_v4.UFO_model_to_mg4-class.html#__init__,Method madgraph.iolibs.file_writers.FileWriter.__init__()=madgraph.iolibs.file_writers.FileWriter-class.html#__init__,Method madgraph.iolibs.gen_infohtml.make_info_html.__init__()=madgraph.iolibs.gen_infohtml.make_info_html-class.html#__init__,Method madgraph.iolibs.helas_call_writers.HelasCallWriter.__init__()=madgraph.iolibs.helas_call_writers.HelasCallWriter-class.html#__init__,Method madgraph.iolibs.import_v4.ProcCardv4Reader.__init__()=madgraph.iolibs.import_v4.ProcCardv4Reader-class.html#__init__,Method madgraph.iolibs.import_v4.ProcessInfo.__init__()=madgraph.iolibs.import_v4.ProcessInfo-class.html#__init__,Method madgraph.iolibs.ufo_expression_parsers.UFOExpressionParser.__init__()=madgraph.iolibs.ufo_expression_parsers.UFOExpressionParser-class.html#__init__,Method madgraph.various.process_checks.MatrixElementEvaluator.__init__()=madgraph.various.process_checks.MatrixElementEvaluator-class.html#__init__,Method madgraph.various.rambo.DoubleFortranList.__init__()=madgraph.various.rambo.DoubleFortranList-class.html#__init__,Method madgraph.various.rambo.FortranList.__init__()=madgraph.various.rambo.FortranList-class.html#__init__,Method models.import_ufo.OrganizeModelExpression.__init__()=models.import_ufo.OrganizeModelExpression-class.html#__init__,Method models.import_ufo.UFOMG5Converter.__init__()=models.import_ufo.UFOMG5Converter-class.html#__init__,Method models.write_param_card.ParamCardWriter.__init__()=models.write_param_card.ParamCardWriter-class.html#__init__"><a title="aloha.aloha_lib.AddVariable.__init__
+aloha.aloha_lib.ConstantObject.__init__
+aloha.aloha_lib.FracVariable.__init__
+aloha.aloha_lib.IndicesIterator.__init__
+aloha.aloha_lib.LorentzObject.__init__
+aloha.aloha_lib.LorentzObjectRepresentation.__init__
+aloha.aloha_lib.MultVariable.__init__
+aloha.aloha_lib.ScalarVariable.__init__
+aloha.aloha_lib.Variable.__init__
+aloha.aloha_object.C.__init__
+aloha.aloha_object.DenominatorPropagator.__init__
+aloha.aloha_object.Epsilon.__init__
+aloha.aloha_object.Gamma.__init__
+aloha.aloha_object.Gamma5.__init__
+aloha.aloha_object.Identity.__init__
+aloha.aloha_object.Mass.__init__
+aloha.aloha_object.Metric.__init__
+aloha.aloha_object.OverMass2.__init__
+aloha.aloha_object.P.__init__
+aloha.aloha_object.PSlash.__init__
+aloha.aloha_object.ProjM.__init__
+aloha.aloha_object.ProjP.__init__
+aloha.aloha_object.Scalar.__init__
+aloha.aloha_object.Sigma.__init__
+aloha.aloha_object.Spin2.__init__
+aloha.aloha_object.Spinor.__init__
+aloha.aloha_object.Vector.__init__
+aloha.aloha_object.Width.__init__
+aloha.aloha_writers.ALOHAWriterForPython.__init__
+aloha.aloha_writers.WriteALOHA.__init__
+aloha.create_aloha.AbstractALOHAModel.__init__
+aloha.create_aloha.AbstractRoutine.__init__
+aloha.create_aloha.AbstractRoutineBuilder.__init__
+aloha.template_files.wavefunctions.WaveFunction.__init__
+madgraph.core.base_objects.ModelVariable.__init__
+madgraph.core.base_objects.ParamCardVariable.__init__
+madgraph.core.base_objects.PhysicsObject.__init__
+madgraph.core.base_objects.PhysicsObjectList.__init__
+madgraph.core.base_objects.VertexList.__init__
+madgraph.core.color_algebra.ColorString.__init__
+madgraph.core.color_algebra.Epsilon.__init__
+madgraph.core.color_algebra.EpsilonBar.__init__
+madgraph.core.color_algebra.K6.__init__
+madgraph.core.color_algebra.K6Bar.__init__
+madgraph.core.color_algebra.T.__init__
+madgraph.core.color_algebra.T6.__init__
+madgraph.core.color_algebra.f.__init__
+madgraph.core.color_amp.ColorBasis.__init__
+madgraph.core.color_amp.ColorMatrix.__init__
+madgraph.core.diagram_generation.Amplitude.__init__
+madgraph.core.diagram_generation.DecayChainAmplitude.__init__
+madgraph.core.diagram_generation.DiagramTag.__init__
+madgraph.core.diagram_generation.DiagramTagChainLink.__init__
+madgraph.core.diagram_generation.MultiProcess.__init__
+madgraph.core.drawing.DiagramDrawer.__init__
+madgraph.core.drawing.DrawOption.__init__
+madgraph.core.drawing.FeynmanDiagram.__init__
+madgraph.core.drawing.FeynmanLine.__init__
+madgraph.core.drawing.VertexPoint.__init__
+madgraph.core.helas_objects.HelasAmplitude.__init__
+madgraph.core.helas_objects.HelasDecayChainProcess.__init__
+madgraph.core.helas_objects.HelasMatrixElement.__init__
+madgraph.core.helas_objects.HelasMultiProcess.__init__
+madgraph.core.helas_objects.HelasWavefunction.__init__
+madgraph.interface.cmd_interface.CmdExtended.__init__
+madgraph.interface.cmd_interface.MadGraphCmd.__init__
+madgraph.interface.cmd_interface.MadGraphCmdWeb.__init__
+madgraph.interface.extended_cmd.Cmd.__init__
+madgraph.interface.extended_cmd.CmdFile.__init__
+madgraph.interface.extended_cmd.SmartQuestion.__init__
+madgraph.interface.launch_ext_program.ExtLauncher.__init__
+madgraph.interface.launch_ext_program.MELauncher.__init__
+madgraph.interface.launch_ext_program.Pythia8Launcher.__init__
+madgraph.interface.launch_ext_program.SALauncher.__init__
+madgraph.interface.launch_ext_program.open_file.__init__
+madgraph.iolibs.drawing_eps.MultiEpsDiagramDrawer.__init__
+madgraph.iolibs.export_cpp.ProcessExporterCPP.__init__
+madgraph.iolibs.export_cpp.ProcessExporterPythia8.__init__
+madgraph.iolibs.export_cpp.UFOModelConverterCPP.__init__
+madgraph.iolibs.export_python.ProcessExporterPython.__init__
+madgraph.iolibs.export_v4.ProcessExporterFortran.__init__
+madgraph.iolibs.export_v4.UFO_model_to_mg4.__init__
+madgraph.iolibs.file_writers.FileWriter.__init__
+madgraph.iolibs.gen_infohtml.make_info_html.__init__
+madgraph.iolibs.helas_call_writers.HelasCallWriter.__init__
+madgraph.iolibs.import_v4.ProcCardv4Reader.__init__
+madgraph.iolibs.import_v4.ProcessInfo.__init__
+madgraph.iolibs.ufo_expression_parsers.UFOExpressionParser.__init__
+madgraph.various.process_checks.MatrixElementEvaluator.__init__
+madgraph.various.rambo.DoubleFortranList.__init__
+madgraph.various.rambo.FortranList.__init__
+models.import_ufo.OrganizeModelExpression.__init__
+models.import_ufo.UFOMG5Converter.__init__
+models.write_param_card.ParamCardWriter.__init__" class="py-name" href="#" onclick="return doclink('link-8', '__init__', 'link-8');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">arg</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">opt</tt><tt class="py-op">)</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__initpos</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">abspath</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getcwd</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">         </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">         </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">         </tt>
+<a name="Cmd.precmd"></a><div id="Cmd.precmd-def"><a name="L63"></a><tt class="py-lineno"> 63</tt> <a class="py-toggle" href="#" id="Cmd.precmd-toggle" onclick="return toggle('Cmd.precmd');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#precmd">precmd</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.precmd-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.precmd-expanded"><a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-docstring">""" A suite of additional function needed for in the cmd</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"><tt class="py-docstring">        this implement history, line breaking, comment treatment,...</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">         </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">line</tt><tt class="py-op">:</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">line</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">        <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">lstrip</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">        <tt class="py-comment"># Update the history of this suite of command,</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line">        <tt class="py-comment"># except for useless commands (empty history and help calls)</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">line</tt> <tt class="py-op">!=</tt> <tt class="py-string">"history"</tt> <tt class="py-keyword">and</tt> \ </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">            <tt class="py-keyword">not</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'help'</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> \ </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">            <tt class="py-keyword">not</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'#*'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-9', 'history', 'link-6');">history</a></tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Method aloha.aloha_lib.AddVariable.append()=aloha.aloha_lib.AddVariable-class.html#append,Method aloha.aloha_lib.MultVariable.append()=aloha.aloha_lib.MultVariable-class.html#append,Method madgraph.core.base_objects.PhysicsObjectList.append()=madgraph.core.base_objects.PhysicsObjectList-class.html#append"><a title="aloha.aloha_lib.AddVariable.append
+aloha.aloha_lib.MultVariable.append
+madgraph.core.base_objects.PhysicsObjectList.append" class="py-name" href="#" onclick="return doclink('link-10', 'append', 'link-10');">append</a></tt><tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">        <tt class="py-comment"># Check if we are continuing a line:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">save_line</tt><tt class="py-op">:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">            <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">save_line</tt> <tt class="py-op">+</tt> <tt class="py-name">line</tt>  </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">save_line</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">         </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-comment"># Check if the line is complete</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-string">'\\'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">save_line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">[</tt><tt class="py-op">:</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-string">''</tt> <tt class="py-comment"># do nothing   </tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">         </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">        <tt class="py-comment"># Remove comment</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">'#'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">line</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'#'</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-comment"># Deal with line splitting</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-string">';'</tt> <tt class="py-keyword">in</tt> <tt class="py-name">line</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'!'</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'shell'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">subline</tt> <tt class="py-keyword">in</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">';'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">                <tt id="link-11" class="py-name" targets="Variable aloha.create_aloha.stop=aloha.create_aloha-module.html#stop"><a title="aloha.create_aloha.stop" class="py-name" href="#" onclick="return doclink('link-11', 'stop', 'link-11');">stop</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method madgraph.interface.extended_cmd.Cmd.onecmd()=madgraph.interface.extended_cmd.Cmd-class.html#onecmd"><a title="madgraph.interface.extended_cmd.Cmd.onecmd" class="py-name" href="#" onclick="return doclink('link-12', 'onecmd', 'link-12');">onecmd</a></tt><tt class="py-op">(</tt><tt class="py-name">subline</tt><tt class="py-op">)</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">                <tt id="link-13" class="py-name"><a title="aloha.create_aloha.stop" class="py-name" href="#" onclick="return doclink('link-13', 'stop', 'link-11');">stop</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Method madgraph.interface.cmd_interface.CmdExtended.postcmd()=madgraph.interface.cmd_interface.CmdExtended-class.html#postcmd,Method madgraph.interface.extended_cmd.OneLinePathCompletion.postcmd()=madgraph.interface.extended_cmd.OneLinePathCompletion-class.html#postcmd,Method madgraph.interface.extended_cmd.SmartQuestion.postcmd()=madgraph.interface.extended_cmd.SmartQuestion-class.html#postcmd"><a title="madgraph.interface.cmd_interface.CmdExtended.postcmd
+madgraph.interface.extended_cmd.OneLinePathCompletion.postcmd
+madgraph.interface.extended_cmd.SmartQuestion.postcmd" class="py-name" href="#" onclick="return doclink('link-14', 'postcmd', 'link-14');">postcmd</a></tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="aloha.create_aloha.stop" class="py-name" href="#" onclick="return doclink('link-15', 'stop', 'link-11');">stop</a></tt><tt class="py-op">,</tt> <tt class="py-name">subline</tt><tt class="py-op">)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-string">''</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">         </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-comment"># execute the line command</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">line</tt> </tt>
+</div><a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"> </tt>
+<a name="Cmd.nice_error_handling"></a><div id="Cmd.nice_error_handling-def"><a name="L103"></a><tt class="py-lineno">103</tt> <a class="py-toggle" href="#" id="Cmd.nice_error_handling-toggle" onclick="return toggle('Cmd.nice_error_handling');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#nice_error_handling">nice_error_handling</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">error</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.nice_error_handling-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.nice_error_handling-expanded"><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-docstring">""" """</tt>  </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">        <tt class="py-comment"># Make sure that we are at the initial position</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">chdir</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__initpos</tt><tt class="py-op">)</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">        <tt class="py-comment"># Create the debug files</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">log</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd" class="py-name" href="#" onclick="return doclink('link-16', 'Cmd', 'link-7');">Cmd</a></tt><tt class="py-op">.</tt><tt id="link-17" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd.onecmd" class="py-name" href="#" onclick="return doclink('link-17', 'onecmd', 'link-12');">onecmd</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-string">'history %s'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="madgraph.interface.cmd_interface.CmdExtended.debug_output
+madgraph.interface.extended_cmd.Cmd.InvalidCmd.debug_output" class="py-name" href="#" onclick="return doclink('link-18', 'debug_output', 'link-3');">debug_output</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-name">debug_file</tt> <tt class="py-op">=</tt> <tt id="link-19" class="py-name" targets="Variable madgraph.interface.tutorial_text.open=madgraph.interface.tutorial_text-module.html#open,Method madgraph.iolibs.export_v4.UFO_model_to_mg4.open()=madgraph.iolibs.export_v4.UFO_model_to_mg4-class.html#open"><a title="madgraph.interface.tutorial_text.open
+madgraph.iolibs.export_v4.UFO_model_to_mg4.open" class="py-name" href="#" onclick="return doclink('link-19', 'open', 'link-19');">open</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="madgraph.interface.cmd_interface.CmdExtended.debug_output
+madgraph.interface.extended_cmd.Cmd.InvalidCmd.debug_output" class="py-name" href="#" onclick="return doclink('link-20', 'debug_output', 'link-3');">debug_output</a></tt><tt class="py-op">,</tt> <tt class="py-string">'a'</tt><tt class="py-op">)</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">        <tt class="py-name">traceback</tt><tt class="py-op">.</tt><tt class="py-name">print_exc</tt><tt class="py-op">(</tt><tt class="py-name">file</tt><tt class="py-op">=</tt><tt class="py-name">debug_file</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-comment"># Create a nice error output</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-21', 'history', 'link-6');">history</a></tt> <tt class="py-keyword">and</tt> <tt class="py-name">line</tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-22', 'history', 'link-6');">history</a></tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">            <tt class="py-name">error_text</tt> <tt class="py-op">=</tt> <tt class="py-string">'Command \"%s\" interrupted with error:\n'</tt> <tt class="py-op">%</tt> <tt class="py-name">line</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-23" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-23', 'history', 'link-6');">history</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">            <tt class="py-name">error_text</tt> <tt class="py-op">=</tt> <tt class="py-string">'Command \"%s\" interrupted in sub-command:\n'</tt> <tt class="py-op">%</tt><tt class="py-name">line</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">            <tt class="py-name">error_text</tt> <tt class="py-op">+=</tt> <tt class="py-string">'\"%s\" with error:\n'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-24', 'history', 'link-6');">history</a></tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">            <tt class="py-name">error_text</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-name">error_text</tt> <tt class="py-op">+=</tt> <tt class="py-string">'%s : %s\n'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">error</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt><tt class="py-op">,</tt>  </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">                                                <tt id="link-25" class="py-name" targets="Class str=str-class.html"><a title="str" class="py-name" href="#" onclick="return doclink('link-25', 'str', 'link-25');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">error</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'\n'</tt><tt class="py-op">,</tt><tt class="py-string">'\n\t'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">        <tt class="py-name">error_text</tt> <tt class="py-op">+=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="madgraph.interface.cmd_interface.CmdExtended.error_debug
+madgraph.interface.extended_cmd.Cmd.InvalidCmd.error_debug" class="py-name" href="#" onclick="return doclink('link-26', 'error_debug', 'link-4');">error_debug</a></tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="madgraph.interface.cmd_interface.CmdExtended.debug_output
+madgraph.interface.extended_cmd.Cmd.InvalidCmd.debug_output" class="py-name" href="#" onclick="return doclink('link-27', 'debug_output', 'link-3');">debug_output</a></tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line">        <tt id="link-28" class="py-name"><a title="madgraph.interface.cmd_interface.logger_stderr
+madgraph.interface.extended_cmd.logger_stderr" class="py-name" href="#" onclick="return doclink('link-28', 'logger_stderr', 'link-1');">logger_stderr</a></tt><tt class="py-op">.</tt><tt class="py-name">critical</tt><tt class="py-op">(</tt><tt class="py-name">error_text</tt><tt class="py-op">)</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-comment">#stop the execution if on a non interactive mode</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">use_rawinput</tt> <tt class="py-op">==</tt> <tt class="py-name">False</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">True</tt>  </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"> </tt>
+<a name="Cmd.nice_user_error"></a><div id="Cmd.nice_user_error-def"><a name="L129"></a><tt class="py-lineno">129</tt> <a class="py-toggle" href="#" id="Cmd.nice_user_error-toggle" onclick="return toggle('Cmd.nice_user_error');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#nice_user_error">nice_user_error</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">error</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.nice_user_error-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.nice_user_error-expanded"><a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-comment"># Make sure that we are at the initial position</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">chdir</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">__initpos</tt><tt class="py-op">)</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">line</tt> <tt class="py-op">==</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-29" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-29', 'history', 'link-6');">history</a></tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">:</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">            <tt class="py-name">error_text</tt> <tt class="py-op">=</tt> <tt class="py-string">'Command \"%s\" interrupted with error:\n'</tt> <tt class="py-op">%</tt> <tt class="py-name">line</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-name">error_text</tt> <tt class="py-op">=</tt> <tt class="py-string">'Command \"%s\" interrupted in sub-command:\n'</tt> <tt class="py-op">%</tt><tt class="py-name">line</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">            <tt class="py-name">error_text</tt> <tt class="py-op">+=</tt> <tt class="py-string">'\"%s\" with error:\n'</tt> <tt class="py-op">%</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-30" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-30', 'history', 'link-6');">history</a></tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt><tt class="py-op">]</tt>  </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-name">error_text</tt> <tt class="py-op">+=</tt> <tt class="py-string">'%s : %s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">error</tt><tt class="py-op">.</tt><tt class="py-name">__class__</tt><tt class="py-op">.</tt><tt class="py-name">__name__</tt><tt class="py-op">,</tt>  </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">                                                <tt id="link-31" class="py-name"><a title="str" class="py-name" href="#" onclick="return doclink('link-31', 'str', 'link-25');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">error</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">replace</tt><tt class="py-op">(</tt><tt class="py-string">'\n'</tt><tt class="py-op">,</tt><tt class="py-string">'\n\t'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt id="link-32" class="py-name"><a title="madgraph.interface.cmd_interface.logger_stderr
+madgraph.interface.extended_cmd.logger_stderr" class="py-name" href="#" onclick="return doclink('link-32', 'logger_stderr', 'link-1');">logger_stderr</a></tt><tt class="py-op">.</tt><tt class="py-name">error</tt><tt class="py-op">(</tt><tt class="py-name">error_text</tt><tt class="py-op">)</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line">        <tt class="py-comment">#stop the execution if on a non interactive mode</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">use_rawinput</tt> <tt class="py-op">==</tt> <tt class="py-name">False</tt><tt class="py-op">:</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">        <tt class="py-comment"># Remove failed command from history</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-33" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-33', 'history', 'link-6');">history</a></tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"> </tt>
+<a name="Cmd.onecmd"></a><div id="Cmd.onecmd-def"><a name="L147"></a><tt class="py-lineno">147</tt> <a class="py-toggle" href="#" id="Cmd.onecmd-toggle" onclick="return toggle('Cmd.onecmd');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#onecmd">onecmd</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.onecmd-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.onecmd-expanded"><a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-docstring">"""catch all error and stop properly command accordingly"""</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line">         </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">cmd</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd" class="py-name" href="#" onclick="return doclink('link-34', 'Cmd', 'link-7');">Cmd</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd.onecmd" class="py-name" href="#" onclick="return doclink('link-35', 'onecmd', 'link-12');">onecmd</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name" targets="Class madgraph.InvalidCmd=madgraph.InvalidCmd-class.html,Class madgraph.interface.extended_cmd.Cmd.InvalidCmd=madgraph.interface.extended_cmd.Cmd.InvalidCmd-class.html"><a title="madgraph.InvalidCmd
+madgraph.interface.extended_cmd.Cmd.InvalidCmd" class="py-name" href="#" onclick="return doclink('link-36', 'InvalidCmd', 'link-36');">InvalidCmd</a></tt> <tt class="py-keyword">as</tt> <tt class="py-name">error</tt><tt class="py-op">:</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">__debug__</tt><tt class="py-op">:</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-37" class="py-name" targets="Method madgraph.interface.extended_cmd.Cmd.nice_error_handling()=madgraph.interface.extended_cmd.Cmd-class.html#nice_error_handling"><a title="madgraph.interface.extended_cmd.Cmd.nice_error_handling" class="py-name" href="#" onclick="return doclink('link-37', 'nice_error_handling', 'link-37');">nice_error_handling</a></tt><tt class="py-op">(</tt><tt class="py-name">error</tt><tt class="py-op">,</tt> <tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method madgraph.interface.extended_cmd.Cmd.nice_user_error()=madgraph.interface.extended_cmd.Cmd-class.html#nice_user_error"><a title="madgraph.interface.extended_cmd.Cmd.nice_user_error" class="py-name" href="#" onclick="return doclink('link-38', 'nice_user_error', 'link-38');">nice_user_error</a></tt><tt class="py-op">(</tt><tt class="py-name">error</tt><tt class="py-op">,</tt> <tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt> <tt class="py-keyword">as</tt> <tt class="py-name">error</tt><tt class="py-op">:</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-39" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd.nice_error_handling" class="py-name" href="#" onclick="return doclink('link-39', 'nice_error_handling', 'link-37');">nice_error_handling</a></tt><tt class="py-op">(</tt><tt class="py-name">error</tt><tt class="py-op">,</tt> <tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">KeyboardInterrupt</tt><tt class="py-op">:</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-40" class="py-name"><a title="madgraph.interface.cmd_interface.CmdExtended.keyboard_stop_msg
+madgraph.interface.extended_cmd.Cmd.InvalidCmd.keyboard_stop_msg" class="py-name" href="#" onclick="return doclink('link-40', 'keyboard_stop_msg', 'link-5');">keyboard_stop_msg</a></tt> </tt>
+</div><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">             </tt>
+<a name="Cmd.exec_cmd"></a><div id="Cmd.exec_cmd-def"><a name="L162"></a><tt class="py-lineno">162</tt> <a class="py-toggle" href="#" id="Cmd.exec_cmd-toggle" onclick="return toggle('Cmd.exec_cmd');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#exec_cmd">exec_cmd</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">,</tt> <tt class="py-param">errorhandling</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.exec_cmd-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.exec_cmd-expanded"><a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line">        <tt class="py-docstring">"""for third party call, call the line with pre and postfix treatment</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">        without global error handling """</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line">        <tt id="link-41" class="py-name"><a title="aloha.create_aloha.logger
+madgraph.core.base_objects.logger
+madgraph.core.diagram_generation.logger
+madgraph.core.helas_objects.logger
+madgraph.interface.cmd_interface.logger
+madgraph.interface.extended_cmd.logger
+madgraph.interface.launch_ext_program.logger
+madgraph.iolibs.export_cpp.logger
+madgraph.iolibs.export_python.logger
+madgraph.iolibs.export_v4.logger
+madgraph.iolibs.files.logger
+madgraph.iolibs.group_subprocs.logger
+madgraph.iolibs.import_v4.logger
+madgraph.iolibs.save_model.logger
+madgraph.iolibs.ufo_expression_parsers.logger
+madgraph.various.diagram_symmetry.logger
+madgraph.various.process_checks.logger
+models.import_ufo.logger
+models.model_reader.logger" class="py-name" href="#" onclick="return doclink('link-41', 'logger', 'link-0');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">info</tt><tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line">        <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Method madgraph.interface.extended_cmd.Cmd.precmd()=madgraph.interface.extended_cmd.Cmd-class.html#precmd"><a title="madgraph.interface.extended_cmd.Cmd.precmd" class="py-name" href="#" onclick="return doclink('link-42', 'precmd', 'link-42');">precmd</a></tt><tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">errorhandling</tt><tt class="py-op">:</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line">            <tt id="link-43" class="py-name"><a title="aloha.create_aloha.stop" class="py-name" href="#" onclick="return doclink('link-43', 'stop', 'link-11');">stop</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-44" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd.onecmd" class="py-name" href="#" onclick="return doclink('link-44', 'onecmd', 'link-12');">onecmd</a></tt><tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line">            <tt id="link-45" class="py-name"><a title="aloha.create_aloha.stop" class="py-name" href="#" onclick="return doclink('link-45', 'stop', 'link-11');">stop</a></tt> <tt class="py-op">=</tt> <tt class="py-name">cmd</tt><tt class="py-op">.</tt><tt id="link-46" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd" class="py-name" href="#" onclick="return doclink('link-46', 'Cmd', 'link-7');">Cmd</a></tt><tt class="py-op">.</tt><tt id="link-47" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd.onecmd" class="py-name" href="#" onclick="return doclink('link-47', 'onecmd', 'link-12');">onecmd</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line">        <tt id="link-48" class="py-name"><a title="aloha.create_aloha.stop" class="py-name" href="#" onclick="return doclink('link-48', 'stop', 'link-11');">stop</a></tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-49" class="py-name"><a title="madgraph.interface.cmd_interface.CmdExtended.postcmd
+madgraph.interface.extended_cmd.OneLinePathCompletion.postcmd
+madgraph.interface.extended_cmd.SmartQuestion.postcmd" class="py-name" href="#" onclick="return doclink('link-49', 'postcmd', 'link-14');">postcmd</a></tt><tt class="py-op">(</tt><tt id="link-50" class="py-name"><a title="aloha.create_aloha.stop" class="py-name" href="#" onclick="return doclink('link-50', 'stop', 'link-11');">stop</a></tt><tt class="py-op">,</tt> <tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-51" class="py-name"><a title="aloha.create_aloha.stop" class="py-name" href="#" onclick="return doclink('link-51', 'stop', 'link-11');">stop</a></tt>       </tt>
+</div><a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"> </tt>
+<a name="Cmd.run_cmd"></a><div id="Cmd.run_cmd-def"><a name="L175"></a><tt class="py-lineno">175</tt> <a class="py-toggle" href="#" id="Cmd.run_cmd-toggle" onclick="return toggle('Cmd.run_cmd');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#run_cmd">run_cmd</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.run_cmd-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.run_cmd-expanded"><a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-docstring">"""for third party call, call the line with pre and postfix treatment</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line"><tt class="py-docstring">        with global error handling"""</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">         </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-52" class="py-name" targets="Method madgraph.interface.extended_cmd.Cmd.exec_cmd()=madgraph.interface.extended_cmd.Cmd-class.html#exec_cmd"><a title="madgraph.interface.extended_cmd.Cmd.exec_cmd" class="py-name" href="#" onclick="return doclink('link-52', 'exec_cmd', 'link-52');">exec_cmd</a></tt><tt class="py-op">(</tt><tt class="py-name">line</tt><tt class="py-op">,</tt> <tt class="py-name">errorhandling</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">     </tt>
+<a name="Cmd.emptyline"></a><div id="Cmd.emptyline-def"><a name="L181"></a><tt class="py-lineno">181</tt> <a class="py-toggle" href="#" id="Cmd.emptyline-toggle" onclick="return toggle('Cmd.emptyline');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#emptyline">emptyline</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.emptyline-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.emptyline-expanded"><a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-docstring">"""If empty line, do nothing. Default is repeat previous command."""</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">     </tt>
+<a name="Cmd.default"></a><div id="Cmd.default-def"><a name="L185"></a><tt class="py-lineno">185</tt> <a class="py-toggle" href="#" id="Cmd.default-toggle" onclick="return toggle('Cmd.default');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#default">default</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.default-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.default-expanded"><a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt class="py-docstring">"""Default action if line is not recognized"""</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line"> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">        <tt class="py-comment"># Faulty command</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">        <tt id="link-53" class="py-name"><a title="aloha.create_aloha.logger
+madgraph.core.base_objects.logger
+madgraph.core.diagram_generation.logger
+madgraph.core.helas_objects.logger
+madgraph.interface.cmd_interface.logger
+madgraph.interface.extended_cmd.logger
+madgraph.interface.launch_ext_program.logger
+madgraph.iolibs.export_cpp.logger
+madgraph.iolibs.export_python.logger
+madgraph.iolibs.export_v4.logger
+madgraph.iolibs.files.logger
+madgraph.iolibs.group_subprocs.logger
+madgraph.iolibs.import_v4.logger
+madgraph.iolibs.save_model.logger
+madgraph.iolibs.ufo_expression_parsers.logger
+madgraph.various.diagram_symmetry.logger
+madgraph.various.process_checks.logger
+models.import_ufo.logger
+models.model_reader.logger" class="py-name" href="#" onclick="return doclink('link-53', 'logger', 'link-0');">logger</a></tt><tt class="py-op">.</tt><tt class="py-name">warning</tt><tt class="py-op">(</tt><tt class="py-string">"Command \"%s\" not recognized, please try again"</tt> <tt class="py-op">%</tt> \ </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">                                                                <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line">    <tt class="py-comment"># Quit</tt> </tt>
+<a name="Cmd.do_quit"></a><div id="Cmd.do_quit-def"><a name="L192"></a><tt class="py-lineno">192</tt> <a class="py-toggle" href="#" id="Cmd.do_quit-toggle" onclick="return toggle('Cmd.do_quit');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#do_quit">do_quit</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.do_quit-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.do_quit-expanded"><a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">        <tt class="py-docstring">""" exit the mainloop() """</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+</div><a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line">  </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line">    <tt class="py-comment"># Aliases</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line">    <tt class="py-name">do_EOF</tt> <tt class="py-op">=</tt> <tt id="link-54" class="py-name" targets="Method madgraph.interface.extended_cmd.Cmd.do_quit()=madgraph.interface.extended_cmd.Cmd-class.html#do_quit"><a title="madgraph.interface.extended_cmd.Cmd.do_quit" class="py-name" href="#" onclick="return doclink('link-54', 'do_quit', 'link-54');">do_quit</a></tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">    <tt class="py-name">do_exit</tt> <tt class="py-op">=</tt> <tt id="link-55" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd.do_quit" class="py-name" href="#" onclick="return doclink('link-55', 'do_quit', 'link-54');">do_quit</a></tt> </tt>
+<a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"> </tt>
+<a name="Cmd.do_help"></a><div id="Cmd.do_help-def"><a name="L201"></a><tt class="py-lineno">201</tt> <a class="py-toggle" href="#" id="Cmd.do_help-toggle" onclick="return toggle('Cmd.do_help');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#do_help">do_help</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.do_help-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.do_help-expanded"><a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">        <tt class="py-docstring">""" propose some usefull possible action """</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line">         </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt><tt class="py-op">.</tt><tt id="link-56" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd" class="py-name" href="#" onclick="return doclink('link-56', 'Cmd', 'link-7');">Cmd</a></tt><tt class="py-op">.</tt><tt id="link-57" class="py-name" targets="Method madgraph.interface.cmd_interface.MadGraphCmd.do_help()=madgraph.interface.cmd_interface.MadGraphCmd-class.html#do_help,Method madgraph.interface.extended_cmd.Cmd.do_help()=madgraph.interface.extended_cmd.Cmd-class.html#do_help"><a title="madgraph.interface.cmd_interface.MadGraphCmd.do_help
+madgraph.interface.extended_cmd.Cmd.do_help" class="py-name" href="#" onclick="return doclink('link-57', 'do_help', 'link-57');">do_help</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt><tt class="py-name">line</tt><tt class="py-op">)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line">         </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line">        <tt class="py-comment"># if not basic help -&gt; simple call is enough    </tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">line</tt><tt class="py-op">:</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-58" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-58', 'history', 'link-6');">history</a></tt><tt class="py-op">)</tt> <tt class="py-op">==</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">            <tt class="py-name">last_action_2</tt> <tt class="py-op">=</tt> <tt class="py-name">last_action</tt> <tt class="py-op">=</tt> <tt class="py-string">'start'</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">            <tt class="py-name">last_action_2</tt> <tt class="py-op">=</tt> <tt class="py-name">last_action</tt> <tt class="py-op">=</tt> <tt class="py-string">'none'</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">         </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">        <tt class="py-name">pos</tt> <tt class="py-op">=</tt> <tt class="py-number">0</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">        <tt class="py-name">authorize</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-59" class="py-name"><a title="madgraph.interface.cmd_interface.CmdExtended.next_possibility
+madgraph.interface.extended_cmd.Cmd.next_possibility" class="py-name" href="#" onclick="return doclink('link-59', 'next_possibility', 'link-2');">next_possibility</a></tt><tt class="py-op">.</tt><tt class="py-name">keys</tt><tt class="py-op">(</tt><tt class="py-op">)</tt>  </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">        <tt class="py-keyword">while</tt> <tt class="py-name">last_action_2</tt>  <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">authorize</tt> <tt class="py-keyword">and</tt> <tt class="py-name">last_action</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">authorize</tt><tt class="py-op">:</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">            <tt class="py-name">pos</tt> <tt class="py-op">+=</tt> <tt class="py-number">1</tt> </tt>
+<a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">pos</tt> <tt class="py-op">&gt;</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-60" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-60', 'history', 'link-6');">history</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L220"></a><tt class="py-lineno">220</tt>  <tt class="py-line">                <tt class="py-name">last_action_2</tt> <tt class="py-op">=</tt> <tt class="py-name">last_action</tt> <tt class="py-op">=</tt> <tt class="py-string">'start'</tt> </tt>
+<a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line">             </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line">            <tt class="py-name">args</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-61" class="py-name"><a title="madgraph.interface.tutorial_text.history" class="py-name" href="#" onclick="return doclink('link-61', 'history', 'link-6');">history</a></tt><tt class="py-op">[</tt><tt class="py-op">-</tt><tt class="py-number">1</tt> <tt class="py-op">*</tt> <tt class="py-name">pos</tt><tt class="py-op">]</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line">            <tt class="py-name">last_action</tt> <tt class="py-op">=</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">args</tt><tt class="py-op">)</tt><tt class="py-op">&gt;</tt><tt class="py-number">1</tt><tt class="py-op">:</tt>  </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line">                <tt class="py-name">last_action_2</tt> <tt class="py-op">=</tt> <tt class="py-string">'%s %s'</tt> <tt class="py-op">%</tt> <tt class="py-op">(</tt><tt class="py-name">last_action</tt><tt class="py-op">,</tt> <tt class="py-name">args</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt>  </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line">                <tt class="py-name">last_action_2</tt> <tt class="py-op">=</tt> <tt class="py-string">'none'</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line">         </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">'Contextual Help'</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">'==============='</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">last_action_2</tt> <tt class="py-keyword">in</tt> <tt class="py-name">authorize</tt><tt class="py-op">:</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line">            <tt class="py-name">options</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-62" class="py-name"><a title="madgraph.interface.cmd_interface.CmdExtended.next_possibility
+madgraph.interface.extended_cmd.Cmd.next_possibility" class="py-name" href="#" onclick="return doclink('link-62', 'next_possibility', 'link-2');">next_possibility</a></tt><tt class="py-op">[</tt><tt class="py-name">last_action_2</tt><tt class="py-op">]</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line">        <tt class="py-keyword">elif</tt> <tt class="py-name">last_action</tt> <tt class="py-keyword">in</tt> <tt class="py-name">authorize</tt><tt class="py-op">:</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">            <tt class="py-name">options</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-63" class="py-name"><a title="madgraph.interface.cmd_interface.CmdExtended.next_possibility
+madgraph.interface.extended_cmd.Cmd.next_possibility" class="py-name" href="#" onclick="return doclink('link-63', 'next_possibility', 'link-2');">next_possibility</a></tt><tt class="py-op">[</tt><tt class="py-name">last_action</tt><tt class="py-op">]</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">         </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">        <tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-string">'The following command(s) may be useful in order to continue.\n'</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">option</tt> <tt class="py-keyword">in</tt> <tt class="py-name">options</tt><tt class="py-op">:</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">            <tt class="py-name">text</tt><tt class="py-op">+=</tt><tt class="py-string">'\t %s \n'</tt> <tt class="py-op">%</tt> <tt class="py-name">option</tt>       </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-name">text</tt> </tt>
+</div><a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line"> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="Cmd.list_completion"></a><div id="Cmd.list_completion-def"><a name="L243"></a><tt class="py-lineno">243</tt> <a class="py-toggle" href="#" id="Cmd.list_completion-toggle" onclick="return toggle('Cmd.list_completion');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#list_completion">list_completion</a><tt class="py-op">(</tt><tt class="py-param">text</tt><tt class="py-op">,</tt> <tt class="py-param">list</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.list_completion-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.list_completion-expanded"><a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">        <tt class="py-docstring">"""Propose completions of text in list"""</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">text</tt><tt class="py-op">:</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">            <tt class="py-name">completions</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">            <tt class="py-name">completions</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> <tt id="link-64" class="py-name" targets="Class madgraph.core.color_algebra.f=madgraph.core.color_algebra.f-class.html"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-64', 'f', 'link-64');">f</a></tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">                            <tt class="py-keyword">for</tt> <tt id="link-65" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-65', 'f', 'link-64');">f</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">list</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">                            <tt class="py-keyword">if</tt> <tt id="link-66" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-66', 'f', 'link-64');">f</a></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">                            <tt class="py-op">]</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">completions</tt> </tt>
+</div><a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line"> </tt>
+<a name="L254"></a><tt class="py-lineno">254</tt>  <tt class="py-line">    <tt class="py-decorator">@</tt><tt class="py-decorator">staticmethod</tt> </tt>
+<a name="Cmd.path_completion"></a><div id="Cmd.path_completion-def"><a name="L255"></a><tt class="py-lineno">255</tt> <a class="py-toggle" href="#" id="Cmd.path_completion-toggle" onclick="return toggle('Cmd.path_completion');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.Cmd-class.html#path_completion">path_completion</a><tt class="py-op">(</tt><tt class="py-param">text</tt><tt class="py-op">,</tt> <tt class="py-param">base_dir</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">only_dirs</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">,</tt>  </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">                                                                 <tt class="py-param">relative</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Cmd.path_completion-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Cmd.path_completion-expanded"><a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">        <tt class="py-docstring">"""Propose completions of text to compose a valid path"""</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">         </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">base_dir</tt> <tt class="py-keyword">is</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">            <tt class="py-name">base_dir</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">getcwd</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">             </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">        <tt class="py-name">prefix</tt><tt class="py-op">,</tt> <tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">        <tt class="py-name">base_dir</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">base_dir</tt><tt class="py-op">,</tt> <tt class="py-name">prefix</tt><tt class="py-op">)</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">prefix</tt><tt class="py-op">:</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">            <tt class="py-name">prefix</tt> <tt class="py-op">+=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">sep</tt> </tt>
+<a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line">         </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line">         </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line"> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">only_dirs</tt><tt class="py-op">:</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">            <tt class="py-name">completion</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-name">prefix</tt> <tt class="py-op">+</tt> <tt id="link-67" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-67', 'f', 'link-64');">f</a></tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">                          <tt class="py-keyword">for</tt> <tt id="link-68" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-68', 'f', 'link-64');">f</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">base_dir</tt><tt class="py-op">)</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">                          <tt class="py-keyword">if</tt> <tt id="link-69" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-69', 'f', 'link-64');">f</a></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> \ </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">                          <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">base_dir</tt><tt class="py-op">,</tt> <tt id="link-70" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-70', 'f', 'link-64');">f</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> \ </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line">                          <tt class="py-op">(</tt><tt class="py-keyword">not</tt> <tt id="link-71" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-71', 'f', 'link-64');">f</a></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-name">text</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L275"></a><tt class="py-lineno">275</tt>  <tt class="py-line">                          <tt class="py-op">]</tt> </tt>
+<a name="L276"></a><tt class="py-lineno">276</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L277"></a><tt class="py-lineno">277</tt>  <tt class="py-line">            <tt class="py-name">completion</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt> <tt class="py-name">prefix</tt> <tt class="py-op">+</tt> <tt id="link-72" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-72', 'f', 'link-64');">f</a></tt> </tt>
+<a name="L278"></a><tt class="py-lineno">278</tt>  <tt class="py-line">                          <tt class="py-keyword">for</tt> <tt id="link-73" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-73', 'f', 'link-64');">f</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">base_dir</tt><tt class="py-op">)</tt> </tt>
+<a name="L279"></a><tt class="py-lineno">279</tt>  <tt class="py-line">                          <tt class="py-keyword">if</tt> <tt id="link-74" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-74', 'f', 'link-64');">f</a></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> \ </tt>
+<a name="L280"></a><tt class="py-lineno">280</tt>  <tt class="py-line">                          <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">base_dir</tt><tt class="py-op">,</tt> <tt id="link-75" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-75', 'f', 'link-64');">f</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> \ </tt>
+<a name="L281"></a><tt class="py-lineno">281</tt>  <tt class="py-line">                          <tt class="py-op">(</tt><tt class="py-keyword">not</tt> <tt id="link-76" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-76', 'f', 'link-64');">f</a></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-name">text</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L282"></a><tt class="py-lineno">282</tt>  <tt class="py-line">                          <tt class="py-op">]</tt> </tt>
+<a name="L283"></a><tt class="py-lineno">283</tt>  <tt class="py-line"> </tt>
+<a name="L284"></a><tt class="py-lineno">284</tt>  <tt class="py-line">            <tt class="py-name">completion</tt> <tt class="py-op">=</tt> <tt class="py-name">completion</tt> <tt class="py-op">+</tt> \ </tt>
+<a name="L285"></a><tt class="py-lineno">285</tt>  <tt class="py-line">                         <tt class="py-op">[</tt><tt class="py-name">prefix</tt> <tt class="py-op">+</tt> <tt id="link-77" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-77', 'f', 'link-64');">f</a></tt> <tt class="py-op">+</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">sep</tt> </tt>
+<a name="L286"></a><tt class="py-lineno">286</tt>  <tt class="py-line">                          <tt class="py-keyword">for</tt> <tt id="link-78" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-78', 'f', 'link-64');">f</a></tt> <tt class="py-keyword">in</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">listdir</tt><tt class="py-op">(</tt><tt class="py-name">base_dir</tt><tt class="py-op">)</tt> </tt>
+<a name="L287"></a><tt class="py-lineno">287</tt>  <tt class="py-line">                          <tt class="py-keyword">if</tt> <tt id="link-79" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-79', 'f', 'link-64');">f</a></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> \ </tt>
+<a name="L288"></a><tt class="py-lineno">288</tt>  <tt class="py-line">                          <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isdir</tt><tt class="py-op">(</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">base_dir</tt><tt class="py-op">,</tt> <tt id="link-80" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-80', 'f', 'link-64');">f</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> \ </tt>
+<a name="L289"></a><tt class="py-lineno">289</tt>  <tt class="py-line">                          <tt class="py-op">(</tt><tt class="py-keyword">not</tt> <tt id="link-81" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-81', 'f', 'link-64');">f</a></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">)</tt> <tt class="py-keyword">or</tt> <tt class="py-name">text</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L290"></a><tt class="py-lineno">290</tt>  <tt class="py-line">                          <tt class="py-op">]</tt> </tt>
+<a name="L291"></a><tt class="py-lineno">291</tt>  <tt class="py-line"> </tt>
+<a name="L292"></a><tt class="py-lineno">292</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">relative</tt><tt class="py-op">:</tt> </tt>
+<a name="L293"></a><tt class="py-lineno">293</tt>  <tt class="py-line">            <tt class="py-name">completion</tt> <tt class="py-op">+=</tt> <tt class="py-op">[</tt><tt class="py-name">prefix</tt> <tt class="py-op">+</tt> <tt id="link-82" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-82', 'f', 'link-64');">f</a></tt> <tt class="py-keyword">for</tt> <tt id="link-83" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-83', 'f', 'link-64');">f</a></tt> <tt class="py-keyword">in</tt> <tt class="py-op">[</tt><tt class="py-string">'.'</tt><tt class="py-op">+</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">sep</tt><tt class="py-op">,</tt> <tt class="py-string">'..'</tt><tt class="py-op">+</tt><tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">sep</tt><tt class="py-op">]</tt> <tt class="py-keyword">if</tt> \ </tt>
+<a name="L294"></a><tt class="py-lineno">294</tt>  <tt class="py-line">                       <tt id="link-84" class="py-name"><a title="madgraph.core.color_algebra.f" class="py-name" href="#" onclick="return doclink('link-84', 'f', 'link-64');">f</a></tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-keyword">and</tt> <tt class="py-keyword">not</tt> <tt class="py-name">prefix</tt><tt class="py-op">.</tt><tt class="py-name">startswith</tt><tt class="py-op">(</tt><tt class="py-string">'.'</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L295"></a><tt class="py-lineno">295</tt>  <tt class="py-line"> </tt>
+<a name="L296"></a><tt class="py-lineno">296</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">completion</tt> </tt>
+</div></div><a name="L297"></a><tt class="py-lineno">297</tt>  <tt class="py-line"> </tt>
+<a name="SmartQuestion"></a><div id="SmartQuestion-def"><a name="L298"></a><tt class="py-lineno">298</tt>  <tt class="py-line"> </tt>
+<a name="L299"></a><tt class="py-lineno">299</tt>  <tt class="py-line"> </tt>
+<a name="L300"></a><tt class="py-lineno">300</tt>  <tt class="py-line"> </tt>
+<a name="L301"></a><tt class="py-lineno">301</tt>  <tt class="py-line"> </tt>
+<a name="L302"></a><tt class="py-lineno">302</tt>  <tt class="py-line"><tt class="py-comment">#===============================================================================</tt> </tt>
+<a name="L303"></a><tt class="py-lineno">303</tt>  <tt class="py-line"><tt class="py-comment"># Question with auto-completion</tt> </tt>
+<a name="L304"></a><tt class="py-lineno">304</tt>  <tt class="py-line"><tt class="py-comment">#===============================================================================</tt> </tt>
+<a name="L305"></a><tt class="py-lineno">305</tt> <a class="py-toggle" href="#" id="SmartQuestion-toggle" onclick="return toggle('SmartQuestion');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.SmartQuestion-class.html">SmartQuestion</a><tt class="py-op">(</tt><tt class="py-base-class">cmd</tt><tt class="py-op">.</tt><tt class="py-base-class">Cmd</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SmartQuestion-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="SmartQuestion-expanded"><a name="L306"></a><tt class="py-lineno">306</tt>  <tt class="py-line">    <tt class="py-docstring">""" a class for answering a question with the path autocompletion"""</tt> </tt>
+<a name="L307"></a><tt class="py-lineno">307</tt>  <tt class="py-line"> </tt>
+<a name="SmartQuestion.preloop"></a><div id="SmartQuestion.preloop-def"><a name="L308"></a><tt class="py-lineno">308</tt> <a class="py-toggle" href="#" id="SmartQuestion.preloop-toggle" onclick="return toggle('SmartQuestion.preloop');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.SmartQuestion-class.html#preloop">preloop</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SmartQuestion.preloop-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SmartQuestion.preloop-expanded"><a name="L309"></a><tt class="py-lineno">309</tt>  <tt class="py-line">        <tt class="py-docstring">"""Initializing before starting the main loop"""</tt> </tt>
+<a name="L310"></a><tt class="py-lineno">310</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">prompt</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L311"></a><tt class="py-lineno">311</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+</div><a name="L312"></a><tt class="py-lineno">312</tt>  <tt class="py-line"> </tt>
+<a name="SmartQuestion.__init__"></a><div id="SmartQuestion.__init__-def"><a name="L313"></a><tt class="py-lineno">313</tt> <a class="py-toggle" href="#" id="SmartQuestion.__init__-toggle" onclick="return toggle('SmartQuestion.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.SmartQuestion-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt>  <tt class="py-param">allow_arg</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">arg</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">opt</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SmartQuestion.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SmartQuestion.__init__-expanded"><a name="L314"></a><tt class="py-lineno">314</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">allow_arg</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt id="link-85" class="py-name"><a title="str" class="py-name" href="#" onclick="return doclink('link-85', 'str', 'link-25');">str</a></tt><tt class="py-op">(</tt><tt class="py-name">a</tt><tt class="py-op">)</tt> <tt class="py-keyword">for</tt> <tt class="py-name">a</tt> <tt class="py-keyword">in</tt> <tt class="py-name">allow_arg</tt><tt class="py-op">]</tt> </tt>
+<a name="L315"></a><tt class="py-lineno">315</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">history_header</tt> <tt class="py-op">=</tt> <tt class="py-string">''</tt> </tt>
+<a name="L316"></a><tt class="py-lineno">316</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">default_value</tt> <tt class="py-op">=</tt> <tt id="link-86" class="py-name"><a title="str" class="py-name" href="#" onclick="return doclink('link-86', 'str', 'link-25');">str</a></tt><tt class="py-op">(</tt><tt id="link-87" class="py-name" targets="Method madgraph.interface.extended_cmd.Cmd.default()=madgraph.interface.extended_cmd.Cmd-class.html#default,Method madgraph.interface.extended_cmd.SmartQuestion.default()=madgraph.interface.extended_cmd.SmartQuestion-class.html#default"><a title="madgraph.interface.extended_cmd.Cmd.default
+madgraph.interface.extended_cmd.SmartQuestion.default" class="py-name" href="#" onclick="return doclink('link-87', 'default', 'link-87');">default</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L317"></a><tt class="py-lineno">317</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt><tt class="py-op">.</tt><tt id="link-88" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd" class="py-name" href="#" onclick="return doclink('link-88', 'Cmd', 'link-7');">Cmd</a></tt><tt class="py-op">.</tt><tt id="link-89" class="py-name"><a title="aloha.aloha_lib.AddVariable.__init__
+aloha.aloha_lib.ConstantObject.__init__
+aloha.aloha_lib.FracVariable.__init__
+aloha.aloha_lib.IndicesIterator.__init__
+aloha.aloha_lib.LorentzObject.__init__
+aloha.aloha_lib.LorentzObjectRepresentation.__init__
+aloha.aloha_lib.MultVariable.__init__
+aloha.aloha_lib.ScalarVariable.__init__
+aloha.aloha_lib.Variable.__init__
+aloha.aloha_object.C.__init__
+aloha.aloha_object.DenominatorPropagator.__init__
+aloha.aloha_object.Epsilon.__init__
+aloha.aloha_object.Gamma.__init__
+aloha.aloha_object.Gamma5.__init__
+aloha.aloha_object.Identity.__init__
+aloha.aloha_object.Mass.__init__
+aloha.aloha_object.Metric.__init__
+aloha.aloha_object.OverMass2.__init__
+aloha.aloha_object.P.__init__
+aloha.aloha_object.PSlash.__init__
+aloha.aloha_object.ProjM.__init__
+aloha.aloha_object.ProjP.__init__
+aloha.aloha_object.Scalar.__init__
+aloha.aloha_object.Sigma.__init__
+aloha.aloha_object.Spin2.__init__
+aloha.aloha_object.Spinor.__init__
+aloha.aloha_object.Vector.__init__
+aloha.aloha_object.Width.__init__
+aloha.aloha_writers.ALOHAWriterForPython.__init__
+aloha.aloha_writers.WriteALOHA.__init__
+aloha.create_aloha.AbstractALOHAModel.__init__
+aloha.create_aloha.AbstractRoutine.__init__
+aloha.create_aloha.AbstractRoutineBuilder.__init__
+aloha.template_files.wavefunctions.WaveFunction.__init__
+madgraph.core.base_objects.ModelVariable.__init__
+madgraph.core.base_objects.ParamCardVariable.__init__
+madgraph.core.base_objects.PhysicsObject.__init__
+madgraph.core.base_objects.PhysicsObjectList.__init__
+madgraph.core.base_objects.VertexList.__init__
+madgraph.core.color_algebra.ColorString.__init__
+madgraph.core.color_algebra.Epsilon.__init__
+madgraph.core.color_algebra.EpsilonBar.__init__
+madgraph.core.color_algebra.K6.__init__
+madgraph.core.color_algebra.K6Bar.__init__
+madgraph.core.color_algebra.T.__init__
+madgraph.core.color_algebra.T6.__init__
+madgraph.core.color_algebra.f.__init__
+madgraph.core.color_amp.ColorBasis.__init__
+madgraph.core.color_amp.ColorMatrix.__init__
+madgraph.core.diagram_generation.Amplitude.__init__
+madgraph.core.diagram_generation.DecayChainAmplitude.__init__
+madgraph.core.diagram_generation.DiagramTag.__init__
+madgraph.core.diagram_generation.DiagramTagChainLink.__init__
+madgraph.core.diagram_generation.MultiProcess.__init__
+madgraph.core.drawing.DiagramDrawer.__init__
+madgraph.core.drawing.DrawOption.__init__
+madgraph.core.drawing.FeynmanDiagram.__init__
+madgraph.core.drawing.FeynmanLine.__init__
+madgraph.core.drawing.VertexPoint.__init__
+madgraph.core.helas_objects.HelasAmplitude.__init__
+madgraph.core.helas_objects.HelasDecayChainProcess.__init__
+madgraph.core.helas_objects.HelasMatrixElement.__init__
+madgraph.core.helas_objects.HelasMultiProcess.__init__
+madgraph.core.helas_objects.HelasWavefunction.__init__
+madgraph.interface.cmd_interface.CmdExtended.__init__
+madgraph.interface.cmd_interface.MadGraphCmd.__init__
+madgraph.interface.cmd_interface.MadGraphCmdWeb.__init__
+madgraph.interface.extended_cmd.Cmd.__init__
+madgraph.interface.extended_cmd.CmdFile.__init__
+madgraph.interface.extended_cmd.SmartQuestion.__init__
+madgraph.interface.launch_ext_program.ExtLauncher.__init__
+madgraph.interface.launch_ext_program.MELauncher.__init__
+madgraph.interface.launch_ext_program.Pythia8Launcher.__init__
+madgraph.interface.launch_ext_program.SALauncher.__init__
+madgraph.interface.launch_ext_program.open_file.__init__
+madgraph.iolibs.drawing_eps.MultiEpsDiagramDrawer.__init__
+madgraph.iolibs.export_cpp.ProcessExporterCPP.__init__
+madgraph.iolibs.export_cpp.ProcessExporterPythia8.__init__
+madgraph.iolibs.export_cpp.UFOModelConverterCPP.__init__
+madgraph.iolibs.export_python.ProcessExporterPython.__init__
+madgraph.iolibs.export_v4.ProcessExporterFortran.__init__
+madgraph.iolibs.export_v4.UFO_model_to_mg4.__init__
+madgraph.iolibs.file_writers.FileWriter.__init__
+madgraph.iolibs.gen_infohtml.make_info_html.__init__
+madgraph.iolibs.helas_call_writers.HelasCallWriter.__init__
+madgraph.iolibs.import_v4.ProcCardv4Reader.__init__
+madgraph.iolibs.import_v4.ProcessInfo.__init__
+madgraph.iolibs.ufo_expression_parsers.UFOExpressionParser.__init__
+madgraph.various.process_checks.MatrixElementEvaluator.__init__
+madgraph.various.rambo.DoubleFortranList.__init__
+madgraph.various.rambo.FortranList.__init__
+models.import_ufo.OrganizeModelExpression.__init__
+models.import_ufo.UFOMG5Converter.__init__
+models.write_param_card.ParamCardWriter.__init__" class="py-name" href="#" onclick="return doclink('link-89', '__init__', 'link-8');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-name">arg</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-name">opt</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L318"></a><tt class="py-lineno">318</tt>  <tt class="py-line"> </tt>
+<a name="SmartQuestion.completenames"></a><div id="SmartQuestion.completenames-def"><a name="L319"></a><tt class="py-lineno">319</tt> <a class="py-toggle" href="#" id="SmartQuestion.completenames-toggle" onclick="return toggle('SmartQuestion.completenames');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.SmartQuestion-class.html#completenames">completenames</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">text</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">ignored</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SmartQuestion.completenames-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SmartQuestion.completenames-expanded"><a name="L320"></a><tt class="py-lineno">320</tt>  <tt class="py-line">        <tt class="py-name">signal</tt><tt class="py-op">.</tt><tt class="py-name">alarm</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> <tt class="py-comment"># avoid timer if any</tt> </tt>
+<a name="L321"></a><tt class="py-lineno">321</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L322"></a><tt class="py-lineno">322</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt id="link-90" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd" class="py-name" href="#" onclick="return doclink('link-90', 'Cmd', 'link-7');">Cmd</a></tt><tt class="py-op">.</tt><tt id="link-91" class="py-name" targets="Method madgraph.interface.cmd_interface.CompleteForCmd.list_completion()=madgraph.interface.cmd_interface.CompleteForCmd-class.html#list_completion,Static Method madgraph.interface.extended_cmd.Cmd.list_completion()=madgraph.interface.extended_cmd.Cmd-class.html#list_completion"><a title="madgraph.interface.cmd_interface.CompleteForCmd.list_completion
+madgraph.interface.extended_cmd.Cmd.list_completion" class="py-name" href="#" onclick="return doclink('link-91', 'list_completion', 'link-91');">list_completion</a></tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">allow_arg</tt><tt class="py-op">)</tt> </tt>
+<a name="L323"></a><tt class="py-lineno">323</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">,</tt> <tt class="py-name">error</tt><tt class="py-op">:</tt> </tt>
+<a name="L324"></a><tt class="py-lineno">324</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-name">error</tt> </tt>
+</div><a name="L325"></a><tt class="py-lineno">325</tt>  <tt class="py-line">             </tt>
+<a name="SmartQuestion.default"></a><div id="SmartQuestion.default-def"><a name="L326"></a><tt class="py-lineno">326</tt> <a class="py-toggle" href="#" id="SmartQuestion.default-toggle" onclick="return toggle('SmartQuestion.default');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.SmartQuestion-class.html#default">default</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SmartQuestion.default-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SmartQuestion.default-expanded"><a name="L327"></a><tt class="py-lineno">327</tt>  <tt class="py-line">        <tt class="py-docstring">"""Default action if line is not recognized"""</tt> </tt>
+<a name="L328"></a><tt class="py-lineno">328</tt>  <tt class="py-line"> </tt>
+<a name="L329"></a><tt class="py-lineno">329</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">line</tt> <tt class="py-op">==</tt> <tt class="py-string">''</tt> <tt class="py-keyword">and</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">default_value</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L330"></a><tt class="py-lineno">330</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">default_value</tt> </tt>
+<a name="L331"></a><tt class="py-lineno">331</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L332"></a><tt class="py-lineno">332</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">line</tt> </tt>
+</div><a name="L333"></a><tt class="py-lineno">333</tt>  <tt class="py-line"> </tt>
+<a name="SmartQuestion.emptyline"></a><div id="SmartQuestion.emptyline-def"><a name="L334"></a><tt class="py-lineno">334</tt> <a class="py-toggle" href="#" id="SmartQuestion.emptyline-toggle" onclick="return toggle('SmartQuestion.emptyline');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.SmartQuestion-class.html#emptyline">emptyline</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SmartQuestion.emptyline-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SmartQuestion.emptyline-expanded"><a name="L335"></a><tt class="py-lineno">335</tt>  <tt class="py-line">        <tt class="py-docstring">"""If empty line, return default"""</tt> </tt>
+<a name="L336"></a><tt class="py-lineno">336</tt>  <tt class="py-line">         </tt>
+<a name="L337"></a><tt class="py-lineno">337</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">default_value</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L338"></a><tt class="py-lineno">338</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">default_value</tt> </tt>
+</div><a name="L339"></a><tt class="py-lineno">339</tt>  <tt class="py-line"> </tt>
+<a name="SmartQuestion.postcmd"></a><div id="SmartQuestion.postcmd-def"><a name="L340"></a><tt class="py-lineno">340</tt> <a class="py-toggle" href="#" id="SmartQuestion.postcmd-toggle" onclick="return toggle('SmartQuestion.postcmd');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.SmartQuestion-class.html#postcmd">postcmd</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">stop</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SmartQuestion.postcmd-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SmartQuestion.postcmd-expanded"><a name="L341"></a><tt class="py-lineno">341</tt>  <tt class="py-line">         </tt>
+<a name="L342"></a><tt class="py-lineno">342</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt>     </tt>
+<a name="L343"></a><tt class="py-lineno">343</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">allow_arg</tt><tt class="py-op">:</tt> </tt>
+<a name="L344"></a><tt class="py-lineno">344</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L345"></a><tt class="py-lineno">345</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L346"></a><tt class="py-lineno">346</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt> </tt>
+<a name="L347"></a><tt class="py-lineno">347</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L348"></a><tt class="py-lineno">348</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"""not valid argument. Valid argument are in (%s)."""</tt> \ </tt>
+<a name="L349"></a><tt class="py-lineno">349</tt>  <tt class="py-line">                          <tt class="py-op">%</tt> <tt class="py-string">','</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">allow_arg</tt><tt class="py-op">)</tt> </tt>
+<a name="L350"></a><tt class="py-lineno">350</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">'please retry'</tt> </tt>
+<a name="L351"></a><tt class="py-lineno">351</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L352"></a><tt class="py-lineno">352</tt>  <tt class="py-line">             </tt>
+<a name="SmartQuestion.cmdloop"></a><div id="SmartQuestion.cmdloop-def"><a name="L353"></a><tt class="py-lineno">353</tt> <a class="py-toggle" href="#" id="SmartQuestion.cmdloop-toggle" onclick="return toggle('SmartQuestion.cmdloop');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.SmartQuestion-class.html#cmdloop">cmdloop</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">intro</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="SmartQuestion.cmdloop-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="SmartQuestion.cmdloop-expanded"><a name="L354"></a><tt class="py-lineno">354</tt>  <tt class="py-line">        <tt class="py-name">cmd</tt><tt class="py-op">.</tt><tt id="link-92" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd" class="py-name" href="#" onclick="return doclink('link-92', 'Cmd', 'link-7');">Cmd</a></tt><tt class="py-op">.</tt><tt id="link-93" class="py-name" targets="Method madgraph.interface.extended_cmd.SmartQuestion.cmdloop()=madgraph.interface.extended_cmd.SmartQuestion-class.html#cmdloop"><a title="madgraph.interface.extended_cmd.SmartQuestion.cmdloop" class="py-name" href="#" onclick="return doclink('link-93', 'cmdloop', 'link-93');">cmdloop</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">intro</tt><tt class="py-op">)</tt> </tt>
+<a name="L355"></a><tt class="py-lineno">355</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> </tt>
+</div></div><a name="L356"></a><tt class="py-lineno">356</tt>  <tt class="py-line">     </tt>
+<a name="smart_input"></a><div id="smart_input-def"><a name="L357"></a><tt class="py-lineno">357</tt>  <tt class="py-line"><tt class="py-comment"># a function helper</tt> </tt>
+<a name="L358"></a><tt class="py-lineno">358</tt> <a class="py-toggle" href="#" id="smart_input-toggle" onclick="return toggle('smart_input');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd-module.html#smart_input">smart_input</a><tt class="py-op">(</tt><tt class="py-param">input_text</tt><tt class="py-op">,</tt> <tt class="py-param">allow_arg</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="smart_input-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="smart_input-expanded"><a name="L359"></a><tt class="py-lineno">359</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-name">input_text</tt> </tt>
+<a name="L360"></a><tt class="py-lineno">360</tt>  <tt class="py-line">    <tt class="py-name">obj</tt> <tt class="py-op">=</tt> <tt id="link-94" class="py-name" targets="Class madgraph.interface.extended_cmd.SmartQuestion=madgraph.interface.extended_cmd.SmartQuestion-class.html"><a title="madgraph.interface.extended_cmd.SmartQuestion" class="py-name" href="#" onclick="return doclink('link-94', 'SmartQuestion', 'link-94');">SmartQuestion</a></tt><tt class="py-op">(</tt><tt class="py-name">allow_arg</tt><tt class="py-op">=</tt><tt class="py-name">allow_arg</tt><tt class="py-op">,</tt> <tt id="link-95" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd.default
+madgraph.interface.extended_cmd.SmartQuestion.default" class="py-name" href="#" onclick="return doclink('link-95', 'default', 'link-87');">default</a></tt><tt class="py-op">=</tt><tt id="link-96" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd.default
+madgraph.interface.extended_cmd.SmartQuestion.default" class="py-name" href="#" onclick="return doclink('link-96', 'default', 'link-87');">default</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L361"></a><tt class="py-lineno">361</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">obj</tt><tt class="py-op">.</tt><tt id="link-97" class="py-name"><a title="madgraph.interface.extended_cmd.SmartQuestion.cmdloop" class="py-name" href="#" onclick="return doclink('link-97', 'cmdloop', 'link-93');">cmdloop</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L362"></a><tt class="py-lineno">362</tt>  <tt class="py-line"> </tt>
+<a name="OneLinePathCompletion"></a><div id="OneLinePathCompletion-def"><a name="L363"></a><tt class="py-lineno">363</tt>  <tt class="py-line"><tt class="py-comment">#===============================================================================</tt> </tt>
+<a name="L364"></a><tt class="py-lineno">364</tt>  <tt class="py-line"><tt class="py-comment"># Question in order to return a path with auto-completion</tt> </tt>
+<a name="L365"></a><tt class="py-lineno">365</tt>  <tt class="py-line"><tt class="py-comment">#===============================================================================</tt> </tt>
+<a name="L366"></a><tt class="py-lineno">366</tt> <a class="py-toggle" href="#" id="OneLinePathCompletion-toggle" onclick="return toggle('OneLinePathCompletion');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.OneLinePathCompletion-class.html">OneLinePathCompletion</a><tt class="py-op">(</tt><tt class="py-base-class">SmartQuestion</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OneLinePathCompletion-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="OneLinePathCompletion-expanded"><a name="L367"></a><tt class="py-lineno">367</tt>  <tt class="py-line">    <tt class="py-docstring">""" a class for answering a question with the path autocompletion"""</tt> </tt>
+<a name="L368"></a><tt class="py-lineno">368</tt>  <tt class="py-line"> </tt>
+<a name="L369"></a><tt class="py-lineno">369</tt>  <tt class="py-line"> </tt>
+<a name="OneLinePathCompletion.completenames"></a><div id="OneLinePathCompletion.completenames-def"><a name="L370"></a><tt class="py-lineno">370</tt> <a class="py-toggle" href="#" id="OneLinePathCompletion.completenames-toggle" onclick="return toggle('OneLinePathCompletion.completenames');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.OneLinePathCompletion-class.html#completenames">completenames</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">text</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">ignored</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OneLinePathCompletion.completenames-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="OneLinePathCompletion.completenames-expanded"><a name="L371"></a><tt class="py-lineno">371</tt>  <tt class="py-line">        <tt class="py-name">signal</tt><tt class="py-op">.</tt><tt class="py-name">alarm</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> <tt class="py-comment"># avoid timer if any</tt> </tt>
+<a name="L372"></a><tt class="py-lineno">372</tt>  <tt class="py-line">         </tt>
+<a name="L373"></a><tt class="py-lineno">373</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-98" class="py-name"><a title="madgraph.interface.extended_cmd.SmartQuestion" class="py-name" href="#" onclick="return doclink('link-98', 'SmartQuestion', 'link-94');">SmartQuestion</a></tt><tt class="py-op">.</tt><tt id="link-99" class="py-name" targets="Method madgraph.interface.extended_cmd.OneLinePathCompletion.completenames()=madgraph.interface.extended_cmd.OneLinePathCompletion-class.html#completenames,Method madgraph.interface.extended_cmd.SmartQuestion.completenames()=madgraph.interface.extended_cmd.SmartQuestion-class.html#completenames"><a title="madgraph.interface.extended_cmd.OneLinePathCompletion.completenames
+madgraph.interface.extended_cmd.SmartQuestion.completenames" class="py-name" href="#" onclick="return doclink('link-99', 'completenames', 'link-99');">completenames</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">text</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt id="link-100" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd" class="py-name" href="#" onclick="return doclink('link-100', 'Cmd', 'link-7');">Cmd</a></tt><tt class="py-op">.</tt><tt id="link-101" class="py-name" targets="Static Method madgraph.interface.extended_cmd.Cmd.path_completion()=madgraph.interface.extended_cmd.Cmd-class.html#path_completion"><a title="madgraph.interface.extended_cmd.Cmd.path_completion" class="py-name" href="#" onclick="return doclink('link-101', 'path_completion', 'link-101');">path_completion</a></tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">,</tt><tt class="py-string">'.'</tt><tt class="py-op">,</tt> <tt class="py-name">only_dirs</tt> <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L374"></a><tt class="py-lineno">374</tt>  <tt class="py-line">             </tt>
+<a name="OneLinePathCompletion.postcmd"></a><div id="OneLinePathCompletion.postcmd-def"><a name="L375"></a><tt class="py-lineno">375</tt> <a class="py-toggle" href="#" id="OneLinePathCompletion.postcmd-toggle" onclick="return toggle('OneLinePathCompletion.postcmd');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.OneLinePathCompletion-class.html#postcmd">postcmd</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">stop</tt><tt class="py-op">,</tt> <tt class="py-param">line</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="OneLinePathCompletion.postcmd-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="OneLinePathCompletion.postcmd-expanded"><a name="L376"></a><tt class="py-lineno">376</tt>  <tt class="py-line">         </tt>
+<a name="L377"></a><tt class="py-lineno">377</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt>     </tt>
+<a name="L378"></a><tt class="py-lineno">378</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt> <tt class="py-keyword">in</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">allow_arg</tt><tt class="py-op">:</tt>  </tt>
+<a name="L379"></a><tt class="py-lineno">379</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">True</tt> </tt>
+<a name="L380"></a><tt class="py-lineno">380</tt>  <tt class="py-line">            <tt class="py-keyword">elif</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">isfile</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L381"></a><tt class="py-lineno">381</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">relpath</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">value</tt><tt class="py-op">)</tt> </tt>
+<a name="L382"></a><tt class="py-lineno">382</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L383"></a><tt class="py-lineno">383</tt>  <tt class="py-line">                <tt class="py-keyword">raise</tt> <tt class="py-name">Exception</tt> </tt>
+<a name="L384"></a><tt class="py-lineno">384</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">,</tt> <tt class="py-name">error</tt><tt class="py-op">:</tt> </tt>
+<a name="L385"></a><tt class="py-lineno">385</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">"""not valid argument. Valid argument are file path or value in (%s)."""</tt> \ </tt>
+<a name="L386"></a><tt class="py-lineno">386</tt>  <tt class="py-line">                          <tt class="py-op">%</tt> <tt class="py-string">','</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">allow_arg</tt><tt class="py-op">)</tt> </tt>
+<a name="L387"></a><tt class="py-lineno">387</tt>  <tt class="py-line">            <tt class="py-keyword">print</tt> <tt class="py-string">'please retry'</tt> </tt>
+<a name="L388"></a><tt class="py-lineno">388</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div></div><a name="L389"></a><tt class="py-lineno">389</tt>  <tt class="py-line">             </tt>
+<a name="raw_path_input"></a><div id="raw_path_input-def"><a name="L390"></a><tt class="py-lineno">390</tt>  <tt class="py-line"><tt class="py-comment"># a function helper</tt> </tt>
+<a name="L391"></a><tt class="py-lineno">391</tt> <a class="py-toggle" href="#" id="raw_path_input-toggle" onclick="return toggle('raw_path_input');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd-module.html#raw_path_input">raw_path_input</a><tt class="py-op">(</tt><tt class="py-param">input_text</tt><tt class="py-op">,</tt> <tt class="py-param">allow_arg</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt><tt class="py-op">,</tt> <tt class="py-param">default</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="raw_path_input-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="raw_path_input-expanded"><a name="L392"></a><tt class="py-lineno">392</tt>  <tt class="py-line">    <tt class="py-keyword">print</tt> <tt class="py-name">input_text</tt> </tt>
+<a name="L393"></a><tt class="py-lineno">393</tt>  <tt class="py-line">    <tt class="py-name">obj</tt> <tt class="py-op">=</tt> <tt id="link-102" class="py-name" targets="Class madgraph.interface.extended_cmd.OneLinePathCompletion=madgraph.interface.extended_cmd.OneLinePathCompletion-class.html"><a title="madgraph.interface.extended_cmd.OneLinePathCompletion" class="py-name" href="#" onclick="return doclink('link-102', 'OneLinePathCompletion', 'link-102');">OneLinePathCompletion</a></tt><tt class="py-op">(</tt><tt class="py-name">allow_arg</tt><tt class="py-op">=</tt><tt class="py-name">allow_arg</tt><tt class="py-op">,</tt> <tt id="link-103" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd.default
+madgraph.interface.extended_cmd.SmartQuestion.default" class="py-name" href="#" onclick="return doclink('link-103', 'default', 'link-87');">default</a></tt><tt class="py-op">=</tt><tt id="link-104" class="py-name"><a title="madgraph.interface.extended_cmd.Cmd.default
+madgraph.interface.extended_cmd.SmartQuestion.default" class="py-name" href="#" onclick="return doclink('link-104', 'default', 'link-87');">default</a></tt> <tt class="py-op">)</tt> </tt>
+<a name="L394"></a><tt class="py-lineno">394</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">obj</tt><tt class="py-op">.</tt><tt id="link-105" class="py-name"><a title="madgraph.interface.extended_cmd.SmartQuestion.cmdloop" class="py-name" href="#" onclick="return doclink('link-105', 'cmdloop', 'link-93');">cmdloop</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L395"></a><tt class="py-lineno">395</tt>  <tt class="py-line"> </tt>
+<a name="CmdFile"></a><div id="CmdFile-def"><a name="L396"></a><tt class="py-lineno">396</tt>  <tt class="py-line"><tt class="py-comment">#===============================================================================</tt> </tt>
+<a name="L397"></a><tt class="py-lineno">397</tt>  <tt class="py-line"><tt class="py-comment"># </tt> </tt>
+<a name="L398"></a><tt class="py-lineno">398</tt>  <tt class="py-line"><tt class="py-comment">#===============================================================================</tt> </tt>
+<a name="L399"></a><tt class="py-lineno">399</tt> <a class="py-toggle" href="#" id="CmdFile-toggle" onclick="return toggle('CmdFile');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.CmdFile-class.html">CmdFile</a><tt class="py-op">(</tt><tt class="py-base-class">file</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CmdFile-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="CmdFile-expanded"><a name="L400"></a><tt class="py-lineno">400</tt>  <tt class="py-line">    <tt class="py-docstring">""" a class for command input file -in order to debug cmd \n problem"""</tt> </tt>
+<a name="L401"></a><tt class="py-lineno">401</tt>  <tt class="py-line">     </tt>
+<a name="CmdFile.__init__"></a><div id="CmdFile.__init__-def"><a name="L402"></a><tt class="py-lineno">402</tt> <a class="py-toggle" href="#" id="CmdFile.__init__-toggle" onclick="return toggle('CmdFile.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.CmdFile-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">name</tt><tt class="py-op">,</tt> <tt class="py-param">opt</tt><tt class="py-op">=</tt><tt class="py-string">'rU'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CmdFile.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CmdFile.__init__-expanded"><a name="L403"></a><tt class="py-lineno">403</tt>  <tt class="py-line">         </tt>
+<a name="L404"></a><tt class="py-lineno">404</tt>  <tt class="py-line">        <tt class="py-name">file</tt><tt class="py-op">.</tt><tt id="link-106" class="py-name"><a title="aloha.aloha_lib.AddVariable.__init__
+aloha.aloha_lib.ConstantObject.__init__
+aloha.aloha_lib.FracVariable.__init__
+aloha.aloha_lib.IndicesIterator.__init__
+aloha.aloha_lib.LorentzObject.__init__
+aloha.aloha_lib.LorentzObjectRepresentation.__init__
+aloha.aloha_lib.MultVariable.__init__
+aloha.aloha_lib.ScalarVariable.__init__
+aloha.aloha_lib.Variable.__init__
+aloha.aloha_object.C.__init__
+aloha.aloha_object.DenominatorPropagator.__init__
+aloha.aloha_object.Epsilon.__init__
+aloha.aloha_object.Gamma.__init__
+aloha.aloha_object.Gamma5.__init__
+aloha.aloha_object.Identity.__init__
+aloha.aloha_object.Mass.__init__
+aloha.aloha_object.Metric.__init__
+aloha.aloha_object.OverMass2.__init__
+aloha.aloha_object.P.__init__
+aloha.aloha_object.PSlash.__init__
+aloha.aloha_object.ProjM.__init__
+aloha.aloha_object.ProjP.__init__
+aloha.aloha_object.Scalar.__init__
+aloha.aloha_object.Sigma.__init__
+aloha.aloha_object.Spin2.__init__
+aloha.aloha_object.Spinor.__init__
+aloha.aloha_object.Vector.__init__
+aloha.aloha_object.Width.__init__
+aloha.aloha_writers.ALOHAWriterForPython.__init__
+aloha.aloha_writers.WriteALOHA.__init__
+aloha.create_aloha.AbstractALOHAModel.__init__
+aloha.create_aloha.AbstractRoutine.__init__
+aloha.create_aloha.AbstractRoutineBuilder.__init__
+aloha.template_files.wavefunctions.WaveFunction.__init__
+madgraph.core.base_objects.ModelVariable.__init__
+madgraph.core.base_objects.ParamCardVariable.__init__
+madgraph.core.base_objects.PhysicsObject.__init__
+madgraph.core.base_objects.PhysicsObjectList.__init__
+madgraph.core.base_objects.VertexList.__init__
+madgraph.core.color_algebra.ColorString.__init__
+madgraph.core.color_algebra.Epsilon.__init__
+madgraph.core.color_algebra.EpsilonBar.__init__
+madgraph.core.color_algebra.K6.__init__
+madgraph.core.color_algebra.K6Bar.__init__
+madgraph.core.color_algebra.T.__init__
+madgraph.core.color_algebra.T6.__init__
+madgraph.core.color_algebra.f.__init__
+madgraph.core.color_amp.ColorBasis.__init__
+madgraph.core.color_amp.ColorMatrix.__init__
+madgraph.core.diagram_generation.Amplitude.__init__
+madgraph.core.diagram_generation.DecayChainAmplitude.__init__
+madgraph.core.diagram_generation.DiagramTag.__init__
+madgraph.core.diagram_generation.DiagramTagChainLink.__init__
+madgraph.core.diagram_generation.MultiProcess.__init__
+madgraph.core.drawing.DiagramDrawer.__init__
+madgraph.core.drawing.DrawOption.__init__
+madgraph.core.drawing.FeynmanDiagram.__init__
+madgraph.core.drawing.FeynmanLine.__init__
+madgraph.core.drawing.VertexPoint.__init__
+madgraph.core.helas_objects.HelasAmplitude.__init__
+madgraph.core.helas_objects.HelasDecayChainProcess.__init__
+madgraph.core.helas_objects.HelasMatrixElement.__init__
+madgraph.core.helas_objects.HelasMultiProcess.__init__
+madgraph.core.helas_objects.HelasWavefunction.__init__
+madgraph.interface.cmd_interface.CmdExtended.__init__
+madgraph.interface.cmd_interface.MadGraphCmd.__init__
+madgraph.interface.cmd_interface.MadGraphCmdWeb.__init__
+madgraph.interface.extended_cmd.Cmd.__init__
+madgraph.interface.extended_cmd.CmdFile.__init__
+madgraph.interface.extended_cmd.SmartQuestion.__init__
+madgraph.interface.launch_ext_program.ExtLauncher.__init__
+madgraph.interface.launch_ext_program.MELauncher.__init__
+madgraph.interface.launch_ext_program.Pythia8Launcher.__init__
+madgraph.interface.launch_ext_program.SALauncher.__init__
+madgraph.interface.launch_ext_program.open_file.__init__
+madgraph.iolibs.drawing_eps.MultiEpsDiagramDrawer.__init__
+madgraph.iolibs.export_cpp.ProcessExporterCPP.__init__
+madgraph.iolibs.export_cpp.ProcessExporterPythia8.__init__
+madgraph.iolibs.export_cpp.UFOModelConverterCPP.__init__
+madgraph.iolibs.export_python.ProcessExporterPython.__init__
+madgraph.iolibs.export_v4.ProcessExporterFortran.__init__
+madgraph.iolibs.export_v4.UFO_model_to_mg4.__init__
+madgraph.iolibs.file_writers.FileWriter.__init__
+madgraph.iolibs.gen_infohtml.make_info_html.__init__
+madgraph.iolibs.helas_call_writers.HelasCallWriter.__init__
+madgraph.iolibs.import_v4.ProcCardv4Reader.__init__
+madgraph.iolibs.import_v4.ProcessInfo.__init__
+madgraph.iolibs.ufo_expression_parsers.UFOExpressionParser.__init__
+madgraph.various.process_checks.MatrixElementEvaluator.__init__
+madgraph.various.rambo.DoubleFortranList.__init__
+madgraph.various.rambo.FortranList.__init__
+models.import_ufo.OrganizeModelExpression.__init__
+models.import_ufo.UFOMG5Converter.__init__
+models.write_param_card.ParamCardWriter.__init__" class="py-name" href="#" onclick="return doclink('link-106', '__init__', 'link-8');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">name</tt><tt class="py-op">,</tt> <tt class="py-name">opt</tt><tt class="py-op">)</tt> </tt>
+<a name="L405"></a><tt class="py-lineno">405</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">file</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+<a name="L406"></a><tt class="py-lineno">406</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L407"></a><tt class="py-lineno">407</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lines</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">text</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-string">'\n'</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L408"></a><tt class="py-lineno">408</tt>  <tt class="py-line">     </tt>
+<a name="CmdFile.readline"></a><div id="CmdFile.readline-def"><a name="L409"></a><tt class="py-lineno">409</tt> <a class="py-toggle" href="#" id="CmdFile.readline-toggle" onclick="return toggle('CmdFile.readline');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.CmdFile-class.html#readline">readline</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-op">*</tt><tt class="py-param">arg</tt><tt class="py-op">,</tt> <tt class="py-op">**</tt><tt class="py-param">opt</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CmdFile.readline-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CmdFile.readline-expanded"><a name="L410"></a><tt class="py-lineno">410</tt>  <tt class="py-line">        <tt class="py-docstring">"""readline method treating correctly a line whithout \n at the end</tt> </tt>
+<a name="L411"></a><tt class="py-lineno">411</tt>  <tt class="py-line"><tt class="py-docstring">           (add it)</tt> </tt>
+<a name="L412"></a><tt class="py-lineno">412</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L413"></a><tt class="py-lineno">413</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lines</tt><tt class="py-op">:</tt> </tt>
+<a name="L414"></a><tt class="py-lineno">414</tt>  <tt class="py-line">            <tt class="py-name">line</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lines</tt><tt class="py-op">.</tt><tt class="py-name">pop</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt> </tt>
+<a name="L415"></a><tt class="py-lineno">415</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L416"></a><tt class="py-lineno">416</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-string">''</tt> </tt>
+<a name="L417"></a><tt class="py-lineno">417</tt>  <tt class="py-line">         </tt>
+<a name="L418"></a><tt class="py-lineno">418</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">line</tt><tt class="py-op">.</tt><tt class="py-name">endswith</tt><tt class="py-op">(</tt><tt class="py-string">'\n'</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L419"></a><tt class="py-lineno">419</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">line</tt> </tt>
+<a name="L420"></a><tt class="py-lineno">420</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L421"></a><tt class="py-lineno">421</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">line</tt> <tt class="py-op">+</tt> <tt class="py-string">'\n'</tt> </tt>
+</div><a name="L422"></a><tt class="py-lineno">422</tt>  <tt class="py-line">     </tt>
+<a name="CmdFile.__next__"></a><div id="CmdFile.__next__-def"><a name="L423"></a><tt class="py-lineno">423</tt> <a class="py-toggle" href="#" id="CmdFile.__next__-toggle" onclick="return toggle('CmdFile.__next__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.CmdFile-class.html#__next__">__next__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CmdFile.__next__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CmdFile.__next__-expanded"><a name="L424"></a><tt class="py-lineno">424</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lines</tt><tt class="py-op">.</tt><tt id="link-107" class="py-name" targets="Method madgraph.interface.extended_cmd.CmdFile.__next__()=madgraph.interface.extended_cmd.CmdFile-class.html#__next__"><a title="madgraph.interface.extended_cmd.CmdFile.__next__" class="py-name" href="#" onclick="return doclink('link-107', '__next__', 'link-107');">__next__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt>     </tt>
+</div><a name="CmdFile.__iter__"></a><div id="CmdFile.__iter__-def"><a name="L425"></a><tt class="py-lineno">425</tt> <a class="py-toggle" href="#" id="CmdFile.__iter__-toggle" onclick="return toggle('CmdFile.__iter__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="madgraph.interface.extended_cmd.CmdFile-class.html#__iter__">__iter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="CmdFile.__iter__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="CmdFile.__iter__-expanded"><a name="L426"></a><tt class="py-lineno">426</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lines</tt><tt class="py-op">.</tt><tt id="link-108" class="py-name" targets="Method aloha.aloha_lib.IndicesIterator.__iter__()=aloha.aloha_lib.IndicesIterator-class.html#__iter__,Method madgraph.interface.extended_cmd.CmdFile.__iter__()=madgraph.interface.extended_cmd.CmdFile-class.html#__iter__"><a title="aloha.aloha_lib.IndicesIterator.__iter__
+madgraph.interface.extended_cmd.CmdFile.__iter__" class="py-name" href="#" onclick="return doclink('link-108', '__iter__', 'link-108');">__iter__</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L427"></a><tt class="py-lineno">427</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Mon Oct 10 15:35:43 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
