@@ -21,20 +21,17 @@
 #*                                                          *
 #************************************************************
 import model sm
-generate e+ e- > z > mu+ mu-
-add process p + p > t +  t 
-output test
-launch test
-launch test
+tutorial
+tutorial stop
+generate p  p > e- ve~
+add process p p >e+ ve
 Traceback (most recent call last):
-  File "/home/sebastian/tp1/blatt_2/MadGraph5_v1_3_20/madgraph/interface/extended_cmd.py", line 151, in onecmd
+  File "/home/ubuntuuser/tp1/blatt_2/MadGraph5_v1_3_20/madgraph/interface/extended_cmd.py", line 151, in onecmd
     return cmd.Cmd.onecmd(self, line)
   File "/usr/lib/python2.7/cmd.py", line 221, in onecmd
     return func(arg)
-  File "/home/sebastian/tp1/blatt_2/MadGraph5_v1_3_20/madgraph/interface/cmd_interface.py", line 2545, in do_launch
-    ext_program.run()
-  File "/home/sebastian/tp1/blatt_2/MadGraph5_v1_3_20/madgraph/interface/launch_ext_program.py", line 62, in run
-    self.launch_program()
-  File "/home/sebastian/tp1/blatt_2/MadGraph5_v1_3_20/madgraph/interface/launch_ext_program.py", line 292, in launch_program
-    fsock = open(path)
-IOError: [Errno 2] No such file or directory: '/home/sebastian/tp1/blatt_2/MadGraph5_v1_3_20/test/SubProcesses/run_01_results.dat'
+  File "/home/ubuntuuser/tp1/blatt_2/MadGraph5_v1_3_20/madgraph/interface/cmd_interface.py", line 1518, in do_add
+    myprocdef = self.extract_process(line)
+  File "/home/ubuntuuser/tp1/blatt_2/MadGraph5_v1_3_20/madgraph/interface/cmd_interface.py", line 2015, in extract_process
+    "No particle %s in model" % part_name
+MadGraph5Error: No particle >e+ in model

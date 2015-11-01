@@ -1,0 +1,71 @@
+
+#####################################
+# Minuit run on 2015-11-01 11:49:54 #
+#####################################
+
+ **********
+ **    6 **MIGRAD        6000         0.1
+ **********
+ FIRST CALL TO USER FUNCTION AT NEW START POINT, WITH IFLAG=4.
+ START MIGRAD MINIMIZATION.  STRATEGY  1.  CONVERGENCE WHEN EDM .LT. 1.00e-04
+ FCN=5.18009e+07 FROM MIGRAD    STATUS=INITIATE        8 CALLS           9 TOTAL
+                     EDM= unknown      STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  slope        1.00000e+00   1.00000e-02   1.00000e-02  -3.40582e+05
+   2  y_intercept   0.00000e+00   1.00000e-02   1.00000e-02  -3.36480e+04
+NO ERROR MATRIX       
+ FCN=4.37003e+06 FROM MIGRAD    STATUS=PROGRESS       14 CALLS          15 TOTAL
+                     EDM=2.62534e+06    STRATEGY= 1      NO ERROR MATRIX       
+  EXT PARAMETER               CURRENT GUESS       STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  slope        1.66352e+02   1.00000e-02   1.65352e+02  -2.44634e+04
+   2  y_intercept   1.14556e+03   1.00000e-02   1.14556e+03   3.53108e+03
+ MIGRAD MINIMIZATION HAS CONVERGED.
+ MIGRAD WILL VERIFY CONVERGENCE AND ERROR MATRIX.
+   START COVARIANCE MATRIX CALCULATION.
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+         1.4916e-01  1.8508e+00
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=5606.54 FROM MIGRAD    STATUS=CONVERGED      37 CALLS          38 TOTAL
+                     EDM=1.73442e-16    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                   STEP         FIRST   
+  NO.   NAME      VALUE            ERROR          SIZE      DERIVATIVE 
+   1  slope        3.26553e+02   8.03543e-02   1.54374e-03  -2.06202e-07
+   2  y_intercept  -2.16564e+02   6.72893e-01   1.29273e-02   3.51773e-09
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=1
+  6.457e-03 -4.600e-02 
+ -4.600e-02  4.528e-01 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.85084   1.000 -0.851
+        2  0.85084  -0.851  1.000
+ **********
+ **    7 **HESSE        6000
+ **********
+   START COVARIANCE MATRIX CALCULATION.
+ EIGENVALUES OF SECOND-DERIVATIVE MATRIX:
+         1.4916e-01  1.8508e+00
+ COVARIANCE MATRIX CALCULATED SUCCESSFULLY
+ FCN=5606.54 FROM HESSE     STATUS=OK             14 CALLS          52 TOTAL
+                     EDM=3.47196e-15    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                                INTERNAL      INTERNAL  
+  NO.   NAME      VALUE            ERROR       STEP SIZE       VALUE   
+   1  slope        3.26553e+02   8.03540e-02   6.17496e-05   3.26553e+02
+   2  y_intercept  -2.16564e+02   6.72891e-01   2.58546e-03  -2.16564e+02
+ EXTERNAL ERROR MATRIX.    NDIM=  25    NPAR=  2    ERR DEF=1
+  6.457e-03 -4.600e-02 
+ -4.600e-02  4.528e-01 
+ PARAMETER  CORRELATION COEFFICIENTS  
+       NO.  GLOBAL      1      2
+        1  0.85084   1.000 -0.851
+        2  0.85084  -0.851  1.000
+ **********
+ **   11 **MINOS        6000
+ **********
+ FCN=5606.54 FROM MINOS     STATUS=SUCCESSFUL     24 CALLS          76 TOTAL
+                     EDM=3.47196e-15    STRATEGY= 1      ERROR MATRIX ACCURATE 
+  EXT PARAMETER                  PARABOLIC         MINOS ERRORS        
+  NO.   NAME      VALUE            ERROR      NEGATIVE      POSITIVE   
+   1  slope        3.26553e+02   8.03540e-02  -8.03543e-02   8.03543e-02
+   2  y_intercept  -2.16564e+02   6.72891e-01  -6.72893e-01   6.72893e-01

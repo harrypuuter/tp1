@@ -19,7 +19,9 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       COMMON/WIDTHS/ WW,WT,WZ,WH
 
 
-      DOUBLE COMPLEX GC_21, GC_24
+      DOUBLE COMPLEX GC_1, GC_2, GC_7, GC_16, GC_21, GC_22, GC_23
+     $ , GC_25
 
-      COMMON/COUPLINGS/ GC_21, GC_24
+      COMMON/COUPLINGS/ GC_1, GC_2, GC_7, GC_16, GC_21, GC_22, GC_23
+     $ , GC_25
 

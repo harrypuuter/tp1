@@ -22,6 +22,7 @@
 #************************************************************
 
 import model sm
-generate e+ e- > z > mu+ mu-
-add process p + p > t +  t 
+p p > w+ w-, w+ >j j ,w- > 1- v1~
+generate p p > w+ w-, w+ > j j ,w- > l- vl~
+define j = g u c d s u~ c~ d~ s~ b b~
 output test

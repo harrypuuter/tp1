@@ -1,0 +1,40 @@
+
+
+  PGS parameters 
+ ----------------
+
+ --> parameter set representing LHC       
+
+  number of eta cells in calorimeter:        320
+  number of phi cells in calorimeter:        200
+           width of each cell in eta:      0.03141590
+           width of each cell in phi:      0.03141590
+       em calorimeter resolution (a):      0.01000000
+       em calorimeter resolution (b):      0.20000000
+       hadron calorimeter resolution:      0.80000000
+              trigger MET resolution:      0.20000000
+calorimeter cell edge crack fraction:      0.01000000
+ jet finding algorithm (cone, ktjet): cone    
+        cluster seed tower threshold:      5.00000000
+    cluster shoulder tower threshold:      1.00000000
+            cluster finder cone size:      0.50000000
+        outer radius of tracking (m):      2.00000000
+                  magnetic field (T):      4.00000000
+              sagitta resolution (m):      0.00001300
+                    track efficiency:      0.98000000
+                    minimum track pt:      1.00000000
+               tracking eta coverage:      3.00000000
+                e/gamma eta coverage:      3.00000000
+                   muon eta coverage:      2.40000000
+                    tau eta coverage:      2.00000000
+
+
+
+
+
+          ********************************************************
+                  STDHEP version 5.04.01 -  Aug. 29, 2005          
+          ********************************************************
+
+
+ STDXROPEN: Cannot open input file, give up 
