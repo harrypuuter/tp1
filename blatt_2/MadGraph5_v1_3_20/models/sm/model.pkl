@@ -6527,7 +6527,7 @@ sg93
 I-1
 ssS'version_tag'
 p2047
-S"/home/ubuntuuser/tp1/blatt_2/MadGraph5_v1_3_20/models/sm{'date': '2011-10-09', 'version': '1.3.20'}"
+S"/home/sebastian/tp1/blatt_2/MadGraph5_v1_3_20/models/sm{'date': '2011-10-09', 'version': '1.3.20'}"
 p2048
 sg12
 g0
