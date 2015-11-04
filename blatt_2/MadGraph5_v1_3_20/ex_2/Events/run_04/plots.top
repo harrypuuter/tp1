@@ -1,0 +1,266 @@
+ SET DEVICE POSTSCRIPT ORIENT=3
+
+  SET INTENSITY 4
+  SET WINDOW Y 2.5 TO 9.
+  SET WINDOW X 2.5 TO 12.
+  SET FONT DUPLEX 
+  SET SYMBOL 5O SIZE 1.8
+  TITLE TOP " Weights            "
+  TITLE BOTTOM "wgt                 "
+  TITLE LEFT "sigma (pb/bin)      "
+  SET SCALE Y LOG
+  (SET TICKS TOP OFF)   
+  SET LIMITS X    0.00000    2.00000
+  SET ORDER X Y DY 
+       0.9700       0.0000E+00       0.0000E+00
+       0.9900       0.3247E+03       0.0000E+00
+       1.0100       0.0000E+00       0.0000E+00
+   HISTO
+
+  (INFO-BOX
+  BOX 7.3 1.3 SIZE 9.5 0.7
+  SET WINDOW Y 0. TO 2.
+  SET TITLE SIZE -1.5
+  SET FONT DUPLEX 
+  TITLE 3.8 1.4 "X-sect = 3.247E+02(pb)   AVG = 9.900E-01   RMS = 0.000E+00"
+  TITLE 3.8 1.1 "Tot # Evts =   10000  Entries =   10000  Undersc =     0  Oversc =     0"
+  SET TITLE SIZE -2
+   NEW PLOT
+
+  SET INTENSITY 4
+  SET WINDOW Y 2.5 TO 9.
+  SET WINDOW X 2.5 TO 12.
+  SET FONT DUPLEX 
+  SET SYMBOL 5O SIZE 1.8
+  TITLE TOP " # muo1             "
+  TITLE BOTTOM "# particles         "
+  TITLE LEFT "sigma (pb/bin)      "
+  SET SCALE Y LOG
+  (SET TICKS TOP OFF)   
+  SET LIMITS X   -0.50000   10.50000
+  SET ORDER X Y DY 
+       0.0000       0.0000E+00       0.0000E+00
+       1.0000       0.3247E+03       0.0000E+00
+       2.0000       0.0000E+00       0.0000E+00
+   HISTO
+
+  (INFO-BOX
+  BOX 7.3 1.3 SIZE 9.5 0.7
+  SET WINDOW Y 0. TO 2.
+  SET TITLE SIZE -1.5
+  SET FONT DUPLEX 
+  TITLE 3.8 1.4 "X-sect = 3.247E+02(pb)   AVG = 1.000E+00   RMS = 0.000E+00"
+  TITLE 3.8 1.1 "Tot # Evts =   10000  Entries =   10000  Undersc =     0  Oversc =     0"
+  SET TITLE SIZE -2
+   NEW PLOT
+
+  SET INTENSITY 4
+  SET WINDOW Y 2.5 TO 9.
+  SET WINDOW X 2.5 TO 12.
+  SET FONT DUPLEX 
+  SET SYMBOL 5O SIZE 1.8
+  TITLE TOP " # muo2             "
+  TITLE BOTTOM "# particles         "
+  TITLE LEFT "sigma (pb/bin)      "
+  SET SCALE Y LOG
+  (SET TICKS TOP OFF)   
+  SET LIMITS X   -0.50000   10.50000
+  SET ORDER X Y DY 
+       0.0000       0.0000E+00       0.0000E+00
+       1.0000       0.3247E+03       0.0000E+00
+       2.0000       0.0000E+00       0.0000E+00
+   HISTO
+
+  (INFO-BOX
+  BOX 7.3 1.3 SIZE 9.5 0.7
+  SET WINDOW Y 0. TO 2.
+  SET TITLE SIZE -1.5
+  SET FONT DUPLEX 
+  TITLE 3.8 1.4 "X-sect = 3.247E+02(pb)   AVG = 1.000E+00   RMS = 0.000E+00"
+  TITLE 3.8 1.1 "Tot # Evts =   10000  Entries =   10000  Undersc =     0  Oversc =     0"
+  SET TITLE SIZE -2
+   NEW PLOT
+
+  SET INTENSITY 4
+  SET WINDOW Y 2.5 TO 9.
+  SET WINDOW X 2.5 TO 12.
+  SET FONT DUPLEX 
+  SET SYMBOL 5O SIZE 1.8
+  TITLE TOP " Ht                 "
+  TITLE BOTTOM "ET                  "
+  TITLE LEFT "sigma (pb/bin)      "
+  SET SCALE Y LOG
+  (SET TICKS TOP OFF)   
+  SET LIMITS X    0.00000 1500.00000
+  SET ORDER X Y DY 
+      50.0000       0.0000E+00       0.0000E+00
+      70.0000       0.1244E+03       0.0000E+00
+      90.0000       0.2004E+03       0.0000E+00
+     110.0000       0.0000E+00       0.0000E+00
+   HISTO
+
+  (INFO-BOX
+  BOX 7.3 1.3 SIZE 9.5 0.7
+  SET WINDOW Y 0. TO 2.
+  SET TITLE SIZE -1.5
+  SET FONT DUPLEX 
+  TITLE 3.8 1.4 "X-sect = 3.247E+02(pb)   AVG = 8.234E+01   RMS = 9.722E+00"
+  TITLE 3.8 1.1 "Tot # Evts =   10000  Entries =   10000  Undersc =     0  Oversc =     0"
+  SET TITLE SIZE -2
+   NEW PLOT
+
+  SET INTENSITY 4
+  SET WINDOW Y 2.5 TO 9.
+  SET WINDOW X 2.5 TO 12.
+  SET FONT DUPLEX 
+  SET SYMBOL 5O SIZE 1.8
+  TITLE TOP " pt(muo11)          "
+  TITLE BOTTOM "pt                  "
+  TITLE LEFT "sigma (pb/bin)      "
+  SET SCALE Y LOG
+  (SET TICKS TOP OFF)   
+  SET LIMITS X    0.00000  200.00000
+  SET ORDER X Y DY 
+      25.0000       0.0000E+00       0.0000E+00
+      35.0000       0.1244E+03       0.0000E+00
+      45.0000       0.2004E+03       0.0000E+00
+      55.0000       0.0000E+00       0.0000E+00
+   HISTO
+
+  (INFO-BOX
+  BOX 7.3 1.3 SIZE 9.5 0.7
+  SET WINDOW Y 0. TO 2.
+  SET TITLE SIZE -1.5
+  SET FONT DUPLEX 
+  TITLE 3.8 1.4 "X-sect = 3.247E+02(pb)   AVG = 4.117E+01   RMS = 4.861E+00"
+  TITLE 3.8 1.1 "Tot # Evts =   10000  Entries =   10000  Undersc =     0  Oversc =     0"
+  SET TITLE SIZE -2
+   NEW PLOT
+
+  SET INTENSITY 4
+  SET WINDOW Y 2.5 TO 9.
+  SET WINDOW X 2.5 TO 12.
+  SET FONT DUPLEX 
+  SET SYMBOL 5O SIZE 1.8
+  TITLE TOP " pt(muo21)          "
+  TITLE BOTTOM "pt                  "
+  TITLE LEFT "sigma (pb/bin)      "
+  SET SCALE Y LOG
+  (SET TICKS TOP OFF)   
+  SET LIMITS X    0.00000  200.00000
+  SET ORDER X Y DY 
+      25.0000       0.0000E+00       0.0000E+00
+      35.0000       0.1244E+03       0.0000E+00
+      45.0000       0.2004E+03       0.0000E+00
+      55.0000       0.0000E+00       0.0000E+00
+   HISTO
+
+  (INFO-BOX
+  BOX 7.3 1.3 SIZE 9.5 0.7
+  SET WINDOW Y 0. TO 2.
+  SET TITLE SIZE -1.5
+  SET FONT DUPLEX 
+  TITLE 3.8 1.4 "X-sect = 3.247E+02(pb)   AVG = 4.117E+01   RMS = 4.861E+00"
+  TITLE 3.8 1.1 "Tot # Evts =   10000  Entries =   10000  Undersc =     0  Oversc =     0"
+  SET TITLE SIZE -2
+   NEW PLOT
+
+  SET INTENSITY 4
+  SET WINDOW Y 2.5 TO 9.
+  SET WINDOW X 2.5 TO 12.
+  SET FONT DUPLEX 
+  SET SYMBOL 5O SIZE 1.8
+  TITLE TOP " eta(muo11)         "
+  TITLE BOTTOM "eta                 "
+  TITLE LEFT "sigma (pb/bin)      "
+  SET SCALE Y lin
+  (SET TICKS TOP OFF)   
+  SET LIMITS X   -5.00000    5.00000
+  SET ORDER X Y DY 
+      -2.7500       0.0000E+00       0.0000E+00
+      -2.2500       0.2322E+02       0.0000E+00
+      -1.7500       0.2806E+02       0.0000E+00
+      -1.2500       0.3355E+02       0.0000E+00
+      -0.7500       0.3787E+02       0.0000E+00
+      -0.2500       0.3735E+02       0.0000E+00
+       0.2500       0.4079E+02       0.0000E+00
+       0.7500       0.3903E+02       0.0000E+00
+       1.2500       0.3358E+02       0.0000E+00
+       1.7500       0.2864E+02       0.0000E+00
+       2.2500       0.2267E+02       0.0000E+00
+       2.7500       0.0000E+00       0.0000E+00
+   HISTO
+
+  (INFO-BOX
+  BOX 7.3 1.3 SIZE 9.5 0.7
+  SET WINDOW Y 0. TO 2.
+  SET TITLE SIZE -1.5
+  SET FONT DUPLEX 
+  TITLE 3.8 1.4 "X-sect = 3.247E+02(pb)   AVG = 4.800E-03   RMS = 1.312E+00"
+  TITLE 3.8 1.1 "Tot # Evts =   10000  Entries =   10000  Undersc =     0  Oversc =     0"
+  SET TITLE SIZE -2
+   NEW PLOT
+
+  SET INTENSITY 4
+  SET WINDOW Y 2.5 TO 9.
+  SET WINDOW X 2.5 TO 12.
+  SET FONT DUPLEX 
+  SET SYMBOL 5O SIZE 1.8
+  TITLE TOP " eta(muo21)         "
+  TITLE BOTTOM "eta                 "
+  TITLE LEFT "sigma (pb/bin)      "
+  SET SCALE Y lin
+  (SET TICKS TOP OFF)   
+  SET LIMITS X   -5.00000    5.00000
+  SET ORDER X Y DY 
+      -2.7500       0.0000E+00       0.0000E+00
+      -2.2500       0.2231E+02       0.0000E+00
+      -1.7500       0.2721E+02       0.0000E+00
+      -1.2500       0.3299E+02       0.0000E+00
+      -0.7500       0.3803E+02       0.0000E+00
+      -0.2500       0.4024E+02       0.0000E+00
+       0.2500       0.4059E+02       0.0000E+00
+       0.7500       0.3991E+02       0.0000E+00
+       1.2500       0.3293E+02       0.0000E+00
+       1.7500       0.2861E+02       0.0000E+00
+       2.2500       0.2192E+02       0.0000E+00
+       2.7500       0.0000E+00       0.0000E+00
+   HISTO
+
+  (INFO-BOX
+  BOX 7.3 1.3 SIZE 9.5 0.7
+  SET WINDOW Y 0. TO 2.
+  SET TITLE SIZE -1.5
+  SET FONT DUPLEX 
+  TITLE 3.8 1.4 "X-sect = 3.247E+02(pb)   AVG = 9.200E-03   RMS = 1.298E+00"
+  TITLE 3.8 1.1 "Tot # Evts =   10000  Entries =   10000  Undersc =     0  Oversc =     0"
+  SET TITLE SIZE -2
+   NEW PLOT
+
+  SET INTENSITY 4
+  SET WINDOW Y 2.5 TO 9.
+  SET WINDOW X 2.5 TO 12.
+  SET FONT DUPLEX 
+  SET SYMBOL 5O SIZE 1.8
+  TITLE TOP " m(muo11,muo21)     "
+  TITLE BOTTOM "mij                 "
+  TITLE LEFT "sigma (pb/bin)      "
+  SET SCALE Y LOG
+  (SET TICKS TOP OFF)   
+  SET LIMITS X    0.00000  250.00000
+  SET ORDER X Y DY 
+      75.0000       0.0000E+00       0.0000E+00
+      85.0000       0.7622E+02       0.0000E+00
+      95.0000       0.2485E+03       0.0000E+00
+     105.0000       0.0000E+00       0.0000E+00
+   HISTO
+
+  (INFO-BOX
+  BOX 7.3 1.3 SIZE 9.5 0.7
+  SET WINDOW Y 0. TO 2.
+  SET TITLE SIZE -1.5
+  SET FONT DUPLEX 
+  TITLE 3.8 1.4 "X-sect = 3.247E+02(pb)   AVG = 9.265E+01   RMS = 4.238E+00"
+  TITLE 3.8 1.1 "Tot # Evts =   10000  Entries =   10000  Undersc =     0  Oversc =     0"
+  SET TITLE SIZE -2
+   NEW PLOT

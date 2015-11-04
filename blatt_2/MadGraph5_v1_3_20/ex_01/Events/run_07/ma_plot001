@@ -5,7 +5,7 @@
   SET WINDOW X 2.5 TO 12.
   SET FONT DUPLEX 
   SET SYMBOL 5O SIZE 1.8
-  TITLE TOP " # e-               "
+  TITLE TOP " # ele              "
   TITLE BOTTOM "# particles         "
   TITLE LEFT "sigma (pb/bin)      "
   SET SCALE Y LOG

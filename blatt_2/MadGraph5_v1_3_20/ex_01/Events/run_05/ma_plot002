@@ -5,22 +5,16 @@
   SET WINDOW X 2.5 TO 12.
   SET FONT DUPLEX 
   SET SYMBOL 5O SIZE 1.8
-  TITLE TOP " Ht                 "
-  TITLE BOTTOM "ET                  "
+  TITLE TOP " # aneu             "
+  TITLE BOTTOM "# particles         "
   TITLE LEFT "sigma (pb/bin)      "
   SET SCALE Y LOG
   (SET TICKS TOP OFF)   
-  SET LIMITS X    0.00000 1500.00000
+  SET LIMITS X   -0.50000   10.50000
   SET ORDER X Y DY 
-      10.0000       0.0000E+00       0.0000E+00
-      30.0000       0.1831E+03       0.0000E+00
-      50.0000       0.3874E+03       0.0000E+00
-      70.0000       0.1019E+04       0.0000E+00
-      90.0000       0.1637E+03       0.0000E+00
-     110.0000       0.3521E+01       0.0000E+00
-     130.0000       0.1761E+01       0.0000E+00
-     150.0000       0.1761E+01       0.0000E+00
-     170.0000       0.0000E+00       0.0000E+00
+       0.0000       0.0000E+00       0.0000E+00
+       1.0000       0.1761E+04       0.0000E+00
+       2.0000       0.0000E+00       0.0000E+00
    HISTO
 
   (INFO-BOX
@@ -28,6 +22,6 @@
   SET WINDOW Y 0. TO 2.
   SET TITLE SIZE -1.5
   SET FONT DUPLEX 
-  TITLE 3.8 1.4 "X-sect = 1.761E+03(pb)   AVG = 6.352E+01   RMS = 1.621E+01"
+  TITLE 3.8 1.4 "X-sect = 1.761E+03(pb)   AVG = 1.000E+00   RMS = 0.000E+00"
   TITLE 3.8 1.1 "Tot # Evts =    1000  Entries =    1000  Undersc =     0  Oversc =     0"
   SET TITLE SIZE -2

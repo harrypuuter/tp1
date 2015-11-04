@@ -6,8 +6,8 @@ SET DEVICE POSTSCRIPT ORIENT=3
   SET WINDOW X 2.5 TO 12.
   SET FONT DUPLEX 
   SET SYMBOL 5O SIZE 1.8
-  TITLE TOP " pt(e-1)            "
-  TITLE BOTTOM "pt                  "
+  TITLE TOP " Missing ET         "
+  TITLE BOTTOM "ET                  "
   TITLE LEFT "sigma (pb/bin)      "
   SET SCALE Y LOG
   (SET TICKS TOP OFF)   

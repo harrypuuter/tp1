@@ -25,10 +25,11 @@ Found Les Houches Event File
   class # 0 is   mET   12 -12  14 -14  16 -16 122
   class # 1 is   jet    1  -1   2  -2   3  -3   4  -4  21
   class # 2 is   b      5  -5
+  class # 3 is   ele   11
+  class # 4 is   aneu -12
  Now start parsing events a first time
- created new class e-  for particle          11
  Setting up graphs
-           6  plots set up
+          12  plots set up
  Setting up acceptance cuts
  Cuts set up
  SEE plots.log FOR MORE INFO
@@ -58,6 +59,24 @@ Found Les Houches Event File
  Plot  5 Done.
  Plot  6 Done.
  Plot  7 Done.
+ Plot  8 Done.
+ Plot  9 Done.
+ Plot 10 Done.
+ Plot 11 Done.
+ Plot 12 Done.
+ Plot 13 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
  Plot  1 Done.
  Plot  0 Done.
  Plot  1 Done.
