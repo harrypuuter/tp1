@@ -6,7 +6,3 @@ Processes:
 2: 3 + -4 > -24 > ..
 2: s c~ > w- > endstate
 ***************************
-theoradically also
-
-u d~ > w- > endstate
-s~ c > w- >endstate
