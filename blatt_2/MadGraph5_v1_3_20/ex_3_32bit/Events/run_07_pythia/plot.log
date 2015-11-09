@@ -1,0 +1,415 @@
+plot_events found
+topdrawer found
+epstosmth found
+events.list found
+plot_card found
+ *****************************************************
+ *                   MadAnalysis                     *
+ *               a MadEvent program                  *
+ *    for making plots and do simple analysis for    *
+ *            LHE and LHCO event files               *
+ *        ---------------------------------          *
+ *        Version compliant with MG_ME_V4.0          *
+ *                                                   *
+ *       Authors: R. Frederix and F. Maltoni         *
+ *                                                   *
+ *         Last Update by R.F., 23-Feb-2006          *
+ *****************************************************
+  
+ input name of event file:
+ -------------------------
+Found Les Houches Event File 
+    output file: plots.top                                                                                                                         
+ Classes will be read from file: ./ma_card.dat
+ Found the following classes in input classes file:
+  class # 0 is   mET   12 -12  14 -14  16 -16 122
+  class # 1 is   jet    1  -1   2  -2   3  -3   4  -4  21
+  class # 2 is   b      5  -5
+ Now start parsing events a first time
+ created new class e-  for particle          11
+ created new class mu+ for particle         -13
+ created new class e+  for particle         -11
+ created new class mu- for particle          13
+ Setting up graphs
+         123  plots set up
+ Setting up acceptance cuts
+ Cuts set up
+ SEE plots.log FOR MORE INFO
+ Now parsing events to fill histograms
+ At event         1000
+  
+ ----------------------------------------------
+               events information              
+ ----------------------------------------------
+  
+   Events in file               :          1000
+   Integrated weight (pb)       :     1000.0000000000000     
+   Max wgt                      :     1.0000000000000000     
+   Average wgt                  :     1.0000000000000000     
+  
+   Passing the cuts (plotted)
+   --------------------------
+  
+   Events                       :          1000
+   Integrated weight (pb)       :     1000.0000000000000     
+   Max wgt                      :     1.0000000000000000     
+   Average wgt                  :     1.0000000000000000     
+ Plot  1 Done.
+ Plot  2 Done.
+ Plot  3 Done.
+ Plot  4 Done.
+ Plot  5 Done.
+ Plot  6 Done.
+ Plot  7 Done.
+ Plot  8 Done.
+ Plot  9 Done.
+ Plot 10 Done.
+ Plot 11 Done.
+ Plot 12 Done.
+ Plot 13 Done.
+ Plot 14 Done.
+ Plot 15 Done.
+ Plot 16 Done.
+ Plot 17 Done.
+ Plot 18 Done.
+ Plot 19 Done.
+ Plot 20 Done.
+ Plot 21 Done.
+ Plot 22 Done.
+ Plot 23 Done.
+ Plot 24 Done.
+ Plot 25 Done.
+ Plot 26 Done.
+ Plot 27 Done.
+ Plot 28 Done.
+ Plot 29 Done.
+ Plot 30 Done.
+ Plot 31 Done.
+ Plot 32 Done.
+ Plot 33 Done.
+ Plot 34 Done.
+ Plot 35 Done.
+ Plot 36 Done.
+ Plot 37 Done.
+ Plot 38 Done.
+ Plot 39 Done.
+ Plot 40 Done.
+ Plot 41 Done.
+ Plot 42 Done.
+ Plot 43 Done.
+ Plot 44 Done.
+ Plot 45 Done.
+ Plot 46 Done.
+ Plot 47 Done.
+ Plot 48 Done.
+ Plot 49 Done.
+ Plot 50 Done.
+ Plot 51 Done.
+ Plot 52 Done.
+ Plot 53 Done.
+ Plot 54 Done.
+ Plot 55 Done.
+ Plot 56 Done.
+ Plot 57 Done.
+ Plot 58 Done.
+ Plot 59 Done.
+ Plot 60 Done.
+ Plot 61 Done.
+ Plot 62 Done.
+ Plot 63 Done.
+ Plot 64 Done.
+ Plot 65 Done.
+ Plot 66 Done.
+ Plot 67 Done.
+ Plot 68 Done.
+ Plot 69 Done.
+ Plot 70 Done.
+ Plot 71 Done.
+ Plot 72 Done.
+ Plot 73 Done.
+ Plot 74 Done.
+ Plot 75 Done.
+ Plot 76 Done.
+ Plot 77 Done.
+ Plot 78 Done.
+ Plot 79 Done.
+ Plot 80 Done.
+ Plot 81 Done.
+ Plot 82 Done.
+ Plot 83 Done.
+ Plot 84 Done.
+ Plot 85 Done.
+ Plot 86 Done.
+ Plot 87 Done.
+ Plot 88 Done.
+ Plot 89 Done.
+ Plot 90 Done.
+ Plot 91 Done.
+ Plot 92 Done.
+ Plot 93 Done.
+ Plot 94 Done.
+ Plot 95 Done.
+ Plot 96 Done.
+ Plot 97 Done.
+ Plot 98 Done.
+ Plot 99 Done.
+ Plot100 Done.
+ Plot101 Done.
+ Plot102 Done.
+ Plot103 Done.
+ Plot104 Done.
+ Plot105 Done.
+ Plot106 Done.
+ Plot107 Done.
+ Plot108 Done.
+ Plot109 Done.
+ Plot110 Done.
+ Plot111 Done.
+ Plot112 Done.
+ Plot113 Done.
+ Plot114 Done.
+ Plot115 Done.
+ Plot116 Done.
+ Plot117 Done.
+ Plot118 Done.
+ Plot119 Done.
+ Plot120 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.
+ Plot  0 Done.
+ Plot  1 Done.

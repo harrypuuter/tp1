@@ -35,9 +35,9 @@
 # Collider type and energy                                           *
 #*********************************************************************
         1     = lpp1  ! beam 1 type (0=NO PDF)
-       -1     = lpp2  ! beam 2 type (0=NO PDF)
-     6500     = ebeam1  ! beam 1 energy in GeV
-     6500     = ebeam2  ! beam 2 energy in GeV
+        1     = lpp2  ! beam 2 type (0=NO PDF)
+     4000     = ebeam1  ! beam 1 energy in GeV
+     4000     = ebeam2  ! beam 2 energy in GeV
 #*********************************************************************
 # Beam polarization from -100 (left-handed) to 100 (right-handed)    *
 #*********************************************************************

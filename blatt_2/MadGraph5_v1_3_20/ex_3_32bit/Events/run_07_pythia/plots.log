@@ -1,0 +1,149 @@
+ ordering function for particles in classes: pt 
+ histograms normalized according to cross section
+ Final states contain          19  different particles.
+particle #  1:   mET1   fits in class # 0
+particle #  2:   jet1   fits in class # 1
+particle #  3:   jet2   fits in class # 1
+particle #  4:   jet3   fits in class # 1
+particle #  5:   jet4   fits in class # 1
+particle #  6:   jet5   fits in class # 1
+particle #  7:   jet6   fits in class # 1
+particle #  8:   jet7   fits in class # 1
+particle #  9:   jet8   fits in class # 1
+particle # 10:   jet9   fits in class # 1
+particle # 11:  jet10   fits in class # 1
+particle # 12:     b1   fits in class # 2
+particle # 13:     b2   fits in class # 2
+particle # 14:     b3   fits in class # 2
+particle # 15:     b4   fits in class # 2
+particle # 16:    e-1   fits in class # 3
+particle # 17:   mu+1   fits in class # 4
+particle # 18:    e+1   fits in class # 5
+particle # 19:   mu-1   fits in class # 6
+ 
+ plots set up:
+ Weights             
+ # jet               
+ # b                 
+ # e-                
+ # mu+               
+ # e+                
+ # mu-               
+ Ht                  
+ Missing ET          
+ pt(jet1)            
+ pt(jet2)            
+ pt(jet3)            
+ pt(jet4)            
+ pt(b1)              
+ pt(b2)              
+ pt(b3)              
+ pt(b4)              
+ pt(e-1)             
+ pt(mu+1)            
+ pt(e+1)             
+ pt(mu-1)            
+ y(jet1)             
+ y(jet2)             
+ y(jet3)             
+ y(jet4)             
+ y(b1)               
+ y(b2)               
+ y(b3)               
+ y(b4)               
+ y(e-1)              
+ y(mu+1)             
+ y(e+1)              
+ y(mu-1)             
+ R(jet1,jet2)        
+ R(jet1,jet3)        
+ R(jet1,jet4)        
+ R(jet2,jet3)        
+ R(jet2,jet4)        
+ R(jet3,jet4)        
+ R(jet1,b1)          
+ R(jet1,b2)          
+ R(jet2,b1)          
+ R(jet2,b2)          
+ R(jet3,b1)          
+ R(jet3,b2)          
+ R(jet4,b1)          
+ R(jet4,b2)          
+ R(jet1,e-1)         
+ R(jet2,e-1)         
+ R(jet3,e-1)         
+ R(jet4,e-1)         
+ R(jet1,mu+1)        
+ R(jet2,mu+1)        
+ R(jet3,mu+1)        
+ R(jet4,mu+1)        
+ R(jet1,e+1)         
+ R(jet2,e+1)         
+ R(jet3,e+1)         
+ R(jet4,e+1)         
+ R(jet1,mu-1)        
+ R(jet2,mu-1)        
+ R(jet3,mu-1)        
+ R(jet4,mu-1)        
+ R(b1,b2)            
+ R(b1,e-1)           
+ R(b2,e-1)           
+ R(b1,mu+1)          
+ R(b2,mu+1)          
+ R(b1,e+1)           
+ R(b2,e+1)           
+ R(b1,mu-1)          
+ R(b2,mu-1)          
+ R(e-1,mu+1)         
+ R(e-1,e+1)          
+ R(e-1,mu-1)         
+ R(mu+1,e+1)         
+ R(mu+1,mu-1)        
+ R(e+1,mu-1)         
+ m(jet1,jet2)        
+ m(jet1,jet3)        
+ m(jet1,jet4)        
+ m(jet2,jet3)        
+ m(jet2,jet4)        
+ m(jet3,jet4)        
+ m(jet1,b1)          
+ m(jet1,b2)          
+ m(jet2,b1)          
+ m(jet2,b2)          
+ m(jet3,b1)          
+ m(jet3,b2)          
+ m(jet4,b1)          
+ m(jet4,b2)          
+ m(jet1,e-1)         
+ m(jet2,e-1)         
+ m(jet3,e-1)         
+ m(jet4,e-1)         
+ m(jet1,mu+1)        
+ m(jet2,mu+1)        
+ m(jet3,mu+1)        
+ m(jet4,mu+1)        
+ m(jet1,e+1)         
+ m(jet2,e+1)         
+ m(jet3,e+1)         
+ m(jet4,e+1)         
+ m(jet1,mu-1)        
+ m(jet2,mu-1)        
+ m(jet3,mu-1)        
+ m(jet4,mu-1)        
+ m(b1,b2)            
+ m(b1,e-1)           
+ m(b2,e-1)           
+ m(b1,mu+1)          
+ m(b2,mu+1)          
+ m(b1,e+1)           
+ m(b2,e+1)           
+ m(b1,mu-1)          
+ m(b2,mu-1)          
+ m(e-1,mu+1)         
+ m(e-1,e+1)          
+ m(e-1,mu-1)         
+ m(mu+1,e+1)         
+ m(mu+1,mu-1)        
+ m(e+1,mu-1)         
+  
+ applied cuts:
