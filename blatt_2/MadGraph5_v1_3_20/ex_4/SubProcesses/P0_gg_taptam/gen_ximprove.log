@@ -1,0 +1,12 @@
+ Warning: parameter  nhel_refine  not found
+          setting it to default value            0
+Enter fractional accuracy (<1), or number events (>1), max processes per job
+, and whether to split channels (T/F)
+Generating    10000. unweighted events.
+Reading total xsection    0.163E+00
+   0.163E+00
+ Working on creating    12000.000476837158       events.
+ Effective Luminosity   73.407967681147355       fb^-1.
+           1   96.700000000000003       0.75913099980503984     
+ Resetting G1/multijob.dat                                                                                                                                       
+ Number of diagrams to fix           0

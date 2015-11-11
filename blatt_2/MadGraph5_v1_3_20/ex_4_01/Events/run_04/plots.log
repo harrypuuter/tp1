@@ -1,0 +1,19 @@
+ ordering function for particles in classes: pt 
+ histograms normalized according to cross section
+ Final states contain           2  different particles.
+particle #  1:   ta+1   fits in class # 3
+particle #  2:   ta-1   fits in class # 4
+ 
+ plots set up:
+ Weights             
+ # ta+               
+ # ta-               
+ Ht                  
+ pt(ta+1)            
+ pt(ta-1)            
+ y(ta+1)             
+ y(ta-1)             
+ R(ta+1,ta-1)        
+ m(ta+1,ta-1)        
+  
+ applied cuts:

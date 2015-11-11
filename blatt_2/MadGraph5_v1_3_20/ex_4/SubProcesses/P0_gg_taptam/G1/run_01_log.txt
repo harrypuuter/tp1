@@ -1,0 +1,222 @@
+ Process in group number            0
+ Warning: parameter  xmtcentral  not found
+          setting it to default value    0.0000000000000000     
+ Warning: parameter  d  not found
+          setting it to default value    1.0000000000000000     
+ Warning: parameter  fixed_couplings  not found
+          setting it to default value  T
+ Warning: parameter  lhaid   not found
+          setting it to default value        10042
+ A PDF is used, so alpha_s(MZ) is going to be modified
+ Warning: parameter WH1 not found
+          setting it to default value    5.7530880000000000E-003
+ Old value of alpha_s from param_card:   0.11799999999999995     
+ New value of alpha_s from PDF cteq6l1:  0.13000000000000000     
+ Warning: parameter WH1 not found
+          setting it to default value    5.7530880000000000E-003
+ *****************************************************
+ *               MadGraph/MadEvent                   *
+ *        --------------------------------           *
+ *          http://madgraph.hep.uiuc.edu             *
+ *          http://madgraph.phys.ucl.ac.be           *
+ *          http://madgraph.roma2.infn.it            *
+ *        --------------------------------           *
+ *                                                   *
+ *          PARAMETER AND COUPLING VALUES            *
+ *                                                   *
+ *****************************************************
+
+  External Params
+  ---------------------------------
+  
+ aEWM1 =    132.50698000000000     
+ Gf =    1.1663900000000000E-005
+ aS =   0.11799999999999999     
+ ymb =    4.2000000000000002     
+ ymt =    164.50000000000000     
+ ymtau =    1.7769999999999999     
+ MT =    174.30000000000001     
+ MB =    4.7000000000000002     
+ MZ =    91.188000000000002     
+ MH =    115.00000000000000     
+ MTA =    1.7769999999999999     
+ WT =    1.5083364900000000     
+ WZ =    2.4414035100000002     
+ WW =    2.0475995100000000     
+ WH =    5.2866891700000000E-003
+ WH1 =    5.7530880000000000E-003
+  Internal Params
+  ---------------------------------
+  
+ sqrt__aS =   0.34351128074635334     
+ G =    1.2177157847767195     
+ MP =    115.00000000000000     
+ complexi =  (  0.0000000000000000     ,  1.0000000000000000     )
+ MZ__exp__2 =    8315.2513440000002     
+ MZ__exp__4 =    69143404.913893804     
+ sqrt__2 =    1.4142135623730951     
+ MH__exp__4 =    174900625.00000000     
+ MT__exp__4 =    922974172.64010036     
+ MH__exp__2 =    13225.000000000000     
+ MT__exp__2 =    30380.490000000005     
+ MH__exp__12 =    5.3502501054737110E+024
+ MH__exp__10 =    4.0455577357079105E+020
+ MH__exp__8 =    30590228625390624.     
+ MH__exp__6 =    2313060765625.0000     
+ MT__exp__6 =    28040407622150.848     
+ aEW =    7.5467722530541412E-003
+ MW =    80.419000017663180     
+ sqrt__aEW =    8.6872160402824916E-002
+ ee =   0.30795379048493737     
+ MW__exp__2 =    6467.2155638409104     
+ sw2 =   0.22224653275124018     
+ cw =   0.88190332080606193     
+ sqrt__sw2 =   0.47143030529574587     
+ sw =   0.47143030529574587     
+ g1 =   0.34919223368324182     
+ gw =   0.65323291062450139     
+ v =    246.21845810181640     
+ ee__exp__2 =    9.4835537074040702E-002
+ MW__exp__12 =    7.3165108672445542E+022
+ MW__exp__10 =    1.1313231784250661E+019
+ MW__exp__8 =    1749320348544510.0     
+ MW__exp__6 =    270490496454.95041     
+ MW__exp__4 =    41824877.149186105     
+ AH =    3.0267730051738260E-005
+ v__exp__2 =    60623.529110035917     
+ lam =   0.10907481133270637     
+ yb =    2.4123686777011710E-002
+ yt =   0.94484439876629189     
+ ytau =    1.0206617000654715E-002
+ muH =    81.317279836452968     
+ gw__exp__2 =   0.42671323552295781     
+ cw__exp__2 =   0.77775346724875982     
+ sw__exp__2 =   0.22224653275124015     
+  Internal Params evaluated point by point
+  ----------------------------------------
+  
+ G__exp__2 =    1.4828317324943818     
+ GH =   -5.2201765175650642E-005
+ Gphi =   -7.9213662852716877E-005
+  Couplings of heft
+  ---------------------------------
+  
+         GC_8 =   0.00000E+00   0.52202E-04
+        GC_44 =  -0.00000E+00  -0.72172E-02
+
+ Collider parameters:
+ --------------------
+
+ Running at P P   machine @    14000.000000000000       GeV
+ PDF set = cteq6l1
+ alpha_s(Mz)= 0.1300 running at 1 loops.
+ alpha_s(Mz)= 0.1300 running at 1 loops.
+ Renormalization scale set on event-by-event basis
+ Factorization   scale set on event-by-event basis
+
+
+ getting user params
+Enter number of events and iterations: 
+ Number of events and iterations         1000           5
+Enter desired fractional accuracy: 
+ Desired fractional accuracy:   0.10000000000000001     
+Enter 0 for fixed, 2 for adjustable grid: 
+Suppress amplitude (0 no, 1 yes)? 
+ Using suppressed amplitude.
+Exact helicity sum (0 yes, n = number/event)? 
+ Explicitly summing over helicities
+Enter Configuration Number: 
+Running Configuration Number:    1
+ Not subdividing B.W.
+ Attempting mappinvarients           1           4
+ Completed mapping           4
+ about to integrate            4        1000           5           4           1
+ Using non-zero grid deformation.
+  4 dimensions   1000 events  4 invarients  5 iterations  1 config(s),  (0.99)
+ Using h-tuple random number sequence.
+ Error opening grid
+ Using Uniform Grid!
+ Using uniform alpha   1.0000000000000000     
+ Grid defined OK
+ Mapping Graph           1  to config           1
+ Setting PDF BW           3           1   115.00000000000000     
+ Transforming s_hat BW    6.7474489795918367E-005   3.1018839517857138E-009
+ Masses: 0.000E+00 0.000E+00 0.178E+01 0.178E+01
+   1   1   2   3   4
+Using random seed offsets     1 :      1
+  with seed      688600
+ Ranmar initialization seeds       28621        9395
+  Particle       3       4
+      Et >    10.0    10.0
+       E >     0.0     0.0
+     Eta <     2.5     2.5
+   xqcut:      0.0     0.0
+d R # 3  >    -0.0     0.4
+s min # 3>     0.0     0.0
+xqcutij # 3>     0.0     0.0
+ No cut BW           -1           1
+ alpha_s for scale    115.00099826147269       is   0.12538536192673669     
+ Added good helicity            1   3.9999999999999996     
+ Added good helicity            4   4.0000000000000000     
+ Added good helicity           13   3.9999999999999996     
+ Added good helicity           16   4.0000000000000000     
+ Iteration  1   Mean: 0.7793E+00   Fluctuation:  0.232E-01   0.921E+00    37.6%
+  1   0.7793E+00 +- 0.2323E-01      0.94
+ Writing out events   4.1409348413673215E-004  0.94259733245660848     
+ Relative summed weights:
+  0.1000E+01  0.0000E+00
+ Relative number of events:
+  0.1000E+01  0.0000E+00
+ Events:
+        1000           0
+ Iteration  2   Mean: 0.7808E+00   Fluctuation:  0.126E-01   0.121E+01    70.8%
+  2   0.7808E+00 +- 0.1256E-01      0.72
+ Relative summed weights:
+  0.1000E+01  0.0000E+00
+ Relative number of events:
+  0.1000E+01  0.0000E+00
+ Events:
+        2000           0
+ Iteration  3   Mean: 0.7785E+00   Fluctuation:  0.833E-02   0.103E+01    74.2%
+  3   0.7785E+00 +- 0.8334E-02      0.68
+ Relative summed weights:
+  0.1000E+01  0.0000E+00
+ Relative number of events:
+  0.1000E+01  0.0000E+00
+ Events:
+        4000           0
+ Accuracy:    0.001   0.100   0.009   0.012
+ Finished due to accuracy    9.2393992727514830E-004  0.10000000000000001     
+
+ -------------------------------------------------------------------------------
+ Accumulated results:   Integral =  0.7792E+00
+                        Std dev  =  0.6653E-02
+             Chi**2 per DoF.     =      0.0117
+ -------------------------------------------------------------------------------
+ Found          542  events.
+ Wrote          538  events.
+ Correct xsec   0.77920820239656574     
+ Event xsec   0.77920820239657229     
+ Events wgts > 1:            0
+ % Cross section > 1:    0.0000000000000000        0.0000000000000000     
+-----------------------------------------------------
+---------------------------
+ Results Last 3 iters:  Integral =   0.7792E+00
+                         Std dev =   0.6653E-02
+                 Chi**2 per DoF. =      0.0117
+-----------------------------------------------------
+---------------------------
+ Status  0.10000000000000001                4           5
+ --------------------- Multi run with           12  jobs. ---------------------
+ job a:  0.78410999999999997             1045
+ job b:  0.78349000000000002             1069
+ job c:  0.78744000000000003             1089
+ job d:  0.77973999999999999             1056
+ job e:  0.78437000000000001             1043
+ job f:  0.78734999999999999             1120
+ job g:  0.78195000000000003             1070
+ job h:  0.78881000000000001             1080
+ job i:  0.77988999999999997             1106
+ job j:  0.78720999999999997             1054
+ job k:  0.78671999999999997             1081
+ job l:  0.79054999999999997             1033
