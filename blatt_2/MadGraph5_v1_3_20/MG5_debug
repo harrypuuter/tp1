@@ -21,7 +21,8 @@
 #*                                                          *
 #************************************************************
 import model sm
-generate p p > t ~t
+p p > pi+ pi-
+generate p p > pi+ pi-
 Traceback (most recent call last):
   File "/home/sebi/tp1/blatt_2/MadGraph5_v1_3_20/madgraph/interface/extended_cmd.py", line 151, in onecmd
     return cmd.Cmd.onecmd(self, line)
@@ -33,4 +34,4 @@ Traceback (most recent call last):
     myprocdef = self.extract_process(line)
   File "/home/sebi/tp1/blatt_2/MadGraph5_v1_3_20/madgraph/interface/cmd_interface.py", line 2015, in extract_process
     "No particle %s in model" % part_name
-MadGraph5Error: No particle ~t in model
+MadGraph5Error: No particle pi+ in model
