@@ -1,0 +1,77 @@
+!##################################################################
+!# Defaults for X Window System applications
+!##################################################################
+
+!############
+!# Xterm
+!############
+xterm*Background:             Wheat
+xterm*Foreground:             DarkBlue
+xterm*borderColor:            Black
+xterm*borderWidth:            2
+xterm*ScrollBar:              On
+xterm*Scrollbar.foreground:   Black
+xterm*Scrollbar.background:   White
+xterm*Scrollbar.thickness:    14
+xterm*scrollInput:            False
+xterm*scrollKey:              True
+xterm*cursorColor:            Red
+xterm*pointerShape:           arrow
+xterm*pointerColor:	      Blue
+xterm*pointerColorBackground: White
+xterm*boldFont:	      	      9x15bold
+xterm*font:                   9x15
+xterm*c132:                   On
+xterm*eightBitInput:          False
+xterm*dynamicColors:          True
+xterm*reverseVideo:           False
+xterm*saveLines:	      4096
+xterm*sunFunctionKeys:        Off
+xterm*visualBell:             False
+xterm*color0:                 Black
+xterm*color1:                 Red
+xterm*color2:                 #00A000
+xterm*color3:                 #C0A000
+xterm*color4:                 Blue
+xterm*color5:                 Magenta
+xterm*color6:                 Cyan
+xterm*color7:                 Blue
+xterm*jumpScroll:             On
+xterm*internalBorder:         0
+xterm*logInhibit:             On
+xterm*geometry:               100x37+800+0
+
+
+!##############
+!#  Emacs
+!##############
+Emacs.background:                                       White
+Emacs.foreground:                                       Black
+Emacs.borderWidth:                                      2
+Emacs.cursorColor:                                      Red
+Emacs.pointerColor:	                                Blue
+Emacs.pointerColorBackground:                           White
+Emacs.font:                                             9x15
+#Emacs.font: -*-fixed-medium-*-normal-*-14-110-100-100-c-70-iso8859-*
+Emacs.bitmapIcon:                                       on
+Emacs.font-lock-comment-face.attributeForeground:       Brown
+Emacs.font-lock-comment-face.attributeBackground:       MistyRose
+!Emacs.font-lock-comment-face.attributeBold:            on
+Emacs.font-lock-function-name-face.attributeForeground: VioletRed
+Emacs.font-lock-function-name-face.attributeBackground: White
+Emacs.font-lock-function-name-face.attributeBold:       on
+Emacs.font-lock-keyword-face.attributeForeground:       ForestGreen
+Emacs.font-lock-keyword-face.attributeBackground:       White
+Emacs.font-lock-keyword-face.attributeBold:             on
+Emacs.font-lock-reference-face.attributeForeground:     CornFlowerBlue
+Emacs.font-lock-reference-face.attributeBackground:     White
+Emacs.font-lock-string-face.attributeForeground:        DarkSlateGray
+Emacs.font-lock-string-face.attributeBackground:        Wheat
+Emacs.font-lock-type-face.attributeForeground:          Purple
+Emacs.font-lock-type-face.attributeBackground:          White
+Emacs.font-lock-variable-name-face.attributeForeground: MidnightBlue
+Emacs.font-lock-variable-name-face.attributeBackground: lavender
+Emacs.font-lock-variable-name-face.attributeBold:       on
+Emacs.font-lock-builtin-face.attributeForeground:       CornFlowerBlue
+Emacs.font-lock-builtin-face.attributeBackground:       Snow
+Emacs.font-lock-builtin-face.attributeBold:             on
