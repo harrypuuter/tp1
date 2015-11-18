@@ -73,6 +73,7 @@ void aufgabe2b()
     Double_t quantile[1];
     quantile[0] = 0.9;
     temp->GetQuantiles(1,radius,quantile);
+    temp->Reset();
     // FIXME fill the width of the event as two times the radius
     // into the histogram hwidth
     radius[0] *= 2;
@@ -85,6 +86,7 @@ void aufgabe2b()
     // -25 to 25 and the length would be negative otherwise)
     TH1F *temp2= gROOT->FindObject("hEdepLong");
     temp2->GetQuantiles(1,length,quantile);
+    temp2->Reset();
     length[0] += 25;
     hlength->Fill(length[0]);
   }
