@@ -1,0 +1,46 @@
+<lcgdict>
+
+<class name="KITAObject"/>
+
+<class name="KITAGenInfo"/>
+<class pattern="KITAGenJet*"/>
+<class name="KITAGenMet"/>
+<class pattern="KITAGenParticle*"/>
+<class pattern="KITAMcParticle*"/>
+<class name="KITAGenTopEvent"/>
+<class name="KITAGenSingleTopEvent"/>
+<class name="KITAGenTprime"/>
+<class name="KITAGenWFlavor"/>
+
+<class name="KITAHlt"/>
+<class name="KITAMet"/>
+<class name="KITAPFMet"/>
+<class pattern="KITAJet*"/>
+<class name="std::vector<KITAJet_CaloVars>"/>
+<class name="std::vector<KITAJet_PFlowVars>"/>
+<class name="std::vector<KITAJet_TrackbTagInfos>"/>
+<class name="std::vector<KITAJet_svBTagInfos>"/>
+<class name="std::map<int, float>"/>
+<class name="std::map<std::string, uint64_t>"/>
+<class pattern="KITAElectron*"/>
+<class pattern="KITAMuon*"/>
+<class name="KITAMisc"/>
+<class name="KITAGenFlavor"/>
+<class pattern="KITASemiSol*"/>
+<class pattern="KITAPrimaryVertex*"/>
+<class pattern="std::vector<KITAPrimaryVertex>" />
+
+<class pattern="KITATopJet*"/>
+
+<class name="KITA4Vector"/>
+
+<class name="KITAMap"/>
+<class name="KITAIntMap"/>
+
+<class name="KITAHlt::KITATriggerObject" />
+<class name="std::vector<KITAHlt::KITATriggerObject>" />
+<class name="std::map<int, std::vector<KITAHlt::KITATriggerObject> >" />
+
+<class name="KITADataCleaning"/>
+
+</lcgdict>
