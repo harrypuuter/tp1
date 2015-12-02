@@ -90,7 +90,7 @@ plotHistos(int Mode)
     hNJetsTTBar->Scale(scalet);
     hNJetsWJet->Draw();
     hNJetsTTBar->Draw("Same");
-    
+
     TLegend *leg = new TLegend(0.67,0.67,0.8,0.8,NULL,"brNDC");
     leg->SetBorderSize(0);
     leg->SetTextSize(0.04);
@@ -187,7 +187,10 @@ plotHistos(int Mode)
     TH1F* hdata  = (TH1F*) fData->Get("hM3");
     TH1F* httbar = (TH1F*) fTTBar->Get("hM3");
     TH1F* hbkg   = (TH1F*) fWJets->Get("hM3");
-
+    Double_t scalettbar = hdata->Integral()/httbar->Integral();
+    Double_t scalewjets = hdata->Integral()/hbkg->Integral();
+    httbar->Scale(scalettbar);
+    hbkg->Scale(scalewjets);
     //
     //normalize monte-carlo histograms to data
     //
@@ -203,17 +206,12 @@ plotHistos(int Mode)
     TH1F* signalABkg = new TH1F("signalABkg", "t #bar{t} signal without b- tagging", 35,0,700);
     signalABkg->Add(hbkg,1);
     signalABkg->Add(httbar,1);
-
-
     //
     // calculate the signal to background ratio
     //
 
-    double sbratio=-9999;
-    //cout << "S/B ratio: " << sbratio << endl;
-
-
-
+    double sbratio=httbar->Integral()/hbkg->Integral();
+    cout << "S/B ratio: " << sbratio << endl;
     //style
     hdata->SetLineColor(1);
     signalABkg->SetLineColor(2);
@@ -246,18 +244,77 @@ plotHistos(int Mode)
     leg->Draw("Same");
 
 
+    //
+    // exercise 4 with b-tagging
+    //
     c1->cd(2);
     TH1F* hdataB  = (TH1F*) fData->Get("hM3B");
     TH1F* httbarB = (TH1F*) fTTBar->Get("hM3B");
     TH1F* hbkgB   = (TH1F*) fWJets->Get("hM3B");
 
     //
-    // exercise 4 with b-tagging
-    //
-
-    //
     // copy and modify code from above
     //
+    Double_t scalettbarB = hdataB->Integral()/httbarB->Integral();
+    Double_t scalewjetsB = hdataB->Integral()/hbkgB->Integral();
+    httbarB->Scale(scalettbarB);
+    hbkgB->Scale(scalewjetsB);
+    //
+    //normalize monte-carlo histograms to data
+    //
+
+    // perform template fit (chi2-fit)
+    double sigFracB = PerformFit(hdataB, httbarB, hbkgB); // make sure to edit this function (defined in m3Fit.h)
+
+    //scale monte carlo to signal fraction
+    httbar->Scale(sigFracB);
+    hbkgB->Scale((1-sigFracB));
+
+    //add signal to background to make a stack plot
+    TH1F* signalABkgB = new TH1F("signalABkgB", "t #bar{t} signal with b- tagging", 35,0,700);
+    signalABkgB->Add(hbkgB,1);
+    signalABkgB->Add(httbarB,1);
+
+
+    //
+    // calculate the signal to background ratio
+    //
+
+    double sbratioB=httbarB->Integral()/hbkgB->Integral();
+    cout << "S/B ratio: " << sbratioB << endl;
+
+
+
+    //style
+    hdataB->SetLineColor(1);
+    signalABkgB->SetLineColor(2);
+    signalABkgB->SetFillColor(2);
+    hbkgB->SetLineColor(8);
+    hbkgB->SetFillColor(8);
+
+    style1D(signalABkgB,"M3 [Gev/c^{2}]", "number of events");
+
+    signalABkgB->Draw("");
+    hbkgB->Draw("Same");
+    hdataB->Draw("Same E1");
+    signalABkgB->Draw("Same AXIS");
+
+    TLegend *leg = new TLegend(0.6,0.7,0.9,0.82,NULL, "brNDC");
+    leg->SetBorderSize(0);
+    leg->SetTextSize(0.03);
+    leg->SetFillColor(10);
+    TLegendEntry* entry[3];
+    entry[0] = leg->AddEntry(hdataB,"Data","le");
+    entry[1] = leg->AddEntry(signalABkgB,"Signal", "f");
+    entry[2] = leg->AddEntry(hbkgB,"Background", "f");
+
+    //write S/B in plot
+    char buffer[50];
+    sprintf(buffer, "#frac{S}{B}: %g ", sbratioB);
+    TLatex* text1 = new TLatex();
+    text1->DrawLatex(450,0.5*signalABkgB->GetMaximum(),buffer);
+
+    leg->Draw("Same");
 
 
 
@@ -272,11 +329,13 @@ plotHistos(int Mode)
     //
     // calculate ttbar cross-section
     //
-    double crossSectionB=-9999;
-    //cout << "cross section: " << crossSectionB <<"fb"<< endl;
+    double crossSectionB=(hdataB->Integral()*sigFracB)/(0.0259*5000);
+    cout << "cross section with b-tagging: " << crossSectionB <<"pb"<< endl;
 
     cout << endl;
-
+    double crossSection=(hdata->Integral()*sigFrac)/(0.0259*5000);
+    cout << "cross section without b-tagging: " << crossSection <<"pb"<< endl;
+    cout << endl;
     c1->SaveAs("results/signal_fraction.png");
 
   }
@@ -544,6 +603,10 @@ void shapeVar(TH1F* histo1, TH1F* histo2, TString nameXaxis, TString nameYaxis)
 {
   histo1->SetLineColor(1);
   histo2->SetLineColor(2);
+  Double_t scale1 = 1.0/histo1->Integral();
+  Double_t scale2 = 1.0/histo2->Integral();
+  histo1->Scale(scale1);
+  histo2->Scale(scale2);
 
   //
   // enter code to normalize the histograms

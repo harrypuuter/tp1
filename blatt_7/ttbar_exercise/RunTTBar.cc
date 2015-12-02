@@ -131,7 +131,7 @@ int main(int argc, char **argv)
 
 //
 //loop over all events
-//
+// chEnt
 
   for (int iE=1;iE<=chEnt; iE++)
   {
@@ -191,34 +191,62 @@ int main(int argc, char **argv)
       continue;  // select events with at least 4 Jets
 
     //muon pt, muon pseudorapidity, missing Et
-
+    double muon_pt = KitaMuon->at(0).vec.Pt();
+    double miss_pt = KitaMet->vec.Pt();
     //Ht: sum of transverse energy
     double Ht=0;
-
-
+    int jet_size = KitaJets->size();
+    for (int k=0; k<jet_size; k++)
+    {
+      Ht += KitaJets->at(k).vec.Pt();
+    }
+    Ht += muon_pt;
+    Ht += miss_pt;
     // M3: mass of the 3 jets with the highest pt
-    float M3=-1000;
+    float M3= 0;
     float maxPt = 0;
     KITA4Vector tvec;	//summed 4-vector
-
+    int comp[3];
     //loop 1 over all jets
-
+    for (int i=0; i<jet_size; i++)
+    {
       //loop 2 over all jets
-
+      for (int j=0; j<jet_size; j++)
+      {
         //loop 3 over all jets
-
+        for (int k=0; k<jet_size; k++)
+        {
           //take care to skip combinations where a jet is used more than once!
-
+          if (i != k && i != j && j!=k)
+          {
+            float pt = KitaJets->at(i).vec.Pt()+KitaJets->at(j).vec.Pt()+KitaJets->at(k).vec.Pt();
+            //cout << "pt: " << pt << "M: " << m << endl;
+            if (pt > maxPt)
+              {
+                maxPt = pt;
+                comp[0] = i;
+                comp[1] = j;
+                comp[2] = k;
+                //M3 = KitaJets->at(i).vec.M()+KitaJets->at(j).vec.M()+KitaJets->at(k).vec.M();
+              }
+          }
           //calculate pt and remember this combination if it has larger pt than previous maximum
 
+          }
+        }
+      }
         //close loop 3
       //close loop 2
     //close loop 1
-
-    //calculate invariante mass:  tvec.M()= M3
-
+      //calculate invariante mass:  tvec.M()= M3
+    tvec = KitaJets->at(comp[0]).vec + KitaJets->at(comp[1]).vec + KitaJets->at(comp[2]).vec;
+    M3 = tvec.M();
     //Fill histogram with M3
-
+    hHt->Fill(Ht);
+    hMuonPt->Fill(muon_pt);
+    hMet->Fill(miss_pt);
+    hMuonPseudo->Fill(KitaJets->at(0).vec.Eta());
+    hM3->Fill(M3);
 
 
 
@@ -227,15 +255,24 @@ int main(int argc, char **argv)
     //
 
     const double bcut= 0.679; // medium working point b tagging
-
+    int btag=0;
+    for (int i=0; i<jet_size; ++i)
+    {
+      if (KitaJets ->at(i).btag_combSV > bcut)
+      {
+        btag++;
+      }
+    }
     //
     //select events with at least one b-tagged jet
-    //
-
-    int btag=0;
-
-
     //Fill histogram with M3
+    if (btag > 0)
+    {
+      hM3B->Fill(M3);
+    }
+
+
+
 
 
 

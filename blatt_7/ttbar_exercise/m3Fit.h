@@ -17,7 +17,7 @@ double chi2Func(Int_t &npar, Double_t *gin, Double_t &f, Double_t *par, Int_t if
   //calculate the number of predicted events in each bin
   for(int i=0; i<NData.size();i++)
   {
-    double NiPred = -9999;   // enter code to calculate the predicted number of events; par[1] is the signal fraction
+    double NiPred = NTTBar[i]*par[1] + NBkg[i]*(1-par[1]);   // enter code to calculate the predicted number of events; par[1] is the signal fraction
     NPred.push_back(NiPred);
   }
 
@@ -27,7 +27,7 @@ double chi2Func(Int_t &npar, Double_t *gin, Double_t &f, Double_t *par, Int_t if
   {
     if(NPred[iBin] != 0)
     {
-      chi2+=-9999;   // enter code to calculate chi^2
+      chi2+=(NPred[iBin]-NData[iBin])**2/sqrt(NPred[iBin]);   // enter code to calculate chi^2
     }
 
   }
@@ -90,4 +90,3 @@ double PerformFit(TH1F* hdata,TH1F* httbar, TH1F* hbkg)
 
 
 }
-
