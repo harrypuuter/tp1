@@ -27,7 +27,7 @@ double chi2Func(Int_t &npar, Double_t *gin, Double_t &f, Double_t *par, Int_t if
   {
     if(NPred[iBin] != 0)
     {
-      chi2+=(NPred[iBin]-NData[iBin])**2/sqrt(NPred[iBin]);   // enter code to calculate chi^2
+      chi2+=pow((NPred[iBin]-NData[iBin]),2)/sqrt(NPred[iBin]);   // enter code to calculate chi^2
     }
 
   }

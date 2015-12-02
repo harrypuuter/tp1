@@ -384,12 +384,22 @@ plotHistos(int Mode)
     //
     // fit functions to histograms
     //
-
+    hMTopLep->Fit("landau");
+    TF1 *fit1 = hMTopLep->GetFunction("landau");
+    Double_t m1 = fit1->GetParameter(1);
+    hMTopHad->Fit("landau");
+    TF1 *fit2 = hMTopHad->GetFunction("landau");
+    Double_t m2 = fit2->GetParameter(1);
+    hMTopAv->Fit("landau");
+    TF1 *fit3 = hMTopAv->GetFunction("landau");
+    Double_t m3 = fit3->GetParameter(1);
 
     hMTopLep->Draw("");
     hMTopHad->Draw("same");
     hMTopAv->Draw("same");
-
+    cout << " the leptonic top mass is: " << m1 << endl;
+    cout << " the hadronic top mass is: " << m2 << endl;
+    cout << " the average top mass is: " << m3 << endl;
 
     TLegend *leg = new TLegend(0.55,0.7,0.9,0.82,NULL, "brNDC");
     leg->SetBorderSize(0);
@@ -425,7 +435,6 @@ plotHistos(int Mode)
     fMTTBar->SetParameters(10000,173,30);
 
 
-
     //
     // Fit the landau function of the reconstructed average top quark mass
     //
@@ -439,8 +448,8 @@ plotHistos(int Mode)
     //
     // Calculate difference between true top quark mass (172,5GeV) and the reconstructed  average top quark mass
     //
-
-    double difference=0;
+    double mass = fMTTBar->GetMaximumX(50,400);
+    double difference=172.5 - mass;
 
     cout << "Difference between true top quark mass and reconstructed top quark mass from MC: " << difference << " GeV/c^2" << endl;
 
@@ -514,13 +523,20 @@ plotHistos(int Mode)
     TF1* fMData2 = new TF1("fMData2", "[0]*TMath::Landau(x,[1],[2],0)" , 50,400);
     fMData2->SetParameters(1000,173,30);
 
+    Double_t sigFracB = 1/10.8384;
+    hMWJets2->Scale(1-sigFracB);
+    hMData2->Add(hMWJets2,-1);
     //
     // subtract scaled background from hMData2
     //
 
 
     // Fit the Landau function fMData2
+    for(int i=0;i<80;i++)	cout<< "-";
+    cout << endl;
 
+    cout << "fit MC_TTBar without background" << endl;
+    hMData2->Fit("fMData2","N");
 
     hMData2->SetLineColor(1);
     fMData2->SetLineColor(2);

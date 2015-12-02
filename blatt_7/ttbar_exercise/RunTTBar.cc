@@ -258,7 +258,7 @@ int main(int argc, char **argv)
     int btag=0;
     for (int i=0; i<jet_size; ++i)
     {
-      if (KitaJets ->at(i).btag_combSV > bcut)
+      if (KitaJets->at(i).btag_combSV > bcut)
       {
         btag++;
       }
@@ -280,59 +280,122 @@ int main(int argc, char **argv)
     //
     //exercise 6
     //
+    if (btag > 0) // makesure at least one b-jet
+    {
+      //count number of loose b-tagged jets
+      const double bcut_loose= 0.244; // medium working point b tagging
+      int btag_loose=0;
+      for (int i=0; i<jet_size; ++i)
+      {
+        if (KitaJets->at(i).btag_combSV > bcut_loose)
+        {
+          btag_loose++;
+        }
+      }
+      //////////////////////////
+      // declare some values ///
+      //////////////////////////
+      double w_had_exp = 78.1;
+      double w_had_err = 11.2;
+      double top_err = 45.2;
+      double mass_err = -7.5;
+      // mass of leptonic top candidate in the best combination
+      double MTopLepBest = -99999;
+      // mass of hadronic top candidate in the best combination
+      double MTopHadBest = -99999;
+      // minimal chi2 of kinematic reconstruction
+      double minChi = 99999;
+      //loop for quark 1 from W_had
+      for (int q1=0; q1<jet_size; q1++)
+      {
+         //loop for quark 2 from W_had
+         for (int q2=0; q2<jet_size; q2++)
+         {
+           //loop for b-quark from top_lep
+           for (int b1=0; b1<jet_size; b1++)
+           {
+              //loop for b-quark from top_had
+              for (int b2=0; b2<jet_size; b2++)
+              {
+              //in loop
+              //make sure that the loose b-tagged jet(s) are/is assigned to the b-quarks, otherwise continue
+              if (btag_loose == 1 && KitaJets->at(b1).btag_combSV > bcut_loose)
+              {
+                KITA4Vector p4_b1=KitaJets->at(b1).vec;
+                KITA4Vector p4_b2=KitaJets->at(b2).vec;
+                KITA4Vector p4_q1=KitaJets->at(q1).vec;
+                KITA4Vector p4Neutrino=KitaMet->vec;
+                KITA4Vector p4_q2=KitaJets->at(q2).vec;
+                //reconstruct W_had
+                KITA4Vector W_had = p4_q1 + p4_q2;
+                //reconstruct top_had
+                KITA4Vector top_had = W_had + p4_b1;
+                //reconstruct neutrino (calculate z component first)
+                double pznu = calcNuPz(KitaMuon->at(0).vec,KitaMet->vec);
+                p4Neutrino.SetPz(pznu); // z component of neutrino and x/y component of missing momentum -> 4-vector of neutrino
+                p4Neutrino.SetE(p4Neutrino.P());
+                //reconstruct W_lep
+                KITA4Vector W_lep = KitaMuon->at(0).vec + p4Neutrino;
+                //reconstruct top_lep
+                KITA4Vector top_lep = W_lep + p4_b2;
+                //calculate chi^2
+                double chi2 = pow((W_had.M() - w_had_exp),2)/pow(w_had_err,2) + pow((top_lep.M() - top_had.M()-mass_err),2)/pow(top_err,2);
+                //store invariant masses of top quarks if this is the combination with minimal chi2 as of yet
+                if (chi2 < minChi)
+                {
+                  minChi = chi2;
+                  MTopLepBest = top_lep.M();
+                  MTopHadBest = top_had.M();
+                }
+              }
+              else if (btag_loose > 1 && KitaJets->at(b1).btag_combSV > bcut_loose && KitaJets->at(b2).btag_combSV > bcut_loose)
+              {
+                KITA4Vector p4_b1=KitaJets->at(b1).vec;
+                KITA4Vector p4_b2=KitaJets->at(b2).vec;
+                KITA4Vector p4_q1=KitaJets->at(q1).vec;
+                KITA4Vector p4Neutrino=KitaMet->vec;
+                KITA4Vector p4_q2=KitaJets->at(q2).vec;
+                //reconstruct W_had
+                KITA4Vector W_had = p4_q1 + p4_q2;
+                //reconstruct top_had
+                KITA4Vector top_had = W_had + p4_b1;
+                //reconstruct neutrino (calculate z component first)
+                double pznu = calcNuPz(KitaMuon->at(0).vec,KitaMet->vec);
+                p4Neutrino.SetPz(pznu); // z component of neutrino and x/y component of missing momentum -> 4-vector of neutrino
+                p4Neutrino.SetE(p4Neutrino.P());
+                //reconstruct W_lep
+                KITA4Vector W_lep = KitaMuon->at(0).vec + p4Neutrino;
+                //reconstruct top_lep
+                KITA4Vector top_lep = W_lep + p4_b2;
+                //calculate chi^2
+                double chi2 = pow((W_had.M() - w_had_exp),2)/pow(w_had_err,2) + pow((top_lep.M() - top_had.M()-mass_err),2)/pow(top_err,2);
+                //store invariant masses of top quarks if this is the combination with minimal chi2 as of yet
+                if (chi2 < minChi)
+                {
+                  minChi = chi2;
+                  MTopLepBest = top_lep.M();
+                  MTopHadBest = top_had.M();
+                }
+              }
+              else
+              {
+                continue;
+              }
+            }
+            //close loop for b-quark from top_had
+          }
+          //close loop for quark 2 from W_had
+        }
+        //close loop for quark 1 from W_had
+      }
+      //close loop for b-quark from top_lep
+      hMTopHad->Fill(MTopHadBest);
+      hMTopLep->Fill(MTopLepBest);
+      double MTopAvg = (MTopLepBest+MTopHadBest)/2;
+      hMTopAv->Fill(MTopAvg);
 
-    //count number of loose b-tagged jets
-
-
-    // mass of leptonic top candidate in the best combination
-    double MTopLepBest = -99999;
-    // mass of hadronic top candidate in the best combination
-    double MTopHadBest = -99999;
-    // minimal chi2 of kinematic reconstruction
-    double minChi = 99999;
-    //loop for quark 1 from W_had
-       //loop for quark 2 from W_had
-         //loop for b-quark from top_lep
-            //loop for b-quark from top_had
-
-            //in loop
-
-            //make sure that the loose b-tagged jet(s) are/is assigned to the b-quarks, otherwise continue
-
-            // 4-vector of current hadronic W candidate
-            KITA4Vector p4WHad;
-            // 4-vector of current hadronic top candidate
-            KITA4Vector p4TopHad;
-            // 4-vector of neutrino
-            KITA4Vector p4Neutrino;
-            // 4-vector of current leptonic W candidate
-            KITA4Vector p4WLep;
-            // 4-vector of current leptonic top candidate
-            KITA4Vector p4TopLep;
-
-            //reconstruct W_had
-
-            //reconstruct top_had
-
-            //reconstruct neutrino (calculate z component first)
-            double pznu = calcNuPz(KitaMuon->at(0).vec,KitaMet->vec);
-
-            //reconstruct W_lep
-
-            //reconstruct top_lep
-
-            //calculate chi^2
-
-            //store invariant masses of top quarks if this is the combination with minimal chi2 as of yet
-
-          //close loop for b-quark from top_had
-        //close loop for quark 2 from W_had
-      //close loop for quark 1 from W_had
-    //close loop for b-quark from top_lep
-
-
-    //Fill the histograms with the three reconstucted top quark masses
-
+      //Fill the histograms with the three reconstucted top quark masses
+    }
   } // end of loop over events
 
 
