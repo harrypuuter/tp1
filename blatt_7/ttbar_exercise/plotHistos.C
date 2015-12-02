@@ -317,11 +317,6 @@ plotHistos(int Mode)
     leg->Draw("Same");
 
 
-
-
-
-
-
     //
     // exercise 5
     //
