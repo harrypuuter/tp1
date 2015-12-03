@@ -187,6 +187,7 @@ plotHistos(int Mode)
     TH1F* hdata  = (TH1F*) fData->Get("hM3");
     TH1F* httbar = (TH1F*) fTTBar->Get("hM3");
     TH1F* hbkg   = (TH1F*) fWJets->Get("hM3");
+    
     Double_t scalettbar = hdata->Integral()/httbar->Integral();
     Double_t scalewjets = hdata->Integral()/hbkg->Integral();
     httbar->Scale(scalettbar);
@@ -267,7 +268,7 @@ plotHistos(int Mode)
     double sigFracB = PerformFit(hdataB, httbarB, hbkgB); // make sure to edit this function (defined in m3Fit.h)
 
     //scale monte carlo to signal fraction
-    httbar->Scale(sigFracB);
+    httbarB->Scale(sigFracB);
     hbkgB->Scale((1-sigFracB));
 
     //add signal to background to make a stack plot
@@ -384,22 +385,15 @@ plotHistos(int Mode)
     //
     // fit functions to histograms
     //
-    hMTopLep->Fit("landau");
-    TF1 *fit1 = hMTopLep->GetFunction("landau");
-    Double_t m1 = fit1->GetParameter(1);
-    hMTopHad->Fit("landau");
-    TF1 *fit2 = hMTopHad->GetFunction("landau");
-    Double_t m2 = fit2->GetParameter(1);
-    hMTopAv->Fit("landau");
-    TF1 *fit3 = hMTopAv->GetFunction("landau");
-    Double_t m3 = fit3->GetParameter(1);
+    hMTopLep->Fit("fMTopLep");
+    hMTopHad->Fit("fMTopHad");
+    hMTopAv->Fit("fMTopAv");
+
 
     hMTopLep->Draw("");
     hMTopHad->Draw("same");
     hMTopAv->Draw("same");
-    cout << " the leptonic top mass is: " << m1 << endl;
-    cout << " the hadronic top mass is: " << m2 << endl;
-    cout << " the average top mass is: " << m3 << endl;
+
 
     TLegend *leg = new TLegend(0.55,0.7,0.9,0.82,NULL, "brNDC");
     leg->SetBorderSize(0);
@@ -523,7 +517,7 @@ plotHistos(int Mode)
     TF1* fMData2 = new TF1("fMData2", "[0]*TMath::Landau(x,[1],[2],0)" , 50,400);
     fMData2->SetParameters(1000,173,30);
 
-    Double_t sigFracB = 1/10.8384;
+    Double_t sigFracB = 0.808144;
     hMWJets2->Scale(1-sigFracB);
     hMData2->Add(hMWJets2,-1);
     //

@@ -14,14 +14,14 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       COMMON/MASSES/ MB,MH,MT,MW,MTA,MZ
 
 
-      DOUBLE PRECISION WW,WT,WZ,WH
+      DOUBLE PRECISION WW,WT,WZ,WH1,WH
 
-      COMMON/WIDTHS/ WW,WT,WZ,WH
+      COMMON/WIDTHS/ WW,WT,WZ,WH1,WH
 
 
-      DOUBLE COMPLEX GC_1, GC_2, GC_7, GC_16, GC_21, GC_22, GC_23
-     $ , GC_25
+      DOUBLE COMPLEX GC_8, GC_2, GC_3, GC_4, GC_27, GC_28, GC_29
+     $ , GC_30, GC_44
 
-      COMMON/COUPLINGS/ GC_1, GC_2, GC_7, GC_16, GC_21, GC_22, GC_23
-     $ , GC_25
+      COMMON/COUPLINGS/ GC_8, GC_2, GC_3, GC_4, GC_27, GC_28, GC_29
+     $ , GC_30, GC_44
 

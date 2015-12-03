@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 
   //pathName must be changed to match the directory where the samples are located
   TString pathName;
-  pathName="/home/ubuntuuser/data/samples/";
+  pathName="/home/staff/chwalek/WS1516/ttbar_CMS/samples/";
   pathName+=argv[1];
 
   //read Tree
@@ -208,18 +208,20 @@ int main(int argc, char **argv)
     KITA4Vector tvec;	//summed 4-vector
     int comp[3];
     //loop 1 over all jets
-    for (int i=0; i<jet_size; i++)
+    for (int i=0; i<jet_size; ++i)
     {
       //loop 2 over all jets
-      for (int j=0; j<jet_size; j++)
+      for (int j=0; j<jet_size; ++j)
       {
         //loop 3 over all jets
-        for (int k=0; k<jet_size; k++)
+        for (int k=0; k<jet_size; ++k)
         {
           //take care to skip combinations where a jet is used more than once!
-          if (i != k && i != j && j!=k)
+          if (i != k && i!=j && k!=j)
           {
-            float pt = KitaJets->at(i).vec.Pt()+KitaJets->at(j).vec.Pt()+KitaJets->at(k).vec.Pt();
+	    //calculate pt and remember this combination if it has larger pt than previous maximum
+	    KITA4Vector tmp = KitaJets->at(i).vec + KitaJets->at(j).vec + KitaJets->at(k).vec;
+            float pt = tmp.Pt();
             //cout << "pt: " << pt << "M: " << m << endl;
             if (pt > maxPt)
               {
@@ -227,11 +229,8 @@ int main(int argc, char **argv)
                 comp[0] = i;
                 comp[1] = j;
                 comp[2] = k;
-                //M3 = KitaJets->at(i).vec.M()+KitaJets->at(j).vec.M()+KitaJets->at(k).vec.M();
               }
           }
-          //calculate pt and remember this combination if it has larger pt than previous maximum
-
           }
         }
       }
@@ -245,7 +244,7 @@ int main(int argc, char **argv)
     hHt->Fill(Ht);
     hMuonPt->Fill(muon_pt);
     hMet->Fill(miss_pt);
-    hMuonPseudo->Fill(KitaJets->at(0).vec.Eta());
+    hMuonPseudo->Fill(KitaMuon->at(0).vec.Eta());
     hM3->Fill(M3);
 
 
@@ -319,68 +318,71 @@ int main(int argc, char **argv)
               {
               //in loop
               //make sure that the loose b-tagged jet(s) are/is assigned to the b-quarks, otherwise continue
-              if (btag_loose == 1 && KitaJets->at(b1).btag_combSV > bcut_loose)
-              {
-                KITA4Vector p4_b1=KitaJets->at(b1).vec;
-                KITA4Vector p4_b2=KitaJets->at(b2).vec;
-                KITA4Vector p4_q1=KitaJets->at(q1).vec;
-                KITA4Vector p4Neutrino=KitaMet->vec;
-                KITA4Vector p4_q2=KitaJets->at(q2).vec;
-                //reconstruct W_had
-                KITA4Vector W_had = p4_q1 + p4_q2;
-                //reconstruct top_had
-                KITA4Vector top_had = W_had + p4_b1;
-                //reconstruct neutrino (calculate z component first)
-                double pznu = calcNuPz(KitaMuon->at(0).vec,KitaMet->vec);
-                p4Neutrino.SetPz(pznu); // z component of neutrino and x/y component of missing momentum -> 4-vector of neutrino
-                p4Neutrino.SetE(p4Neutrino.P());
-                //reconstruct W_lep
-                KITA4Vector W_lep = KitaMuon->at(0).vec + p4Neutrino;
-                //reconstruct top_lep
-                KITA4Vector top_lep = W_lep + p4_b2;
-                //calculate chi^2
-                double chi2 = pow((W_had.M() - w_had_exp),2)/pow(w_had_err,2) + pow((top_lep.M() - top_had.M()-mass_err),2)/pow(top_err,2);
-                //store invariant masses of top quarks if this is the combination with minimal chi2 as of yet
-                if (chi2 < minChi)
-                {
-                  minChi = chi2;
-                  MTopLepBest = top_lep.M();
-                  MTopHadBest = top_had.M();
-                }
-              }
-              else if (btag_loose > 1 && KitaJets->at(b1).btag_combSV > bcut_loose && KitaJets->at(b2).btag_combSV > bcut_loose)
-              {
-                KITA4Vector p4_b1=KitaJets->at(b1).vec;
-                KITA4Vector p4_b2=KitaJets->at(b2).vec;
-                KITA4Vector p4_q1=KitaJets->at(q1).vec;
-                KITA4Vector p4Neutrino=KitaMet->vec;
-                KITA4Vector p4_q2=KitaJets->at(q2).vec;
-                //reconstruct W_had
-                KITA4Vector W_had = p4_q1 + p4_q2;
-                //reconstruct top_had
-                KITA4Vector top_had = W_had + p4_b1;
-                //reconstruct neutrino (calculate z component first)
-                double pznu = calcNuPz(KitaMuon->at(0).vec,KitaMet->vec);
-                p4Neutrino.SetPz(pznu); // z component of neutrino and x/y component of missing momentum -> 4-vector of neutrino
-                p4Neutrino.SetE(p4Neutrino.P());
-                //reconstruct W_lep
-                KITA4Vector W_lep = KitaMuon->at(0).vec + p4Neutrino;
-                //reconstruct top_lep
-                KITA4Vector top_lep = W_lep + p4_b2;
-                //calculate chi^2
-                double chi2 = pow((W_had.M() - w_had_exp),2)/pow(w_had_err,2) + pow((top_lep.M() - top_had.M()-mass_err),2)/pow(top_err,2);
-                //store invariant masses of top quarks if this is the combination with minimal chi2 as of yet
-                if (chi2 < minChi)
-                {
-                  minChi = chi2;
-                  MTopLepBest = top_lep.M();
-                  MTopHadBest = top_had.M();
-                }
-              }
-              else
-              {
-                continue;
-              }
+	      if (q1 != q2 && q1!=b1 && q1!=b2 && q2!=b1 && q2!=b2 && b1!=b2)
+	      {
+		if (btag_loose == 1 && (KitaJets->at(b1).btag_combSV > bcut_loose || KitaJets->at(b2).btag_combSV > bcut_loose))
+		{
+		  KITA4Vector p4_b1=KitaJets->at(b1).vec;
+		  KITA4Vector p4_b2=KitaJets->at(b2).vec;
+		  KITA4Vector p4_q1=KitaJets->at(q1).vec;
+		  KITA4Vector p4Neutrino=KitaMet->vec;
+		  KITA4Vector p4_q2=KitaJets->at(q2).vec;
+		  //reconstruct W_had
+		  KITA4Vector W_had = p4_q1 + p4_q2;
+		  //reconstruct top_had
+		  KITA4Vector top_had = W_had + p4_b1;
+		  //reconstruct neutrino (calculate z component first)
+		  double pznu = calcNuPz(KitaMuon->at(0).vec,KitaMet->vec);
+		  p4Neutrino.SetPz(pznu); // z component of neutrino and x/y component of missing momentum -> 4-vector of neutrino
+		  p4Neutrino.SetE(p4Neutrino.P());
+		  //reconstruct W_lep
+		  KITA4Vector W_lep = KitaMuon->at(0).vec + p4Neutrino;
+		  //reconstruct top_lep
+		  KITA4Vector top_lep = W_lep + p4_b2;
+		  //calculate chi^2
+		  double chi2 = pow((W_had.M() - w_had_exp),2)/pow(w_had_err,2) + pow((top_lep.M() - top_had.M()-mass_err),2)/pow(top_err,2);
+		  //store invariant masses of top quarks if this is the combination with minimal chi2 as of yet
+		  if (chi2 < minChi)
+		  {
+		    minChi = chi2;
+		    MTopLepBest = top_lep.M();
+		    MTopHadBest = top_had.M();
+		  }
+		}
+		else if (btag_loose > 1 && KitaJets->at(b1).btag_combSV > bcut_loose && KitaJets->at(b2).btag_combSV > bcut_loose)
+		{
+		  KITA4Vector p4_b1=KitaJets->at(b1).vec;
+		  KITA4Vector p4_b2=KitaJets->at(b2).vec;
+		  KITA4Vector p4_q1=KitaJets->at(q1).vec;
+		  KITA4Vector p4Neutrino=KitaMet->vec;
+		  KITA4Vector p4_q2=KitaJets->at(q2).vec;
+		  //reconstruct W_had
+		  KITA4Vector W_had = p4_q1 + p4_q2;
+		  //reconstruct top_had
+		  KITA4Vector top_had = W_had + p4_b1;
+		  //reconstruct neutrino (calculate z component first)
+		  double pznu = calcNuPz(KitaMuon->at(0).vec,KitaMet->vec);
+		  p4Neutrino.SetPz(pznu); // z component of neutrino and x/y component of missing momentum -> 4-vector of neutrino
+		  p4Neutrino.SetE(p4Neutrino.P());
+		  //reconstruct W_lep
+		  KITA4Vector W_lep = KitaMuon->at(0).vec + p4Neutrino;
+		  //reconstruct top_lep
+		  KITA4Vector top_lep = W_lep + p4_b2;
+		  //calculate chi^2
+		  double chi2 = pow((W_had.M() - w_had_exp),2)/pow(w_had_err,2) + pow((top_lep.M() - top_had.M()-mass_err),2)/pow(top_err,2);
+		  //store invariant masses of top quarks if this is the combination with minimal chi2 as of yet
+		  if (chi2 < minChi)
+		  {
+		    minChi = chi2;
+		    MTopLepBest = top_lep.M();
+		    MTopHadBest = top_had.M();
+		  }
+		}
+		else
+		{
+		  continue;
+		}
+	      }
             }
             //close loop for b-quark from top_had
           }

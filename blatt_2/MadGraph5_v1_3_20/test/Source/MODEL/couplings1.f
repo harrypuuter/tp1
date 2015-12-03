@@ -12,12 +12,12 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       INCLUDE 'input.inc'
       INCLUDE 'coupl.inc'
 
-      GC_1 = -(EE*COMPLEXI)/3.000000D+00
-      GC_2 = (2.000000D+00*EE*COMPLEXI)/3.000000D+00
-      GC_7 = CW*COMPLEXI*GW
-      GC_16 = (CKM22*EE*COMPLEXI)/(SW*SQRT__2)
-      GC_21 = -(CW*EE*COMPLEXI)/(2.000000D+00*SW)
-      GC_22 = (CW*EE*COMPLEXI)/(2.000000D+00*SW)
-      GC_23 = -(EE*COMPLEXI*SW)/(6.000000D+00*CW)
-      GC_25 = COMPLEXI*GW*SW
+      GC_2 = -(EE*COMPLEXI)/3.000000D+00
+      GC_3 = (2.000000D+00*EE*COMPLEXI)/3.000000D+00
+      GC_4 = -(EE*COMPLEXI)
+      GC_27 = -(CW*EE*COMPLEXI)/(2.000000D+00*SW)
+      GC_28 = (CW*EE*COMPLEXI)/(2.000000D+00*SW)
+      GC_29 = -(EE*COMPLEXI*SW)/(6.000000D+00*CW)
+      GC_30 = (EE*COMPLEXI*SW)/(2.000000D+00*CW)
+      GC_44 = -((COMPLEXI*YTAU)/SQRT__2)
       END

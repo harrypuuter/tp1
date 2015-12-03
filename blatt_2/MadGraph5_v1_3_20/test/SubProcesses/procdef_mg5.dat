@@ -16,7 +16,7 @@
 # Process(es) requested : mg2 input                                  *
 #*********************************************************************
 # Begin PROCESS # This is TAG. Do not modify this line
-p p > w+ w- , w+ > j j , w- > l- vl~           #Process
+p p > ta+ ta-           #Process
 # Be carefull the coupling are here in MG5 convention
           
 end_coup           # End the couplings input
@@ -27,7 +27,7 @@ done               # this tells MG there are no more procs
 # Model information                                                  *
 #*********************************************************************
 # Begin MODEL  # This is TAG. Do not modify this line
-sm
+heft
 # End   MODEL  # This is TAG. Do not modify this line
 #*********************************************************************
 # Start multiparticle definitions                                    *

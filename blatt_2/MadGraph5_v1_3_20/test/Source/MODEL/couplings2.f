@@ -12,4 +12,5 @@ ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
       INCLUDE 'input.inc'
       INCLUDE 'coupl.inc'
 
+      GC_8 = -(COMPLEXI*GH)
       END
