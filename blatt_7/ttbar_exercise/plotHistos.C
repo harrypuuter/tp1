@@ -518,6 +518,8 @@ plotHistos(int Mode)
     fMData2->SetParameters(1000,173,30);
 
     Double_t sigFracB = 0.808144;
+    Double_t scale = hMData2->Integral()/hMWJets2->Integral();
+    hMWJets2->Scale(scale);
     hMWJets2->Scale(1-sigFracB);
     hMData2->Add(hMWJets2,-1);
     //
@@ -530,7 +532,7 @@ plotHistos(int Mode)
     cout << endl;
 
     cout << "fit MC_TTBar without background" << endl;
-    hMData2->Fit("fMData2","N");
+    hMData2->Fit("fMData2","NR");
 
     hMData2->SetLineColor(1);
     fMData2->SetLineColor(2);
