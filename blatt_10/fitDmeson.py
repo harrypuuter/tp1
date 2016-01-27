@@ -3,7 +3,7 @@ import numpy as np
 
 gROOT.SetBatch(True)
 
-# FIXME Implement your code here. 
+# FIXME Implement your code here.
 
 class Dmeson(object):
 
@@ -34,7 +34,7 @@ class Dmeson(object):
 
     def plotAndFit(self):
 
-        # Plot 
+        # Plot
         self.setstyle()
 
         # Get D0 histogram out of file 'loadFile'
@@ -47,13 +47,14 @@ class Dmeson(object):
         h1.Draw()
         c1.Update()
         c1.SaveAs('D0.pdf')
-           
-         
+
+
         # Fit h1 with Breit-Wigner distribution
 
         breitW = TF1('breitW', BreitWig, 1.7, 2.0, 5)
+        #backg = TF1('back',bkg1, 1.7, 2.0, 2)
 
-        # The value given in breitW.SetParameter(1, 1.8648) is the 
+        # The value given in breitW.SetParameter(1, 1.8648) is the
 	# PDG value of the D0 mass
 
         breitW.SetParameter(0, 0.05) # Width
@@ -72,7 +73,7 @@ class Dmeson(object):
 
         h1.UseCurrentStyle()
 
-	# Start fit with breitW	
+	# Start fit with breitW
 
       	h1.Fit("breitW")
         c2 = TCanvas('c2', 'Canvas2', 0, 0, 700, 500)
@@ -80,7 +81,22 @@ class Dmeson(object):
         h1.Draw()
         c2.Update()
         c2.SaveAs('Fit.pdf')
-
+        norm = h1.GetEntries()/breitW.Integral(1.3, 2.1)  
+        a = breitW.GetParameter(3)
+        b = breitW.GetParameter(4)
+        lower = 1.84
+        higher = 1.89
+        back = 0.5*b*(pow(higher, 2) - pow(lower, 2)) + a*(higher-lower)
+        #back = a*(np.exp(a*higher)-np.exp(b*lower))/b
+        peak = breitW.Integral(lower, higher)
+        peak2 = h1.Integral(54, 59)
+        signal = peak2-back*norm
+        back_entries = back * norm
+        print " Events in Signal: " + str(signal)
+        print " Events in Background: " + str(back_entries)
+        print " Signal to Background Ratio: " + str(signal/back_entries)
+       
+        print "Lifetime in s: " + str((6.582119514*pow(10, -16))/(breitW.GetParameter(0)*pow(10,9)))
 def BreitWig(x, par):
 
     f = (par[0]/2.)*par[2]/((x[0] - par[1])*(x[0] - par[1]) + (par[0]/2.)*(par[0]/2.)) + bkg1(x, par)
