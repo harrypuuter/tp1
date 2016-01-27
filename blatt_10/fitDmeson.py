@@ -75,6 +75,11 @@ class Dmeson(object):
 	# Start fit with breitW	
 
       	h1.Fit("breitW")
+        c2 = TCanvas('c2', 'Canvas2', 0, 0, 700, 500)
+        c2.Clear()
+        h1.Draw()
+        c2.Update()
+        c2.SaveAs('Fit.pdf')
 
 def BreitWig(x, par):
 
