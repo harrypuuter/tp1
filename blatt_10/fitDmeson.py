@@ -11,9 +11,9 @@ class Dmeson(object):
 
         print('ROOT file opened')
 
-        # Load ROOT file with the D0 mass distribution
+	# Load ROOT file with the D0 mass distribution
 
-        self.loadFile = TFile('')
+        self.loadFile = TFile('hist.root')
 
     def __del__(self):
 
@@ -38,7 +38,7 @@ class Dmeson(object):
         self.setstyle()
 
         # Get D0 histogram out of file 'loadFile'
-        h1 = self.loadFile.Get('')
+        h1 = self.loadFile.Get('hist')
         h1.UseCurrentStyle()
 
         # Plot D0 mass distribution before fit
@@ -74,7 +74,7 @@ class Dmeson(object):
 
 	# Start fit with breitW	
 
-      
+      	h1.Fit("breitW")
 
 def BreitWig(x, par):
 
@@ -106,3 +106,5 @@ def bkg3(x, par):
 
 # Declaration of an object of the class Dmeson
 
+meson = Dmeson()
+meson.plotAndFit()
